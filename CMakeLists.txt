@@ -36,47 +36,35 @@ set(ep_common_cxx_flags "${CMAKE_CXX_FLAGS_INIT} ${ADDITIONAL_CXX_FLAGS}")
 #-----------------------------------------------------------------------------
 # Add external dependencies:
 
+set(${PROJECT_NAME}_SUPERBUILD TRUE)
+
 include(ExternalProject)
+set(proj ${PROJECT_NAME})
+set(${proj}_DEPENDENCIES pyLAR ANTS ITKUtils)
 
-set(proj pyLAR)
-ExternalProject_Add(${proj}
-GIT_REPOSITORY git@github.com:fbudin69500/pyLAR.git
-GIT_TAG cadedde782cf9cc9f9aa53bf616da870c0ce203e
-SOURCE_DIR ${proj}
-CONFIGURE_COMMAND ""
-BUILD_COMMAND ""
-INSTALL_COMMAND ""
-)
-install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/pyLAR/pyLAR DESTINATION ${Slicer_QTSCRIPTEDMODULES_LIB_DIR})
-#-----------------------------------------------------------------------------
-# Add external dependencies: pyLAR library
-set(proj ANTS)
-ExternalProject_Add(${proj}
-GIT_REPOSITORY https://github.com/stnava/ANTs.git
-GIT_TAG 3758b7c5617ec1e21d4e60a2930d9729fe03a5cd
-SOURCE_DIR ${proj}
-BINARY_DIR ${proj}-build
-CMAKE_GENERATOR ${gen}
-CMAKE_ARGS
-    -DCMAKE_CXX_COMPILER:FILEPATH=${CMAKE_CXX_COMPILER}
-    -DCMAKE_CXX_FLAGS:STRING=${ep_common_cxx_flags}
-    -DCMAKE_C_COMPILER:FILEPATH=${CMAKE_C_COMPILER}
-    -DCMAKE_C_FLAGS:STRING=${ep_common_c_flags}
-    -DCMAKE_BUILD_TYPE:STRING=${CMAKE_BUILD_TYPE}
-    -DCMAKE_RUNTIME_OUTPUT_DIRECTORY:PATH=${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
-    -DCMAKE_LIBRARY_OUTPUT_DIRECTORY:PATH=${CMAKE_LIBRARY_OUTPUT_DIRECTORY}
-    -DCMAKE_ARCHIVE_OUTPUT_DIRECTORY:PATH=${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}
-    -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_CURRENT_BINARY_DIR}/${proj}-install
-    -DCMAKE_BUILD_TYPE:STRING=${CMAKE_BUILD_TYPE}
-    -DBUILD_SHARED_LIBS:BOOL=OFF
-    -DBUILD_TESTING:BOOL=OFF
-)
+ExternalProject_Include_Dependencies(${proj}
+  DEPENDS_VAR ${proj}_DEPENDENCIES
+  )
 
+ExternalProject_Add_Empty(${proj}
+  DEPENDS
+    ${${proj}_DEPENDENCIES}
+  )
 
 #-----------------------------------------------------------------------------
 # Extension modules
-add_subdirectory(LowRankImageDecomposition)
+add_subdirectory(Script)
 ## NEXT_MODULE
-
 #-----------------------------------------------------------------------------
+# Packaging
+install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/pyLAR/pyLAR DESTINATION ${Slicer_INSTALL_QTSCRIPTEDMODULES_BIN_DIR} )
+if( WIN32 )
+  set( EXE_EXTENSION ".exe" )
+endif()
+set(Slicer_INSTALL_ExternalBinMODULES_BIN_DIR ${Slicer_INSTALL_CLIMODULES_BIN_DIR}/../ExternalBin )
+set(ANTS_EXE ANTS AverageImages ComposeMultiTransform WarpImageMultiTransform CreateJacobianDeterminantImage )
+foreach(VAR ${ANTS_EXE})
+  install(PROGRAMS ${ANTS_DIR}/${VAR}${EXE_EXTENSION} DESTINATION ${Slicer_INSTALL_ExternalBinMODULES_BIN_DIR} )
+endforeach()
+install(PROGRAMS ${ITKUtils_DIR}/InvertDeformationField${EXE_EXTENSION} DESTINATION  ${Slicer_INSTALL_ExternalBinMODULES_BIN_DIR} )
 include(${Slicer_EXTENSION_CPACK})

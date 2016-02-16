@@ -4,7 +4,8 @@ import vtk, qt, ctk, slicer
 from slicer.ScriptedLoadableModule import *
 import logging
 import SimpleITK as sitk
-import pyLAR.alm.ialm as ialm
+import pyLAR
+from distutils.spawn import find_executable
 
 #
 # Low-rank Image Decomposition
@@ -55,46 +56,11 @@ class LowRankImageDecompositionWidget(ScriptedLoadableModuleWidget):
     parametersFormLayout = qt.QFormLayout(parametersCollapsibleButton)
 
     #
-    # input volume selector
+    # parameter file selector
     #
-    self.inputSelector = slicer.qMRMLNodeComboBox()
-    self.inputSelector.nodeTypes = ["vtkMRMLScalarVolumeNode"]
-    self.inputSelector.selectNodeUponCreation = True
-    self.inputSelector.addEnabled = False
-    self.inputSelector.removeEnabled = False
-    self.inputSelector.noneEnabled = False
-    self.inputSelector.showHidden = False
-    self.inputSelector.showChildNodeTypes = False
-    self.inputSelector.setMRMLScene( slicer.mrmlScene )
-    self.inputSelector.setToolTip( "Pick the input to the algorithm." )
-    parametersFormLayout.addRow("Input Volume: ", self.inputSelector)
-
-    #
-    # output volume selector
-    #
-    self.outputLowRankSelector = slicer.qMRMLNodeComboBox()
-    self.outputLowRankSelector.nodeTypes = ["vtkMRMLScalarVolumeNode"]
-    self.outputLowRankSelector.selectNodeUponCreation = True
-    self.outputLowRankSelector.addEnabled = True
-    self.outputLowRankSelector.removeEnabled = True
-    self.outputLowRankSelector.noneEnabled = True
-    self.outputLowRankSelector.showHidden = False
-    self.outputLowRankSelector.showChildNodeTypes = False
-    self.outputLowRankSelector.setMRMLScene( slicer.mrmlScene )
-    self.outputLowRankSelector.setToolTip( "Pick the output to the algorithm (low-rank)." )
-    parametersFormLayout.addRow("Output Low-Rank Volume: ", self.outputLowRankSelector)
-
-    self.outputSparseSelector = slicer.qMRMLNodeComboBox()
-    self.outputSparseSelector.nodeTypes = ["vtkMRMLScalarVolumeNode"]
-    self.outputSparseSelector.selectNodeUponCreation = True
-    self.outputSparseSelector.addEnabled = True
-    self.outputSparseSelector.removeEnabled = True
-    self.outputSparseSelector.noneEnabled = True
-    self.outputSparseSelector.showHidden = False
-    self.outputSparseSelector.showChildNodeTypes = False
-    self.outputSparseSelector.setMRMLScene( slicer.mrmlScene )
-    self.outputSparseSelector.setToolTip( "Pick the output to the algorithm (sparse)." )
-    parametersFormLayout.addRow("Output Sparse Volume: ", self.outputSparseSelector)
+    self.selectConfigFileButton = qt.QPushButton("Select Configuration File")
+    self.selectConfigFileButton.toolTip = "Select configuration file."
+    parametersFormLayout.addRow(self.selectConfigFileButton)
 
     #
     # Apply Button
@@ -104,11 +70,21 @@ class LowRankImageDecompositionWidget(ScriptedLoadableModuleWidget):
     self.applyButton.enabled = False
     parametersFormLayout.addRow(self.applyButton)
 
+    #
+    # Select algorithm
+    #
+    self.selectAlgorithm = qt.QButtonGroup()
+    self.selectUnbiasAtlas = qt.QRadioButton("Unbias Atlas Creation")
+    self.selectLowRankDecomposition = qt.QRadioButton("Low Rank/Sparse Decomposition")
+    self.selectLowRankAtlasCreation = qt.QRadioButton("Low Rank Atlas Creation")
+    self.selectAlgorithm.addButton(self.selectUnbiasAtlas)
+    self.selectAlgorithm.addButton(self.selectLowRankDecomposition)
+    self.selectAlgorithm.addButton(self.selectLowRankAtlasCreation)
+
+
     # connections
     self.applyButton.connect('clicked(bool)', self.onApplyButton)
-    self.inputSelector.connect("currentNodeChanged(vtkMRMLNode*)", self.onSelect)
-    self.outputLowRankSelector.connect("currentNodeChanged(vtkMRMLNode*)", self.onSelect)
-    self.outputSparseSelector.connect("currentNodeChanged(vtkMRMLNode*)", self.onSelect)
+    self.selectConfigFileButton.connect('clicked(bool)', self.onSelectFile)
 
     # Add vertical spacer
     self.layout.addStretch(1)
@@ -116,19 +92,18 @@ class LowRankImageDecompositionWidget(ScriptedLoadableModuleWidget):
     # Refresh Apply button state
     self.onSelect()
 
+  def onSelectFile(self):
+      self.configFile = qt.QFileDialog.getOpenFileName(parent=self,caption='Select file')
+
   def cleanup(self):
     pass
 
   def onSelect(self):
-    self.applyButton.enabled = self.inputSelector.currentNode()\
-                               and self.outputLowRankSelector.currentNode()\
-                               and self.outputSparseSelector.currentNode()
+    self.applyButton.enabled = self.configFile and self.selectAgolrithm.checkedButton()
 
   def onApplyButton(self):
     logic = LowRankImageDecompositionLogic()
-    logic.run(self.inputSelector.currentNode(),
-              self.outputLowRankSelector.currentNode(),
-              self.outputSparseSelector.currentNode())
+    logic.run(self.configFile, self.selectAlgorithm.checkedButton().text)
 
 #
 # LowRankImageDecompositionLogic
@@ -143,66 +118,50 @@ class LowRankImageDecompositionLogic(ScriptedLoadableModuleLogic):
   Uses ScriptedLoadableModuleLogic base class, available at:
   https://github.com/Slicer/Slicer/blob/master/Base/Python/slicer/ScriptedLoadableModule.py
   """
+  def softwarePaths(self):
+    currentFilePath = os.path.realpath(__file__)
+    upDirectory = os.path.join(currentFilePath, '..')
+    # Prepend PATH with path of executables packaged with extension
+    os.environ["PATH"] = os.path.join(upDirectory, 'ExternalBin') + os.pathsep + os.environ["PATH"]
+    # Creates software configuration file
+    software = type('obj', (object,), {})
+    slicerSoftware = ['BRAINSFit', 'BRAINSDemonWarp', 'BSplineDeformableRegistration', 'BRAINSResample'
+                      'ANTS', 'AverageImages', 'ComposeMultiTransform', 'WarpImageMultiTransform',
+                      'CreateJacobianDeterminantImage', 'InvertDeformationField']
+    for i in slicerSoftware:
+      setattr(software, 'EXE'+str(i), find_executable(i))
+    return software
 
-  def hasImageData(self,volumeNode):
-    """This is an example logic method that
-    returns true if the passed in volume
-    node has valid image data
-    """
-    if not volumeNode:
-      logging.debug('hasImageData failed: no volume node')
-      return False
-    if volumeNode.GetImageData() == None:
-      logging.debug('hasImageData failed: no image data in volume node')
-      return False
-    return True
-
-  def isValidInputOutputData(self, inputVolumeNode, outputVolumeNode):
-    """Validates if the output is not the same as input
-    """
-    if not inputVolumeNode:
-      logging.debug('isValidInputOutputData failed: no input volume node defined')
-      return False
-    if not outputVolumeNode:
-      logging.debug('isValidInputOutputData failed: no output volume node defined')
-      return False
-    if inputVolumeNode.GetID()==outputVolumeNode.GetID():
-      logging.debug('isValidInputOutputData failed: input and output volume is the same. Create a new volume for output to avoid this error.')
-      return False
-    return True
-
-  def run(self, inputVolume, outputLowRankVolume, outputSparseVolume ):
+  def run(self, configFile, algo ):
     """
     Run the actual algorithm
     """
+    # Loads configuration file
+    config = pyLAR.loadConfiguration(configFile, 'config')
+    software = self.softwarePaths()
 
-    if not self.isValidInputOutputData(inputVolume, outputLowRankVolume):
-      slicer.util.errorDisplay('Input volume is the same as the output low-rank volume.\
-       Choose a different output low-rank volume.')
-      return False
-    if not self.isValidInputOutputData(inputVolume, outputSparseVolume):
-      slicer.util.errorDisplay('Input volume is the same as the output sparse volume.\
-       Choose a different output sparse volume.')
-      return False
-    if not self.isValidInputOutputData(outputLowRankVolume, outputSparseVolume):
-      slicer.util.errorDisplay('Output low-rank volume is the same as the output sparse volume.\
-       Choose a different output volume.')
-      return False
-
+    result_dir = config.result_dir
+    # For reproducibility: save all parameters into the result dir
+    savedFileName = lambda name, default: os.path.basename(name) if name else default
+    pyLAR.saveConfiguration(os.path.join(result_dir, savedFileName(configFN, 'Config.txt')), config)
+    pyLAR.saveConfiguration(os.path.join(result_dir, savedFileName(configSoftware, 'Software.txt')),
+                            software)
+    fileListFN = config.fileListFN
+    pyLAR.writeTxtIntoList(os.path.join(result_dir, savedFileName(fileListFN, 'listFiles.txt')), im_fns)
+    currentPyFile = os.path.realpath(__file__)
+    shutil.copy(currentPyFile, result_dir)
+    sys.stdout = open(os.path.join(result_dir, 'RUN.log'), "w")
     logging.info('Processing started')
-
-    # Compute the low-rank and sparse volumes using pyLAR
-    # decompose X into L+S
-    # data for processing
-    X = slicer.util.array(inputVolume.GetName())
-    L, S, _, _, _, _ = ialm.recover(X)
-
-    L_image = sitk.GetImageFromArray(np.asarray(L, dtype=np.uint8))
-    S_image = sitk.GetImageFromArray(np.asarray(S, dtype=np.uint8))
-    sitkUtils.PushToSlicer(L_image, outputLowRankVolume.GetName())
-    sitkUtils.PushToSlicer(S_image, outputSparseVolume.GetName())
+    if algo == "Unbias Atlas Creation":
+      dsfsdf
+    elif algo == "Low Rank/Sparse Decomposition":
+      dsfsdf
+    elif algo == "Low Rank Atlas Creation":
+      esdf
+    else:
+      print "Error while selecting algorithm"
+      return False
     logging.info('Processing completed')
-
     return True
 
 
