@@ -1,0 +1,2887 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XCEDE xmlns="http://www.xcede.org/xcede-2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:fbirn="http://www.xcede.org/xcede-2/extensions/fbirn" xmlns:xcede="http://www.xcede.org/xcede-2" xsi:schemaLocation="http://www.xcede.org/xcede-2 MIDAS/xcede-2.0-ext.xsd">
+<catalog ID="21">
+ <catalogList>
+<catalog ID="39">
+ <catalogList>
+<catalog ID="1359">
+   <entryList>
+      <entry ID="6301" name="brain3.jpg" description="" format="image/jpeg" content="" cachePath="" uri="http://hdl.handle.net/1926/596.6301"/>
+      <entry ID="6302" name="brain2.jpg" description="" format="image/jpeg" content="" cachePath="" uri="http://hdl.handle.net/1926/596.6302"/>
+      <entry ID="6303" name="brain1.jpg" description="" format="image/jpeg" content="" cachePath="" uri="http://hdl.handle.net/1926/596.6303"/>
+      <entry ID="6304" name="dti.jpg" description="" format="image/jpeg" content="" cachePath="" uri="http://hdl.handle.net/1926/596.6304"/>
+   </entryList>
+</catalog>
+<catalog ID="1360">
+   <entryList>
+      <entry ID="6308" name="dicom_header_T1_flash.txt" description="" format="text/plain" content="" cachePath="" uri="http://hdl.handle.net/1926/597.6308"/>
+      <entry ID="6309" name="dicom_header_MRA.txt" description="" format="text/plain" content="" cachePath="" uri="http://hdl.handle.net/1926/597.6309"/>
+      <entry ID="6310" name="dicom_header_DTI.txt" description="" format="text/plain" content="" cachePath="" uri="http://hdl.handle.net/1926/597.6310"/>
+      <entry ID="6311" name="dicom_header_T2_tra.txt" description="" format="text/plain" content="" cachePath="" uri="http://hdl.handle.net/1926/597.6311"/>
+      <entry ID="6314" name="dicom_header_T1_mprage.txt" description="" format="text/plain" content="" cachePath="" uri="http://hdl.handle.net/1926/597.6314"/>
+   </entryList>
+</catalog>
+<catalog ID="2042">
+   <entryList>
+      <entry ID="8386" name="NormalDatabase2.pdf" description="Age, Gender, etc." format="application/pdf" content="" cachePath="" uri="http://hdl.handle.net/1926/1313.8386"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="40">
+ <catalogList>
+<catalog ID="1362">
+   <entryList>
+      <entry ID="6323" name="Normal001-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/601.6323"/>
+   </entryList>
+</catalog>
+<catalog ID="1363">
+   <entryList>
+      <entry ID="6325" name="Normal001-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/602.6325"/>
+   </entryList>
+</catalog>
+<catalog ID="1364">
+   <entryList>
+      <entry ID="6327" name="Normal001-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/603.6327"/>
+   </entryList>
+</catalog>
+<catalog ID="1365">
+   <entryList>
+      <entry ID="6329" name="Normal001-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/604.6329"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="41">
+ <catalogList>
+<catalog ID="1366">
+   <entryList>
+      <entry ID="6331" name="Normal002-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/606.6331"/>
+   </entryList>
+</catalog>
+<catalog ID="1367">
+   <entryList>
+      <entry ID="6333" name="Normal002-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/607.6333"/>
+   </entryList>
+</catalog>
+<catalog ID="1368">
+   <entryList>
+      <entry ID="6335" name="Normal002-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/608.6335"/>
+   </entryList>
+</catalog>
+<catalog ID="1369">
+   <entryList>
+      <entry ID="6337" name="Normal002-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/609.6337"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="42">
+ <catalogList>
+<catalog ID="1370">
+   <entryList>
+      <entry ID="6339" name="Normal003-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/611.6339"/>
+   </entryList>
+</catalog>
+<catalog ID="1371">
+   <entryList>
+      <entry ID="6341" name="Normal003-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/612.6341"/>
+   </entryList>
+</catalog>
+<catalog ID="1372">
+   <entryList>
+      <entry ID="6343" name="Normal003-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/613.6343"/>
+   </entryList>
+</catalog>
+<catalog ID="1373">
+   <entryList>
+      <entry ID="6345" name="Normal003-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/614.6345"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="43">
+ <catalogList>
+<catalog ID="1374">
+   <entryList>
+      <entry ID="6449" name="Normal004-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/616.6449"/>
+   </entryList>
+</catalog>
+<catalog ID="1375">
+   <entryList>
+      <entry ID="6349" name="Normal004-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/617.6349"/>
+   </entryList>
+</catalog>
+<catalog ID="1376">
+   <entryList>
+      <entry ID="6351" name="Normal004-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/618.6351"/>
+   </entryList>
+</catalog>
+<catalog ID="1377">
+   <entryList>
+      <entry ID="6353" name="Normal004-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/619.6353"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="44">
+ <catalogList>
+<catalog ID="1378">
+   <entryList>
+      <entry ID="6355" name="Normal005-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/621.6355"/>
+   </entryList>
+</catalog>
+<catalog ID="1379">
+   <entryList>
+      <entry ID="6357" name="Normal005-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/622.6357"/>
+   </entryList>
+</catalog>
+<catalog ID="1380">
+   <entryList>
+      <entry ID="6359" name="Normal005-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/623.6359"/>
+   </entryList>
+</catalog>
+<catalog ID="1381">
+   <entryList>
+      <entry ID="6361" name="Normal005-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/624.6361"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="45">
+ <catalogList>
+<catalog ID="1382">
+   <entryList>
+      <entry ID="6363" name="Normal006-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/626.6363"/>
+   </entryList>
+</catalog>
+<catalog ID="1383">
+   <entryList>
+      <entry ID="6365" name="Normal006-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/627.6365"/>
+   </entryList>
+</catalog>
+<catalog ID="1384">
+   <entryList>
+      <entry ID="6367" name="Normal006-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/628.6367"/>
+   </entryList>
+</catalog>
+<catalog ID="1385">
+   <entryList>
+      <entry ID="6369" name="Normal006-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/629.6369"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="46">
+ <catalogList>
+<catalog ID="1386">
+   <entryList>
+      <entry ID="6371" name="Normal007-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/631.6371"/>
+   </entryList>
+</catalog>
+<catalog ID="1387">
+   <entryList>
+      <entry ID="6450" name="Normal007-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/632.6450"/>
+   </entryList>
+</catalog>
+<catalog ID="1388">
+   <entryList>
+      <entry ID="6375" name="Normal007-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/633.6375"/>
+   </entryList>
+</catalog>
+<catalog ID="1389">
+   <entryList>
+      <entry ID="6377" name="Normal007-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/634.6377"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="47">
+ <catalogList>
+<catalog ID="1390">
+   <entryList>
+      <entry ID="6451" name="Normal008-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/636.6451"/>
+   </entryList>
+</catalog>
+<catalog ID="1391">
+   <entryList>
+      <entry ID="6381" name="Normal008-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/637.6381"/>
+   </entryList>
+</catalog>
+<catalog ID="1392">
+   <entryList>
+      <entry ID="6383" name="Normal008-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/638.6383"/>
+   </entryList>
+</catalog>
+<catalog ID="1393">
+   <entryList>
+      <entry ID="6385" name="Normal008-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/639.6385"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="48">
+ <catalogList>
+<catalog ID="1394">
+   <entryList>
+      <entry ID="6387" name="Normal009-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/641.6387"/>
+   </entryList>
+</catalog>
+<catalog ID="1395">
+   <entryList>
+      <entry ID="6453" name="Normal009-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/642.6453"/>
+   </entryList>
+</catalog>
+<catalog ID="1396">
+   <entryList>
+      <entry ID="6452" name="Normal009-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/643.6452"/>
+   </entryList>
+</catalog>
+<catalog ID="1397">
+   <entryList>
+      <entry ID="6393" name="Normal009-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/644.6393"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="49">
+ <catalogList>
+<catalog ID="1398">
+   <entryList>
+      <entry ID="6395" name="Normal010-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/646.6395"/>
+   </entryList>
+</catalog>
+<catalog ID="1399">
+   <entryList>
+      <entry ID="6397" name="Normal010-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/647.6397"/>
+   </entryList>
+</catalog>
+<catalog ID="1400">
+   <entryList>
+      <entry ID="6454" name="Normal010-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/648.6454"/>
+   </entryList>
+</catalog>
+<catalog ID="1401">
+   <entryList>
+      <entry ID="6401" name="Normal010-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/649.6401"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="50">
+ <catalogList>
+<catalog ID="1402">
+   <entryList>
+      <entry ID="6403" name="Normal011-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/651.6403"/>
+   </entryList>
+</catalog>
+<catalog ID="1403">
+   <entryList>
+      <entry ID="6405" name="Normal011-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/652.6405"/>
+   </entryList>
+</catalog>
+<catalog ID="1404">
+   <entryList>
+      <entry ID="6407" name="Normal011-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/653.6407"/>
+   </entryList>
+</catalog>
+<catalog ID="1405">
+   <entryList>
+      <entry ID="6409" name="Normal011-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/654.6409"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="51">
+ <catalogList>
+<catalog ID="1406">
+   <entryList>
+      <entry ID="6411" name="Normal012-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/656.6411"/>
+   </entryList>
+</catalog>
+<catalog ID="1407">
+   <entryList>
+      <entry ID="6413" name="Normal012-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/657.6413"/>
+   </entryList>
+</catalog>
+<catalog ID="1408">
+   <entryList>
+      <entry ID="6455" name="Normal012-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/658.6455"/>
+   </entryList>
+</catalog>
+<catalog ID="1409">
+   <entryList>
+      <entry ID="6417" name="Normal012-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/659.6417"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="52">
+ <catalogList>
+<catalog ID="1410">
+   <entryList>
+      <entry ID="6456" name="Normal013-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/661.6456"/>
+   </entryList>
+</catalog>
+<catalog ID="1411">
+   <entryList>
+      <entry ID="6421" name="Normal013-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/662.6421"/>
+   </entryList>
+</catalog>
+<catalog ID="1412">
+   <entryList>
+      <entry ID="6423" name="Normal013-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/663.6423"/>
+   </entryList>
+</catalog>
+<catalog ID="1413">
+   <entryList>
+      <entry ID="6425" name="Normal013-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/664.6425"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="53">
+ <catalogList>
+<catalog ID="1414">
+   <entryList>
+      <entry ID="6427" name="Normal014-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/666.6427"/>
+   </entryList>
+</catalog>
+<catalog ID="1415">
+   <entryList>
+      <entry ID="6429" name="Normal014-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/667.6429"/>
+   </entryList>
+</catalog>
+<catalog ID="1416">
+   <entryList>
+      <entry ID="6431" name="Normal014-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/668.6431"/>
+   </entryList>
+</catalog>
+<catalog ID="1417">
+   <entryList>
+      <entry ID="6433" name="Normal014-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/669.6433"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="54">
+ <catalogList>
+<catalog ID="1427">
+   <entryList>
+      <entry ID="6460" name="Normal015-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/683.6460"/>
+   </entryList>
+</catalog>
+<catalog ID="1428">
+   <entryList>
+      <entry ID="6462" name="Normal015-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/684.6462"/>
+   </entryList>
+</catalog>
+<catalog ID="1429">
+   <entryList>
+      <entry ID="6464" name="Normal015-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/685.6464"/>
+   </entryList>
+</catalog>
+<catalog ID="1430">
+   <entryList>
+      <entry ID="6466" name="Normal015-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/686.6466"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="55">
+ <catalogList>
+<catalog ID="1431">
+   <entryList>
+      <entry ID="6468" name="Normal016-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/688.6468"/>
+   </entryList>
+</catalog>
+<catalog ID="1432">
+   <entryList>
+      <entry ID="6470" name="Normal016-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/689.6470"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="56">
+ <catalogList>
+<catalog ID="1433">
+   <entryList>
+      <entry ID="6472" name="Normal017-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/691.6472"/>
+   </entryList>
+</catalog>
+<catalog ID="1434">
+   <entryList>
+      <entry ID="6837" name="Normal017-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/692.6837"/>
+   </entryList>
+</catalog>
+<catalog ID="1435">
+   <entryList>
+      <entry ID="6476" name="Normal017-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/693.6476"/>
+   </entryList>
+</catalog>
+<catalog ID="1436">
+   <entryList>
+      <entry ID="6478" name="Normal017-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/694.6478"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="57">
+ <catalogList>
+<catalog ID="1437">
+   <entryList>
+      <entry ID="6480" name="Normal018-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/696.6480"/>
+   </entryList>
+</catalog>
+<catalog ID="1438">
+   <entryList>
+      <entry ID="6482" name="Normal018-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/697.6482"/>
+   </entryList>
+</catalog>
+<catalog ID="1439">
+   <entryList>
+      <entry ID="6484" name="Normal018-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/698.6484"/>
+   </entryList>
+</catalog>
+<catalog ID="1440">
+   <entryList>
+      <entry ID="6486" name="Normal018-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/699.6486"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="58">
+ <catalogList>
+<catalog ID="1441">
+   <entryList>
+      <entry ID="6488" name="Normal019-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/701.6488"/>
+   </entryList>
+</catalog>
+<catalog ID="1442">
+   <entryList>
+      <entry ID="6490" name="Normal019-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/702.6490"/>
+   </entryList>
+</catalog>
+<catalog ID="1443">
+   <entryList>
+      <entry ID="6492" name="Normal019-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/703.6492"/>
+   </entryList>
+</catalog>
+<catalog ID="1444">
+   <entryList>
+      <entry ID="6494" name="Normal019-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/704.6494"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="59">
+ <catalogList>
+<catalog ID="1445">
+   <entryList>
+      <entry ID="6496" name="Normal020-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/706.6496"/>
+   </entryList>
+</catalog>
+<catalog ID="1446">
+   <entryList>
+      <entry ID="6498" name="Normal020-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/707.6498"/>
+   </entryList>
+</catalog>
+<catalog ID="1447">
+   <entryList>
+      <entry ID="6500" name="Normal020-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/708.6500"/>
+   </entryList>
+</catalog>
+<catalog ID="1448">
+   <entryList>
+      <entry ID="6502" name="Normal020-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/709.6502"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="60">
+ <catalogList>
+<catalog ID="1449">
+   <entryList>
+      <entry ID="6504" name="Normal021-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/711.6504"/>
+   </entryList>
+</catalog>
+<catalog ID="1450">
+   <entryList>
+      <entry ID="6506" name="Normal021-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/712.6506"/>
+   </entryList>
+</catalog>
+<catalog ID="1451">
+   <entryList>
+      <entry ID="6508" name="Normal021-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/713.6508"/>
+   </entryList>
+</catalog>
+<catalog ID="1452">
+   <entryList>
+      <entry ID="6510" name="Normal021-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/714.6510"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="61">
+ <catalogList>
+<catalog ID="1453">
+   <entryList>
+      <entry ID="6512" name="Normal022-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/716.6512"/>
+   </entryList>
+</catalog>
+<catalog ID="1454">
+   <entryList>
+      <entry ID="6841" name="Normal022-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/717.6841"/>
+   </entryList>
+</catalog>
+<catalog ID="1455">
+   <entryList>
+      <entry ID="6516" name="Normal022-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/718.6516"/>
+   </entryList>
+</catalog>
+<catalog ID="1456">
+   <entryList>
+      <entry ID="6518" name="Normla022-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/719.6518"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="62">
+ <catalogList>
+<catalog ID="1457">
+   <entryList>
+      <entry ID="6520" name="Normal023-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/721.6520"/>
+   </entryList>
+</catalog>
+<catalog ID="1458">
+   <entryList>
+      <entry ID="6849" name="Normal023-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/722.6849"/>
+   </entryList>
+</catalog>
+<catalog ID="1459">
+   <entryList>
+      <entry ID="6524" name="Normal023-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/723.6524"/>
+   </entryList>
+</catalog>
+<catalog ID="1460">
+   <entryList>
+      <entry ID="6526" name="Normal023-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/724.6526"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="63">
+ <catalogList>
+<catalog ID="1461">
+   <entryList>
+      <entry ID="6528" name="Normal024-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/726.6528"/>
+   </entryList>
+</catalog>
+<catalog ID="1462">
+   <entryList>
+      <entry ID="6530" name="Normal024-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/727.6530"/>
+   </entryList>
+</catalog>
+<catalog ID="1463">
+   <entryList>
+      <entry ID="6532" name="Normal024-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/728.6532"/>
+   </entryList>
+</catalog>
+<catalog ID="1464">
+   <entryList>
+      <entry ID="6534" name="Normal024-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/729.6534"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="64">
+ <catalogList>
+<catalog ID="1465">
+   <entryList>
+      <entry ID="6857" name="Normal025-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/731.6857"/>
+   </entryList>
+</catalog>
+<catalog ID="1466">
+   <entryList>
+      <entry ID="6854" name="Normal025-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/732.6854"/>
+   </entryList>
+</catalog>
+<catalog ID="1467">
+   <entryList>
+      <entry ID="6540" name="Normal025-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/733.6540"/>
+   </entryList>
+</catalog>
+<catalog ID="1468">
+   <entryList>
+      <entry ID="6542" name="Normal025-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/734.6542"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="65">
+ <catalogList>
+<catalog ID="1469">
+   <entryList>
+      <entry ID="6862" name="Normal026-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/736.6862"/>
+   </entryList>
+</catalog>
+<catalog ID="1470">
+   <entryList>
+      <entry ID="6546" name="Normal026-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/737.6546"/>
+   </entryList>
+</catalog>
+<catalog ID="1471">
+   <entryList>
+      <entry ID="6548" name="Normal026-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/738.6548"/>
+   </entryList>
+</catalog>
+<catalog ID="1472">
+   <entryList>
+      <entry ID="6550" name="Normal026-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/739.6550"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="66">
+ <catalogList>
+<catalog ID="1473">
+   <entryList>
+      <entry ID="6552" name="Normal027-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/741.6552"/>
+   </entryList>
+</catalog>
+<catalog ID="1474">
+   <entryList>
+      <entry ID="6554" name="Normal027-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/742.6554"/>
+   </entryList>
+</catalog>
+<catalog ID="1475">
+   <entryList>
+      <entry ID="6556" name="Normal027-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/743.6556"/>
+   </entryList>
+</catalog>
+<catalog ID="1665">
+   <entryList>
+      <entry ID="7241" name="Normal027-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/969.7241"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="67">
+ <catalogList>
+<catalog ID="1476">
+   <entryList>
+      <entry ID="6559" name="Normal028-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/745.6559"/>
+   </entryList>
+</catalog>
+<catalog ID="1477">
+   <entryList>
+      <entry ID="6865" name="Normal028-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/746.6865"/>
+   </entryList>
+</catalog>
+<catalog ID="1478">
+   <entryList>
+      <entry ID="6563" name="Normal028-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/747.6563"/>
+   </entryList>
+</catalog>
+<catalog ID="1479">
+   <entryList>
+      <entry ID="6565" name="Normal028-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/748.6565"/>
+   </entryList>
+</catalog>
+<catalog ID="1480">
+   <entryList>
+      <entry ID="6567" name="Normal028-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/749.6567"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="68">
+ <catalogList>
+<catalog ID="1481">
+   <entryList>
+      <entry ID="6870" name="Normal029-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/751.6870"/>
+   </entryList>
+</catalog>
+<catalog ID="1482">
+   <entryList>
+      <entry ID="6571" name="Normal029-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/752.6571"/>
+   </entryList>
+</catalog>
+<catalog ID="1483">
+   <entryList>
+      <entry ID="6573" name="Normal029-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/753.6573"/>
+   </entryList>
+</catalog>
+<catalog ID="1484">
+   <entryList>
+      <entry ID="6575" name="Normal029-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/754.6575"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="69">
+ <catalogList>
+<catalog ID="1485">
+   <entryList>
+      <entry ID="6577" name="Normal030-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/756.6577"/>
+   </entryList>
+</catalog>
+<catalog ID="1486">
+   <entryList>
+      <entry ID="6875" name="Normal030-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/757.6875"/>
+   </entryList>
+</catalog>
+<catalog ID="1487">
+   <entryList>
+      <entry ID="6581" name="Normal030-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/758.6581"/>
+   </entryList>
+</catalog>
+<catalog ID="1488">
+   <entryList>
+      <entry ID="6583" name="Normal030-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/759.6583"/>
+   </entryList>
+</catalog>
+<catalog ID="1489">
+   <entryList>
+      <entry ID="6585" name="Normal030-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/760.6585"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="70">
+ <catalogList>
+<catalog ID="1494">
+   <entryList>
+      <entry ID="6915" name="Normal031-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/766.6915"/>
+   </entryList>
+</catalog>
+<catalog ID="1490">
+   <entryList>
+      <entry ID="6587" name="Normal031-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/762.6587"/>
+   </entryList>
+</catalog>
+<catalog ID="1491">
+   <entryList>
+      <entry ID="6589" name="Normal031-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/763.6589"/>
+   </entryList>
+</catalog>
+<catalog ID="1492">
+   <entryList>
+      <entry ID="6591" name="Normal031-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/764.6591"/>
+   </entryList>
+</catalog>
+<catalog ID="1493">
+   <entryList>
+      <entry ID="6593" name="Normal031-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/765.6593"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="71">
+ <catalogList>
+<catalog ID="1495">
+   <entryList>
+      <entry ID="6597" name="Normal032-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/768.6597"/>
+   </entryList>
+</catalog>
+<catalog ID="1496">
+   <entryList>
+      <entry ID="6599" name="Normal032-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/769.6599"/>
+   </entryList>
+</catalog>
+<catalog ID="1497">
+   <entryList>
+      <entry ID="6601" name="Normal032-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/770.6601"/>
+   </entryList>
+</catalog>
+<catalog ID="1498">
+   <entryList>
+      <entry ID="6603" name="Normal032-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/771.6603"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="72">
+ <catalogList>
+<catalog ID="1499">
+   <entryList>
+      <entry ID="6605" name="Normal033-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/773.6605"/>
+   </entryList>
+</catalog>
+<catalog ID="1500">
+   <entryList>
+      <entry ID="6607" name="Normal033-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/774.6607"/>
+   </entryList>
+</catalog>
+<catalog ID="1501">
+   <entryList>
+      <entry ID="6924" name="Normal033-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/775.6924"/>
+   </entryList>
+</catalog>
+<catalog ID="1502">
+   <entryList>
+      <entry ID="6611" name="Normal033-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/776.6611"/>
+   </entryList>
+</catalog>
+<catalog ID="1503">
+   <entryList>
+      <entry ID="6613" name="Normal033-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/777.6613"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="73">
+ <catalogList>
+<catalog ID="1504">
+   <entryList>
+      <entry ID="6615" name="Normal034-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/779.6615"/>
+   </entryList>
+</catalog>
+<catalog ID="1505">
+   <entryList>
+      <entry ID="6617" name="Normal034-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/780.6617"/>
+   </entryList>
+</catalog>
+<catalog ID="1506">
+   <entryList>
+      <entry ID="6619" name="Normal034-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/781.6619"/>
+   </entryList>
+</catalog>
+<catalog ID="1507">
+   <entryList>
+      <entry ID="6621" name="Normal034-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/782.6621"/>
+   </entryList>
+</catalog>
+<catalog ID="1508">
+   <entryList>
+      <entry ID="6623" name="Normal034-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/783.6623"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="74">
+ <catalogList>
+<catalog ID="1509">
+   <entryList>
+      <entry ID="6625" name="Normal035-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/785.6625"/>
+   </entryList>
+</catalog>
+<catalog ID="1510">
+   <entryList>
+      <entry ID="6627" name="Normal035-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/786.6627"/>
+   </entryList>
+</catalog>
+<catalog ID="1511">
+   <entryList>
+      <entry ID="6929" name="Normal035-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/787.6929"/>
+   </entryList>
+</catalog>
+<catalog ID="1512">
+   <entryList>
+      <entry ID="6631" name="Normal035-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/788.6631"/>
+   </entryList>
+</catalog>
+<catalog ID="1513">
+   <entryList>
+      <entry ID="6633" name="Normal035-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/789.6633"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="75">
+ <catalogList>
+<catalog ID="1514">
+   <entryList>
+      <entry ID="6635" name="Normal036-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/791.6635"/>
+   </entryList>
+</catalog>
+<catalog ID="1515">
+   <entryList>
+      <entry ID="6637" name="Normal036-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/792.6637"/>
+   </entryList>
+</catalog>
+<catalog ID="1516">
+   <entryList>
+      <entry ID="6639" name="Normal036-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/793.6639"/>
+   </entryList>
+</catalog>
+<catalog ID="1517">
+   <entryList>
+      <entry ID="6641" name="Normal036-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/794.6641"/>
+   </entryList>
+</catalog>
+<catalog ID="1518">
+   <entryList>
+      <entry ID="6643" name="Normal036-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/795.6643"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="76">
+ <catalogList>
+<catalog ID="1519">
+   <entryList>
+      <entry ID="6645" name="Normal037-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/797.6645"/>
+   </entryList>
+</catalog>
+<catalog ID="1520">
+   <entryList>
+      <entry ID="6647" name="Normal037-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/798.6647"/>
+   </entryList>
+</catalog>
+<catalog ID="1521">
+   <entryList>
+      <entry ID="6649" name="Normal037-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/799.6649"/>
+   </entryList>
+</catalog>
+<catalog ID="1522">
+   <entryList>
+      <entry ID="6934" name="Normal037-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/800.6934"/>
+   </entryList>
+</catalog>
+<catalog ID="1523">
+   <entryList>
+      <entry ID="6653" name="Normal037-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/801.6653"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="77">
+ <catalogList>
+<catalog ID="1524">
+   <entryList>
+      <entry ID="6655" name="Normal038-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/803.6655"/>
+   </entryList>
+</catalog>
+<catalog ID="1525">
+   <entryList>
+      <entry ID="6657" name="Normal038-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/804.6657"/>
+   </entryList>
+</catalog>
+<catalog ID="1526">
+   <entryList>
+      <entry ID="6659" name="Normal038-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/805.6659"/>
+   </entryList>
+</catalog>
+<catalog ID="1527">
+   <entryList>
+      <entry ID="6661" name="Normal038-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/806.6661"/>
+   </entryList>
+</catalog>
+<catalog ID="1528">
+   <entryList>
+      <entry ID="6663" name="Normal038-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/807.6663"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="78">
+ <catalogList>
+<catalog ID="1531">
+   <entryList>
+      <entry ID="6669" name="Normal039-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/811.6669"/>
+   </entryList>
+</catalog>
+<catalog ID="1532">
+   <entryList>
+      <entry ID="6671" name="Normal039-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/812.6671"/>
+   </entryList>
+</catalog>
+<catalog ID="1533">
+   <entryList>
+      <entry ID="6673" name="Normal039-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/813.6673"/>
+   </entryList>
+</catalog>
+<catalog ID="1529">
+   <entryList>
+      <entry ID="6665" name="Normal039-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/809.6665"/>
+   </entryList>
+</catalog>
+<catalog ID="1530">
+   <entryList>
+      <entry ID="6667" name="Normal039-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/810.6667"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="79">
+ <catalogList>
+<catalog ID="1534">
+   <entryList>
+      <entry ID="6675" name="Normal040-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/815.6675"/>
+   </entryList>
+</catalog>
+<catalog ID="1535">
+   <entryList>
+      <entry ID="6677" name="Normal040-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/816.6677"/>
+   </entryList>
+</catalog>
+<catalog ID="1536">
+   <entryList>
+      <entry ID="6679" name="Normal040-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/817.6679"/>
+   </entryList>
+</catalog>
+<catalog ID="1537">
+   <entryList>
+      <entry ID="6681" name="Normal040-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/818.6681"/>
+   </entryList>
+</catalog>
+<catalog ID="1538">
+   <entryList>
+      <entry ID="7080" name="Normal040-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/819.7080"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="80">
+ <catalogList>
+<catalog ID="1539">
+   <entryList>
+      <entry ID="6685" name="Normal041-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/821.6685"/>
+   </entryList>
+</catalog>
+<catalog ID="1540">
+   <entryList>
+      <entry ID="6687" name="Normal041-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/822.6687"/>
+   </entryList>
+</catalog>
+<catalog ID="1541">
+   <entryList>
+      <entry ID="6689" name="Normal041-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/823.6689"/>
+   </entryList>
+</catalog>
+<catalog ID="1542">
+   <entryList>
+      <entry ID="7225" name="Normal041-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/824.7225"/>
+   </entryList>
+</catalog>
+<catalog ID="1543">
+   <entryList>
+      <entry ID="6693" name="Normal041-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/825.6693"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="81">
+ <catalogList>
+<catalog ID="1544">
+   <entryList>
+      <entry ID="7226" name="Normal042-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/827.7226"/>
+   </entryList>
+</catalog>
+<catalog ID="1545">
+   <entryList>
+      <entry ID="6697" name="Normal042-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/828.6697"/>
+   </entryList>
+</catalog>
+<catalog ID="1548">
+   <entryList>
+      <entry ID="6703" name="Normal042-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/831.6703"/>
+   </entryList>
+</catalog>
+<catalog ID="1546">
+   <entryList>
+      <entry ID="6699" name="Normal042-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/829.6699"/>
+   </entryList>
+</catalog>
+<catalog ID="1547">
+   <entryList>
+      <entry ID="6701" name="Normal042-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/830.6701"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="82">
+ <catalogList>
+<catalog ID="1549">
+   <entryList>
+      <entry ID="7227" name="Normal043-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/833.7227"/>
+   </entryList>
+</catalog>
+<catalog ID="1550">
+   <entryList>
+      <entry ID="6707" name="Normal043-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/834.6707"/>
+   </entryList>
+</catalog>
+<catalog ID="1551">
+   <entryList>
+      <entry ID="6709" name="Normal043-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/835.6709"/>
+   </entryList>
+</catalog>
+<catalog ID="1552">
+   <entryList>
+      <entry ID="6711" name="Normal043-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/836.6711"/>
+   </entryList>
+</catalog>
+<catalog ID="1553">
+   <entryList>
+      <entry ID="6713" name="Normal043-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/837.6713"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="83">
+ <catalogList>
+<catalog ID="1554">
+   <entryList>
+      <entry ID="6715" name="Normal044-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/839.6715"/>
+   </entryList>
+</catalog>
+<catalog ID="1555">
+   <entryList>
+      <entry ID="6717" name="Normal044-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/840.6717"/>
+   </entryList>
+</catalog>
+<catalog ID="1556">
+   <entryList>
+      <entry ID="6719" name="Normal044-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/841.6719"/>
+   </entryList>
+</catalog>
+<catalog ID="1557">
+   <entryList>
+      <entry ID="6721" name="Normal044-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/842.6721"/>
+   </entryList>
+</catalog>
+<catalog ID="1558">
+   <entryList>
+      <entry ID="6723" name="Normal044-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/843.6723"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="84">
+ <catalogList>
+<catalog ID="1559">
+   <entryList>
+      <entry ID="6725" name="Normal045-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/845.6725"/>
+   </entryList>
+</catalog>
+<catalog ID="1560">
+   <entryList>
+      <entry ID="6727" name="Normal045-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/846.6727"/>
+   </entryList>
+</catalog>
+<catalog ID="1561">
+   <entryList>
+      <entry ID="6729" name="Normal045-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/847.6729"/>
+   </entryList>
+</catalog>
+<catalog ID="1562">
+   <entryList>
+      <entry ID="6731" name="Normal045-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/848.6731"/>
+   </entryList>
+</catalog>
+<catalog ID="1563">
+   <entryList>
+      <entry ID="6733" name="Normal045-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/849.6733"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="85">
+ <catalogList>
+<catalog ID="1564">
+   <entryList>
+      <entry ID="6735" name="Normal046-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/851.6735"/>
+   </entryList>
+</catalog>
+<catalog ID="1565">
+   <entryList>
+      <entry ID="7229" name="Normal046-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/852.7229"/>
+   </entryList>
+</catalog>
+<catalog ID="1566">
+   <entryList>
+      <entry ID="6739" name="Normal046-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/853.6739"/>
+   </entryList>
+</catalog>
+<catalog ID="1567">
+   <entryList>
+      <entry ID="6741" name="Normal046-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/854.6741"/>
+   </entryList>
+</catalog>
+<catalog ID="1568">
+   <entryList>
+      <entry ID="6743" name="Normal046-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/855.6743"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="86">
+ <catalogList>
+<catalog ID="1569">
+   <entryList>
+      <entry ID="6745" name="Normal047-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/857.6745"/>
+   </entryList>
+</catalog>
+<catalog ID="1570">
+   <entryList>
+      <entry ID="6747" name="Normal047-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/858.6747"/>
+   </entryList>
+</catalog>
+<catalog ID="1571">
+   <entryList>
+      <entry ID="6749" name="Normal047-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/859.6749"/>
+   </entryList>
+</catalog>
+<catalog ID="1572">
+   <entryList>
+      <entry ID="7230" name="Normal047-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/860.7230"/>
+   </entryList>
+</catalog>
+<catalog ID="1573">
+   <entryList>
+      <entry ID="6753" name="Normal047-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/861.6753"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="87">
+ <catalogList>
+<catalog ID="1578">
+   <entryList>
+      <entry ID="6763" name="Normal048-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/867.6763"/>
+   </entryList>
+</catalog>
+<catalog ID="1574">
+   <entryList>
+      <entry ID="7231" name="Normal048-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/863.7231"/>
+   </entryList>
+</catalog>
+<catalog ID="1575">
+   <entryList>
+      <entry ID="6757" name="Normal048-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/864.6757"/>
+   </entryList>
+</catalog>
+<catalog ID="1576">
+   <entryList>
+      <entry ID="6759" name="Normal048-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/865.6759"/>
+   </entryList>
+</catalog>
+<catalog ID="1577">
+   <entryList>
+      <entry ID="6761" name="Normal048-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/866.6761"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="88">
+ <catalogList>
+<catalog ID="1579">
+   <entryList>
+      <entry ID="6765" name="Normal049-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/869.6765"/>
+   </entryList>
+</catalog>
+<catalog ID="1580">
+   <entryList>
+      <entry ID="6767" name="Normal049-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/870.6767"/>
+   </entryList>
+</catalog>
+<catalog ID="1581">
+   <entryList>
+      <entry ID="6769" name="Normal049-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/871.6769"/>
+   </entryList>
+</catalog>
+<catalog ID="1582">
+   <entryList>
+      <entry ID="7232" name="Normal049-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/872.7232"/>
+   </entryList>
+</catalog>
+<catalog ID="1583">
+   <entryList>
+      <entry ID="6773" name="Normal049-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/873.6773"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="89">
+ <catalogList>
+<catalog ID="1584">
+   <entryList>
+      <entry ID="6775" name="Normal050-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/875.6775"/>
+   </entryList>
+</catalog>
+<catalog ID="1585">
+   <entryList>
+      <entry ID="7235" name="Normal050-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/876.7235"/>
+   </entryList>
+</catalog>
+<catalog ID="1586">
+   <entryList>
+      <entry ID="6779" name="Normal050-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/877.6779"/>
+   </entryList>
+</catalog>
+<catalog ID="1587">
+   <entryList>
+      <entry ID="6781" name="Normal050-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/878.6781"/>
+   </entryList>
+</catalog>
+<catalog ID="1666">
+   <entryList>
+      <entry ID="7245" name="Normal050-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/970.7245"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="90">
+ <catalogList>
+<catalog ID="1589">
+   <entryList>
+      <entry ID="6785" name="Normal051-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/881.6785"/>
+   </entryList>
+</catalog>
+<catalog ID="1590">
+   <entryList>
+      <entry ID="6787" name="Normal051-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/882.6787"/>
+   </entryList>
+</catalog>
+<catalog ID="1591">
+   <entryList>
+      <entry ID="7236" name="Normal051-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/883.7236"/>
+   </entryList>
+</catalog>
+<catalog ID="1592">
+   <entryList>
+      <entry ID="6791" name="Normal051-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/884.6791"/>
+   </entryList>
+</catalog>
+<catalog ID="1593">
+   <entryList>
+      <entry ID="6793" name="Normal051-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/885.6793"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="91">
+ <catalogList>
+<catalog ID="1594">
+   <entryList>
+      <entry ID="6795" name="Normal052-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/887.6795"/>
+   </entryList>
+</catalog>
+<catalog ID="1595">
+   <entryList>
+      <entry ID="6797" name="Normal052-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/888.6797"/>
+   </entryList>
+</catalog>
+<catalog ID="1596">
+   <entryList>
+      <entry ID="6799" name="Normal052-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/889.6799"/>
+   </entryList>
+</catalog>
+<catalog ID="1597">
+   <entryList>
+      <entry ID="6801" name="Normal052-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/890.6801"/>
+   </entryList>
+</catalog>
+<catalog ID="1598">
+   <entryList>
+      <entry ID="6803" name="Normal052-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/891.6803"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="92">
+ <catalogList>
+<catalog ID="1599">
+   <entryList>
+      <entry ID="6805" name="Normal053-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/893.6805"/>
+   </entryList>
+</catalog>
+<catalog ID="1600">
+   <entryList>
+      <entry ID="6807" name="Normal053-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/894.6807"/>
+   </entryList>
+</catalog>
+<catalog ID="1601">
+   <entryList>
+      <entry ID="6809" name="Normal053-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/895.6809"/>
+   </entryList>
+</catalog>
+<catalog ID="1602">
+   <entryList>
+      <entry ID="6811" name="Normal053-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/896.6811"/>
+   </entryList>
+</catalog>
+<catalog ID="1603">
+   <entryList>
+      <entry ID="6813" name="Normal053-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/897.6813"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="93">
+ <catalogList>
+<catalog ID="1604">
+   <entryList>
+      <entry ID="6815" name="Normal054-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/899.6815"/>
+   </entryList>
+</catalog>
+<catalog ID="1605">
+   <entryList>
+      <entry ID="6817" name="Normal054-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/900.6817"/>
+   </entryList>
+</catalog>
+<catalog ID="1606">
+   <entryList>
+      <entry ID="6819" name="Normal054-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/901.6819"/>
+   </entryList>
+</catalog>
+<catalog ID="1607">
+   <entryList>
+      <entry ID="6821" name="Normal054-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/902.6821"/>
+   </entryList>
+</catalog>
+<catalog ID="1608">
+   <entryList>
+      <entry ID="6823" name="Normal054-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/903.6823"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="94">
+ <catalogList>
+<catalog ID="1609">
+   <entryList>
+      <entry ID="6825" name="Normal055-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/905.6825"/>
+   </entryList>
+</catalog>
+<catalog ID="1610">
+   <entryList>
+      <entry ID="7238" name="Normal055-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/906.7238"/>
+   </entryList>
+</catalog>
+<catalog ID="1611">
+   <entryList>
+      <entry ID="6829" name="Normal055-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/907.6829"/>
+   </entryList>
+</catalog>
+<catalog ID="1612">
+   <entryList>
+      <entry ID="6831" name="Normal055-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/908.6831"/>
+   </entryList>
+</catalog>
+<catalog ID="1613">
+   <entryList>
+      <entry ID="6833" name="Normal055-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/909.6833"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="95">
+ <catalogList>
+<catalog ID="1617">
+   <entryList>
+      <entry ID="7242" name="Normal056-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/914.7242"/>
+   </entryList>
+</catalog>
+<catalog ID="1615">
+   <entryList>
+      <entry ID="7243" name="Normal056-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/912.7243"/>
+   </entryList>
+</catalog>
+<catalog ID="1614">
+   <entryList>
+      <entry ID="6835" name="Normal056-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/911.6835"/>
+   </entryList>
+</catalog>
+<catalog ID="1616">
+   <entryList>
+      <entry ID="6840" name="Normal056-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/913.6840"/>
+   </entryList>
+</catalog>
+<catalog ID="1618">
+   <entryList>
+      <entry ID="7239" name="Normal056-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/915.7239"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="96">
+ <catalogList>
+<catalog ID="1619">
+   <entryList>
+      <entry ID="6847" name="Normal057-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/917.6847"/>
+   </entryList>
+</catalog>
+<catalog ID="1620">
+   <entryList>
+      <entry ID="6850" name="Normal057-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/918.6850"/>
+   </entryList>
+</catalog>
+<catalog ID="1621">
+   <entryList>
+      <entry ID="6852" name="Normal057-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/919.6852"/>
+   </entryList>
+</catalog>
+<catalog ID="1622">
+   <entryList>
+      <entry ID="6855" name="Normal057-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/920.6855"/>
+   </entryList>
+</catalog>
+<catalog ID="1623">
+   <entryList>
+      <entry ID="6858" name="Normal057-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/921.6858"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="97">
+ <catalogList>
+<catalog ID="1626">
+   <entryList>
+      <entry ID="6866" name="Normal058-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/925.6866"/>
+   </entryList>
+</catalog>
+<catalog ID="1627">
+   <entryList>
+      <entry ID="6868" name="Normal058-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/926.6868"/>
+   </entryList>
+</catalog>
+<catalog ID="1628">
+   <entryList>
+      <entry ID="6871" name="Normal058-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/927.6871"/>
+   </entryList>
+</catalog>
+<catalog ID="1624">
+   <entryList>
+      <entry ID="7246" name="Normal058-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/923.7246"/>
+   </entryList>
+</catalog>
+<catalog ID="1625">
+   <entryList>
+      <entry ID="6863" name="Normal058-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/924.6863"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="98">
+ <catalogList>
+<catalog ID="1629">
+   <entryList>
+      <entry ID="7248" name="Normal059-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/929.7248"/>
+   </entryList>
+</catalog>
+<catalog ID="1630">
+   <entryList>
+      <entry ID="6876" name="Normal059-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/930.6876"/>
+   </entryList>
+</catalog>
+<catalog ID="1631">
+   <entryList>
+      <entry ID="6879" name="Normal059-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/931.6879"/>
+   </entryList>
+</catalog>
+<catalog ID="1632">
+   <entryList>
+      <entry ID="6881" name="Normal059-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/932.6881"/>
+   </entryList>
+</catalog>
+<catalog ID="1633">
+   <entryList>
+      <entry ID="6883" name="Normal059-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/933.6883"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="99">
+ <catalogList>
+<catalog ID="1634">
+   <entryList>
+      <entry ID="6885" name="Normal060-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/935.6885"/>
+   </entryList>
+</catalog>
+<catalog ID="1635">
+   <entryList>
+      <entry ID="6887" name="Normal060-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/936.6887"/>
+   </entryList>
+</catalog>
+<catalog ID="1636">
+   <entryList>
+      <entry ID="6889" name="Normal060-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/937.6889"/>
+   </entryList>
+</catalog>
+<catalog ID="1637">
+   <entryList>
+      <entry ID="7250" name="Normal060-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/938.7250"/>
+   </entryList>
+</catalog>
+<catalog ID="1638">
+   <entryList>
+      <entry ID="6893" name="Normal060-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/939.6893"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="100">
+ <catalogList>
+<catalog ID="1639">
+   <entryList>
+      <entry ID="7249" name="Normal061-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/941.7249"/>
+   </entryList>
+</catalog>
+<catalog ID="1640">
+   <entryList>
+      <entry ID="6897" name="Normal061-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/942.6897"/>
+   </entryList>
+</catalog>
+<catalog ID="1641">
+   <entryList>
+      <entry ID="6899" name="Normal061-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/943.6899"/>
+   </entryList>
+</catalog>
+<catalog ID="1642">
+   <entryList>
+      <entry ID="6901" name="Normal061-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/944.6901"/>
+   </entryList>
+</catalog>
+<catalog ID="1643">
+   <entryList>
+      <entry ID="6903" name="Normal061-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/945.6903"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="101">
+ <catalogList>
+<catalog ID="1644">
+   <entryList>
+      <entry ID="6905" name="Normal062-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/947.6905"/>
+   </entryList>
+</catalog>
+<catalog ID="1645">
+   <entryList>
+      <entry ID="6907" name="Normal062-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/948.6907"/>
+   </entryList>
+</catalog>
+<catalog ID="1646">
+   <entryList>
+      <entry ID="6909" name="Normal062-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/949.6909"/>
+   </entryList>
+</catalog>
+<catalog ID="1647">
+   <entryList>
+      <entry ID="6911" name="Normal062-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/950.6911"/>
+   </entryList>
+</catalog>
+<catalog ID="1648">
+   <entryList>
+      <entry ID="6913" name="Normal062-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/951.6913"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="102">
+ <catalogList>
+<catalog ID="1650">
+   <entryList>
+      <entry ID="6918" name="Normal063-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/954.6918"/>
+   </entryList>
+</catalog>
+<catalog ID="1649">
+   <entryList>
+      <entry ID="6916" name="Normal063-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/953.6916"/>
+   </entryList>
+</catalog>
+<catalog ID="1651">
+   <entryList>
+      <entry ID="6920" name="Normal063-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/955.6920"/>
+   </entryList>
+</catalog>
+<catalog ID="1652">
+   <entryList>
+      <entry ID="7251" name="Normal063-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/956.7251"/>
+   </entryList>
+</catalog>
+<catalog ID="1653">
+   <entryList>
+      <entry ID="7252" name="Normal063-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/957.7252"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="103">
+ <catalogList>
+<catalog ID="1654">
+   <entryList>
+      <entry ID="6927" name="Normal064-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/959.6927"/>
+   </entryList>
+</catalog>
+<catalog ID="1655">
+   <entryList>
+      <entry ID="6930" name="Normal064-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/960.6930"/>
+   </entryList>
+</catalog>
+<catalog ID="1656">
+   <entryList>
+      <entry ID="6932" name="Normal064-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/961.6932"/>
+   </entryList>
+</catalog>
+<catalog ID="1657">
+   <entryList>
+      <entry ID="7254" name="Normal064-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/962.7254"/>
+   </entryList>
+</catalog>
+<catalog ID="1658">
+   <entryList>
+      <entry ID="7253" name="Normal064-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/963.7253"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="104">
+ <catalogList>
+<catalog ID="1725">
+   <entryList>
+      <entry ID="7379" name="Normal065-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1042.7379"/>
+   </entryList>
+</catalog>
+<catalog ID="1659">
+   <entryList>
+      <entry ID="6955" name="Normal065-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/965.6955"/>
+   </entryList>
+</catalog>
+<catalog ID="1667">
+   <entryList>
+      <entry ID="7370" name="Normal065-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/971.7370"/>
+   </entryList>
+</catalog>
+<catalog ID="1668">
+   <entryList>
+      <entry ID="7369" name="Normal065-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/972.7369"/>
+   </entryList>
+</catalog>
+<catalog ID="1669">
+   <entryList>
+      <entry ID="7368" name="Normal065-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/973.7368"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="105">
+ <catalogList>
+<catalog ID="1729">
+   <entryList>
+      <entry ID="7391" name="Normal066-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1048.7391"/>
+   </entryList>
+</catalog>
+<catalog ID="1726">
+   <entryList>
+      <entry ID="7383" name="Normal066-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1045.7383"/>
+   </entryList>
+</catalog>
+<catalog ID="1727">
+   <entryList>
+      <entry ID="7385" name="Normal066-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1046.7385"/>
+   </entryList>
+</catalog>
+<catalog ID="1728">
+   <entryList>
+      <entry ID="7387" name="Normal066-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1047.7387"/>
+   </entryList>
+</catalog>
+<catalog ID="1730">
+   <entryList>
+      <entry ID="7393" name="Normal066-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1049.7393"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="106">
+ <catalogList>
+<catalog ID="1731">
+   <entryList>
+      <entry ID="7395" name="Normal067-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1051.7395"/>
+   </entryList>
+</catalog>
+<catalog ID="1733">
+   <entryList>
+      <entry ID="7399" name="Normal067-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1053.7399"/>
+   </entryList>
+</catalog>
+<catalog ID="1734">
+   <entryList>
+      <entry ID="7401" name="Normal067-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1054.7401"/>
+   </entryList>
+</catalog>
+<catalog ID="1735">
+   <entryList>
+      <entry ID="7403" name="Normal067-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1055.7403"/>
+   </entryList>
+</catalog>
+<catalog ID="1732">
+   <entryList>
+      <entry ID="7397" name="Normal067-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1052.7397"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="107">
+ <catalogList>
+<catalog ID="1736">
+   <entryList>
+      <entry ID="7405" name="Normal068-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1057.7405"/>
+   </entryList>
+</catalog>
+<catalog ID="1739">
+   <entryList>
+      <entry ID="7412" name="Normal068-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1060.7412"/>
+   </entryList>
+</catalog>
+<catalog ID="1740">
+   <entryList>
+      <entry ID="7414" name="Normal068-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1061.7414"/>
+   </entryList>
+</catalog>
+<catalog ID="1737">
+   <entryList>
+      <entry ID="7407" name="Normal068-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1058.7407"/>
+   </entryList>
+</catalog>
+<catalog ID="1738">
+   <entryList>
+      <entry ID="7410" name="Normal068-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1059.7410"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="108">
+ <catalogList>
+<catalog ID="1742">
+   <entryList>
+      <entry ID="7418" name="Normal069-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1064.7418"/>
+   </entryList>
+</catalog>
+<catalog ID="1743">
+   <entryList>
+      <entry ID="7420" name="Normal069-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1065.7420"/>
+   </entryList>
+</catalog>
+<catalog ID="1744">
+   <entryList>
+      <entry ID="7422" name="Normal069-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1066.7422"/>
+   </entryList>
+</catalog>
+<catalog ID="1741">
+   <entryList>
+      <entry ID="7416" name="Normal069-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1063.7416"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="109">
+ <catalogList>
+<catalog ID="1745">
+   <entryList>
+      <entry ID="7424" name="Normal070-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1068.7424"/>
+   </entryList>
+</catalog>
+<catalog ID="1746">
+   <entryList>
+      <entry ID="7426" name="Normal070-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1069.7426"/>
+   </entryList>
+</catalog>
+<catalog ID="1747">
+   <entryList>
+      <entry ID="7428" name="Normal070-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1070.7428"/>
+   </entryList>
+</catalog>
+<catalog ID="1748">
+   <entryList>
+      <entry ID="7430" name="Normal070-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1071.7430"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="110">
+ <catalogList>
+<catalog ID="1749">
+   <entryList>
+      <entry ID="7432" name="Normal071-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1073.7432"/>
+   </entryList>
+</catalog>
+<catalog ID="1750">
+   <entryList>
+      <entry ID="7434" name="Normal071-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1074.7434"/>
+   </entryList>
+</catalog>
+<catalog ID="1751">
+   <entryList>
+      <entry ID="7436" name="Normal071-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1075.7436"/>
+   </entryList>
+</catalog>
+<catalog ID="1752">
+   <entryList>
+      <entry ID="7438" name="Normal071-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1076.7438"/>
+   </entryList>
+</catalog>
+<catalog ID="1753">
+   <entryList>
+      <entry ID="7440" name="Normal071-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1077.7440"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="111">
+ <catalogList>
+<catalog ID="1757">
+   <entryList>
+      <entry ID="7448" name="Normal072-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1082.7448"/>
+   </entryList>
+</catalog>
+<catalog ID="1755">
+   <entryList>
+      <entry ID="7444" name="Normal072-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1080.7444"/>
+   </entryList>
+</catalog>
+<catalog ID="1756">
+   <entryList>
+      <entry ID="7446" name="Normal072-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1081.7446"/>
+   </entryList>
+</catalog>
+<catalog ID="1754">
+   <entryList>
+      <entry ID="7442" name="Normal072-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1079.7442"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="112">
+ <catalogList>
+<catalog ID="1758">
+   <entryList>
+      <entry ID="7451" name="Normal073-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1084.7451"/>
+   </entryList>
+</catalog>
+<catalog ID="1761">
+   <entryList>
+      <entry ID="7458" name="Normal073-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1087.7458"/>
+   </entryList>
+</catalog>
+<catalog ID="1759">
+   <entryList>
+      <entry ID="7454" name="Normal073-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1085.7454"/>
+   </entryList>
+</catalog>
+<catalog ID="1760">
+   <entryList>
+      <entry ID="7456" name="Normal073-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1086.7456"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="113">
+ <catalogList>
+<catalog ID="1765">
+   <entryList>
+      <entry ID="7467" name="Normal074-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1092.7467"/>
+   </entryList>
+</catalog>
+<catalog ID="1766">
+   <entryList>
+      <entry ID="7470" name="Normal074-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1093.7470"/>
+   </entryList>
+</catalog>
+<catalog ID="1762">
+   <entryList>
+      <entry ID="7460" name="Normal074-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1089.7460"/>
+   </entryList>
+</catalog>
+<catalog ID="1763">
+   <entryList>
+      <entry ID="7463" name="Normal074-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1090.7463"/>
+   </entryList>
+</catalog>
+<catalog ID="1764">
+   <entryList>
+      <entry ID="7465" name="Normal074-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1091.7465"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="114">
+ <catalogList>
+<catalog ID="1767">
+   <entryList>
+      <entry ID="7472" name="Normal075-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1095.7472"/>
+   </entryList>
+</catalog>
+<catalog ID="1768">
+   <entryList>
+      <entry ID="7474" name="Normal075-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1096.7474"/>
+   </entryList>
+</catalog>
+<catalog ID="1769">
+   <entryList>
+      <entry ID="7476" name="Normal075-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1097.7476"/>
+   </entryList>
+</catalog>
+<catalog ID="1770">
+   <entryList>
+      <entry ID="7478" name="Normal075-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1098.7478"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="115">
+ <catalogList>
+<catalog ID="1774">
+   <entryList>
+      <entry ID="7487" name="Normal076-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1103.7487"/>
+   </entryList>
+</catalog>
+<catalog ID="1771">
+   <entryList>
+      <entry ID="7481" name="Normal076-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1100.7481"/>
+   </entryList>
+</catalog>
+<catalog ID="1772">
+   <entryList>
+      <entry ID="7483" name="Normal076-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1101.7483"/>
+   </entryList>
+</catalog>
+<catalog ID="1773">
+   <entryList>
+      <entry ID="7485" name="Normal076-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1102.7485"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="116">
+ <catalogList>
+<catalog ID="1775">
+   <entryList>
+      <entry ID="7489" name="Normal077-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1105.7489"/>
+   </entryList>
+</catalog>
+<catalog ID="1778">
+   <entryList>
+      <entry ID="7495" name="Normal077-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1108.7495"/>
+   </entryList>
+</catalog>
+<catalog ID="1779">
+   <entryList>
+      <entry ID="7497" name="Normal077-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1109.7497"/>
+   </entryList>
+</catalog>
+<catalog ID="1776">
+   <entryList>
+      <entry ID="7491" name="Normal077-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1106.7491"/>
+   </entryList>
+</catalog>
+<catalog ID="1777">
+   <entryList>
+      <entry ID="7493" name="Normal077-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1107.7493"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="117">
+ <catalogList>
+<catalog ID="1780">
+   <entryList>
+      <entry ID="7499" name="Normal078-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1111.7499"/>
+   </entryList>
+</catalog>
+<catalog ID="1781">
+   <entryList>
+      <entry ID="7501" name="Normal078-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1112.7501"/>
+   </entryList>
+</catalog>
+<catalog ID="1782">
+   <entryList>
+      <entry ID="7505" name="Normal078-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1113.7505"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="118">
+ <catalogList>
+<catalog ID="1783">
+   <entryList>
+      <entry ID="7507" name="Normal079-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1115.7507"/>
+   </entryList>
+</catalog>
+<catalog ID="1784">
+   <entryList>
+      <entry ID="7509" name="Normal079-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1116.7509"/>
+   </entryList>
+</catalog>
+<catalog ID="1785">
+   <entryList>
+      <entry ID="7511" name="Normal079-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1117.7511"/>
+   </entryList>
+</catalog>
+<catalog ID="1786">
+   <entryList>
+      <entry ID="7513" name="Normal079-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1118.7513"/>
+   </entryList>
+</catalog>
+<catalog ID="1787">
+   <entryList>
+      <entry ID="7515" name="Normal079-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1119.7515"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="119">
+ <catalogList>
+<catalog ID="1788">
+   <entryList>
+      <entry ID="7517" name="Normal080-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1121.7517"/>
+   </entryList>
+</catalog>
+<catalog ID="1789">
+   <entryList>
+      <entry ID="7519" name="Normal080-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1122.7519"/>
+   </entryList>
+</catalog>
+<catalog ID="1791">
+   <entryList>
+      <entry ID="7523" name="Normal080-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1124.7523"/>
+   </entryList>
+</catalog>
+<catalog ID="1792">
+   <entryList>
+      <entry ID="7525" name="Normal080-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1125.7525"/>
+   </entryList>
+</catalog>
+<catalog ID="1790">
+   <entryList>
+      <entry ID="7521" name="Normal080-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1123.7521"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="120">
+ <catalogList>
+<catalog ID="1793">
+   <entryList>
+      <entry ID="7573" name="Normal081-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1127.7573"/>
+   </entryList>
+</catalog>
+<catalog ID="1794">
+   <entryList>
+      <entry ID="7529" name="Normal081-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1128.7529"/>
+   </entryList>
+</catalog>
+<catalog ID="1795">
+   <entryList>
+      <entry ID="7531" name="Normal081-T!-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1129.7531"/>
+   </entryList>
+</catalog>
+<catalog ID="1796">
+   <entryList>
+      <entry ID="7533" name="Normal081-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1130.7533"/>
+   </entryList>
+</catalog>
+<catalog ID="1797">
+   <entryList>
+      <entry ID="7535" name="Normal081-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1131.7535"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="122">
+ <catalogList>
+<catalog ID="1798">
+   <entryList>
+      <entry ID="7537" name="Normal082-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1133.7537"/>
+   </entryList>
+</catalog>
+<catalog ID="1799">
+   <entryList>
+      <entry ID="7539" name="Normal082-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1134.7539"/>
+   </entryList>
+</catalog>
+<catalog ID="1800">
+   <entryList>
+      <entry ID="7541" name="Normal082-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1135.7541"/>
+   </entryList>
+</catalog>
+<catalog ID="1801">
+   <entryList>
+      <entry ID="7543" name="Normal082-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1136.7543"/>
+   </entryList>
+</catalog>
+<catalog ID="1802">
+   <entryList>
+      <entry ID="7545" name="Normal082-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1137.7545"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="124">
+ <catalogList>
+<catalog ID="1803">
+   <entryList>
+      <entry ID="7547" name="Normal083-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1139.7547"/>
+   </entryList>
+</catalog>
+<catalog ID="1804">
+   <entryList>
+      <entry ID="7549" name="Normal083-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1140.7549"/>
+   </entryList>
+</catalog>
+<catalog ID="1806">
+   <entryList>
+      <entry ID="7553" name="Normal083-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1142.7553"/>
+   </entryList>
+</catalog>
+<catalog ID="1807">
+   <entryList>
+      <entry ID="7555" name="Normal083-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1143.7555"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="126">
+ <catalogList>
+<catalog ID="1808">
+   <entryList>
+      <entry ID="7557" name="Normal084-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1145.7557"/>
+   </entryList>
+</catalog>
+<catalog ID="1809">
+   <entryList>
+      <entry ID="7559" name="Normal084-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1146.7559"/>
+   </entryList>
+</catalog>
+<catalog ID="1810">
+   <entryList>
+      <entry ID="7561" name="Normal084-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1147.7561"/>
+   </entryList>
+</catalog>
+<catalog ID="1811">
+   <entryList>
+      <entry ID="7563" name="Normal084-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1148.7563"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="127">
+ <catalogList>
+<catalog ID="1812">
+   <entryList>
+      <entry ID="7566" name="Normal085-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1150.7566"/>
+   </entryList>
+</catalog>
+<catalog ID="1813">
+   <entryList>
+      <entry ID="7568" name="Normal085-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1151.7568"/>
+   </entryList>
+</catalog>
+<catalog ID="1814">
+   <entryList>
+      <entry ID="7571" name="Normal085-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1152.7571"/>
+   </entryList>
+</catalog>
+<catalog ID="1815">
+   <entryList>
+      <entry ID="7574" name="Normal085-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1153.7574"/>
+   </entryList>
+</catalog>
+<catalog ID="1816">
+   <entryList>
+      <entry ID="7576" name="Normal085-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1154.7576"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="128">
+ <catalogList>
+<catalog ID="1817">
+   <entryList>
+      <entry ID="7578" name="Normal086-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1156.7578"/>
+   </entryList>
+</catalog>
+<catalog ID="1818">
+   <entryList>
+      <entry ID="7581" name="Normal086-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1157.7581"/>
+   </entryList>
+</catalog>
+<catalog ID="1819">
+   <entryList>
+      <entry ID="7583" name="Normal086-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1158.7583"/>
+   </entryList>
+</catalog>
+<catalog ID="1820">
+   <entryList>
+      <entry ID="7585" name="Normal086-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1159.7585"/>
+   </entryList>
+</catalog>
+<catalog ID="1821">
+   <entryList>
+      <entry ID="7587" name="Normal086-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1160.7587"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="129">
+ <catalogList>
+<catalog ID="1846">
+   <entryList>
+      <entry ID="7644" name="Normal087-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1190.7644"/>
+   </entryList>
+</catalog>
+<catalog ID="1822">
+   <entryList>
+      <entry ID="7589" name="Normal087-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1162.7589"/>
+   </entryList>
+</catalog>
+<catalog ID="1823">
+   <entryList>
+      <entry ID="7591" name="Normal087-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1163.7591"/>
+   </entryList>
+</catalog>
+<catalog ID="1825">
+   <entryList>
+      <entry ID="7597" name="Normal087-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1164.7597"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="130">
+ <catalogList>
+<catalog ID="1826">
+   <entryList>
+      <entry ID="7599" name="Normal088-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1166.7599"/>
+   </entryList>
+</catalog>
+<catalog ID="1827">
+   <entryList>
+      <entry ID="7602" name="Normal088-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1167.7602"/>
+   </entryList>
+</catalog>
+<catalog ID="1828">
+   <entryList>
+      <entry ID="7604" name="Normal088-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1168.7604"/>
+   </entryList>
+</catalog>
+<catalog ID="1829">
+   <entryList>
+      <entry ID="7606" name="Normal088-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1169.7606"/>
+   </entryList>
+</catalog>
+<catalog ID="1830">
+   <entryList>
+      <entry ID="7608" name="Normal088-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1170.7608"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="131">
+ <catalogList>
+<catalog ID="1831">
+   <entryList>
+      <entry ID="7610" name="Normal089-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1172.7610"/>
+   </entryList>
+</catalog>
+<catalog ID="1832">
+   <entryList>
+      <entry ID="7612" name="Normal089-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1173.7612"/>
+   </entryList>
+</catalog>
+<catalog ID="1833">
+   <entryList>
+      <entry ID="7614" name="Normal089-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1174.7614"/>
+   </entryList>
+</catalog>
+<catalog ID="1834">
+   <entryList>
+      <entry ID="7616" name="Normal089-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1175.7616"/>
+   </entryList>
+</catalog>
+<catalog ID="1835">
+   <entryList>
+      <entry ID="7618" name="Normal089-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1176.7618"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="132">
+ <catalogList>
+<catalog ID="1836">
+   <entryList>
+      <entry ID="7620" name="Normal090-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1178.7620"/>
+   </entryList>
+</catalog>
+<catalog ID="1837">
+   <entryList>
+      <entry ID="7622" name="Normal090-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1179.7622"/>
+   </entryList>
+</catalog>
+<catalog ID="1838">
+   <entryList>
+      <entry ID="7624" name="Normal090-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1180.7624"/>
+   </entryList>
+</catalog>
+<catalog ID="1839">
+   <entryList>
+      <entry ID="7626" name="Normal090-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1181.7626"/>
+   </entryList>
+</catalog>
+<catalog ID="1840">
+   <entryList>
+      <entry ID="7628" name="Normal090-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1182.7628"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="133">
+ <catalogList>
+<catalog ID="1843">
+   <entryList>
+      <entry ID="7634" name="Normal091-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1186.7634"/>
+   </entryList>
+</catalog>
+<catalog ID="1841">
+   <entryList>
+      <entry ID="7630" name="Normal091-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1184.7630"/>
+   </entryList>
+</catalog>
+<catalog ID="1842">
+   <entryList>
+      <entry ID="7632" name="Normal091-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1185.7632"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="134">
+ <catalogList>
+<catalog ID="1844">
+   <entryList>
+      <entry ID="7636" name="Normal092-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1188.7636"/>
+   </entryList>
+</catalog>
+<catalog ID="1845">
+   <entryList>
+      <entry ID="7642" name="Normal092-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1189.7642"/>
+   </entryList>
+</catalog>
+<catalog ID="1847">
+   <entryList>
+      <entry ID="7646" name="Normal092-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1191.7646"/>
+   </entryList>
+</catalog>
+<catalog ID="1848">
+   <entryList>
+      <entry ID="7648" name="Normal092-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1192.7648"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="135">
+ <catalogList>
+<catalog ID="1849">
+   <entryList>
+      <entry ID="7650" name="Normal093-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1194.7650"/>
+   </entryList>
+</catalog>
+<catalog ID="1850">
+   <entryList>
+      <entry ID="7652" name="Normal093-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1195.7652"/>
+   </entryList>
+</catalog>
+<catalog ID="1851">
+   <entryList>
+      <entry ID="7654" name="Normal093-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1196.7654"/>
+   </entryList>
+</catalog>
+<catalog ID="1852">
+   <entryList>
+      <entry ID="7656" name="Normal093-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1197.7656"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="136">
+ <catalogList>
+<catalog ID="1853">
+   <entryList>
+      <entry ID="7658" name="Normal094-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1199.7658"/>
+   </entryList>
+</catalog>
+<catalog ID="1854">
+   <entryList>
+      <entry ID="7660" name="Normal094-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1200.7660"/>
+   </entryList>
+</catalog>
+<catalog ID="1855">
+   <entryList>
+      <entry ID="7663" name="Normal094-T1-Flash.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1201.7663"/>
+   </entryList>
+</catalog>
+<catalog ID="1856">
+   <entryList>
+      <entry ID="7665" name="Normal094-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1202.7665"/>
+   </entryList>
+</catalog>
+<catalog ID="1857">
+   <entryList>
+      <entry ID="7667" name="Normal094-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1203.7667"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="137">
+ <catalogList>
+<catalog ID="1861">
+   <entryList>
+      <entry ID="7676" name="Normal095-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1208.7676"/>
+   </entryList>
+</catalog>
+<catalog ID="1858">
+   <entryList>
+      <entry ID="7669" name="Normal095-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1205.7669"/>
+   </entryList>
+</catalog>
+<catalog ID="1859">
+   <entryList>
+      <entry ID="7672" name="Normal095-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1206.7672"/>
+   </entryList>
+</catalog>
+<catalog ID="1860">
+   <entryList>
+      <entry ID="7674" name="Normal095-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1207.7674"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="138">
+ <catalogList>
+<catalog ID="1862">
+   <entryList>
+      <entry ID="7678" name="Normal096-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1210.7678"/>
+   </entryList>
+</catalog>
+<catalog ID="1863">
+   <entryList>
+      <entry ID="7680" name="Normal096-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1211.7680"/>
+   </entryList>
+</catalog>
+<catalog ID="1864">
+   <entryList>
+      <entry ID="7713" name="Normal096-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1212.7713"/>
+   </entryList>
+</catalog>
+<catalog ID="1865">
+   <entryList>
+      <entry ID="7685" name="Normal096-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1213.7685"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="139">
+ <catalogList>
+<catalog ID="1866">
+   <entryList>
+      <entry ID="7687" name="Normal097-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1215.7687"/>
+   </entryList>
+</catalog>
+<catalog ID="1867">
+   <entryList>
+      <entry ID="7689" name="Normal097-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1216.7689"/>
+   </entryList>
+</catalog>
+<catalog ID="1868">
+   <entryList>
+      <entry ID="7691" name="Normal097-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1217.7691"/>
+   </entryList>
+</catalog>
+<catalog ID="1869">
+   <entryList>
+      <entry ID="7694" name="Normal097-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1218.7694"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="140">
+ <catalogList>
+<catalog ID="1873">
+   <entryList>
+      <entry ID="7705" name="Normal098-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1223.7705"/>
+   </entryList>
+</catalog>
+<catalog ID="1870">
+   <entryList>
+      <entry ID="7697" name="Normal098-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1220.7697"/>
+   </entryList>
+</catalog>
+<catalog ID="1871">
+   <entryList>
+      <entry ID="7699" name="Normal098-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1221.7699"/>
+   </entryList>
+</catalog>
+<catalog ID="1872">
+   <entryList>
+      <entry ID="7703" name="Normal098-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1222.7703"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="141">
+ <catalogList>
+<catalog ID="1874">
+   <entryList>
+      <entry ID="7707" name="Normal099-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1225.7707"/>
+   </entryList>
+</catalog>
+<catalog ID="1875">
+   <entryList>
+      <entry ID="7709" name="Normal099-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1226.7709"/>
+   </entryList>
+</catalog>
+<catalog ID="1876">
+   <entryList>
+      <entry ID="7711" name="Normal099-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1227.7711"/>
+   </entryList>
+</catalog>
+<catalog ID="1877">
+   <entryList>
+      <entry ID="7714" name="Normal099-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1228.7714"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="142">
+ <catalogList>
+<catalog ID="1878">
+   <entryList>
+      <entry ID="7718" name="Normal100-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1230.7718"/>
+   </entryList>
+</catalog>
+<catalog ID="1879">
+   <entryList>
+      <entry ID="7720" name="Normal100-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1231.7720"/>
+   </entryList>
+</catalog>
+<catalog ID="1880">
+   <entryList>
+      <entry ID="7723" name="Normal100-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1232.7723"/>
+   </entryList>
+</catalog>
+<catalog ID="1881">
+   <entryList>
+      <entry ID="7725" name="Normal100-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1233.7725"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="143">
+ <catalogList>
+<catalog ID="1882">
+   <entryList>
+   </entryList>
+</catalog>
+<catalog ID="1883">
+   <entryList>
+      <entry ID="7729" name="Normal101-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1236.7729"/>
+   </entryList>
+</catalog>
+<catalog ID="1884">
+   <entryList>
+      <entry ID="7731" name="Normal101-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1237.7731"/>
+   </entryList>
+</catalog>
+<catalog ID="1885">
+   <entryList>
+      <entry ID="7733" name="Normal101-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1238.7733"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="144">
+ <catalogList>
+<catalog ID="1886">
+   <entryList>
+      <entry ID="7735" name="Normal102-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1240.7735"/>
+   </entryList>
+</catalog>
+<catalog ID="1887">
+   <entryList>
+      <entry ID="7737" name="Normal102-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1241.7737"/>
+   </entryList>
+</catalog>
+<catalog ID="1888">
+   <entryList>
+      <entry ID="7741" name="Normal102-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1242.7741"/>
+   </entryList>
+</catalog>
+<catalog ID="1889">
+   <entryList>
+      <entry ID="7743" name="Normal102-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1243.7743"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="145">
+ <catalogList>
+<catalog ID="1891">
+   <entryList>
+      <entry ID="7748" name="Normal103-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1246.7748"/>
+   </entryList>
+</catalog>
+<catalog ID="1892">
+   <entryList>
+      <entry ID="7751" name="Normal103-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1247.7751"/>
+   </entryList>
+</catalog>
+<catalog ID="1893">
+   <entryList>
+      <entry ID="7754" name="Normal103-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1248.7754"/>
+   </entryList>
+</catalog>
+<catalog ID="1890">
+   <entryList>
+      <entry ID="7745" name="Normal103-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1245.7745"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="146">
+ <catalogList>
+<catalog ID="1894">
+   <entryList>
+      <entry ID="7756" name="Normal104-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1250.7756"/>
+   </entryList>
+</catalog>
+<catalog ID="1895">
+   <entryList>
+      <entry ID="7758" name="Normal104-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1251.7758"/>
+   </entryList>
+</catalog>
+<catalog ID="1896">
+   <entryList>
+      <entry ID="7760" name="Normal104-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1252.7760"/>
+   </entryList>
+</catalog>
+<catalog ID="1897">
+   <entryList>
+      <entry ID="7764" name="Normal104-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1253.7764"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="147">
+ <catalogList>
+<catalog ID="1898">
+   <entryList>
+      <entry ID="7766" name="Normal105-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1255.7766"/>
+   </entryList>
+</catalog>
+<catalog ID="1899">
+   <entryList>
+      <entry ID="7768" name="Normal105-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1256.7768"/>
+   </entryList>
+</catalog>
+<catalog ID="1900">
+   <entryList>
+      <entry ID="7771" name="Normal105-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1257.7771"/>
+   </entryList>
+</catalog>
+<catalog ID="1901">
+   <entryList>
+      <entry ID="7774" name="Normal105-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1258.7774"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="148">
+ <catalogList>
+<catalog ID="1903">
+   <entryList>
+      <entry ID="7781" name="Normal106-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1261.7781"/>
+   </entryList>
+</catalog>
+<catalog ID="1904">
+   <entryList>
+      <entry ID="7783" name="Normal106-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1262.7783"/>
+   </entryList>
+</catalog>
+<catalog ID="1905">
+   <entryList>
+      <entry ID="7785" name="Normal106-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1263.7785"/>
+   </entryList>
+</catalog>
+<catalog ID="1902">
+   <entryList>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="149">
+ <catalogList>
+<catalog ID="1906">
+   <entryList>
+      <entry ID="7789" name="Normal107-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1265.7789"/>
+   </entryList>
+</catalog>
+<catalog ID="1907">
+   <entryList>
+      <entry ID="7792" name="Normal107-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1266.7792"/>
+   </entryList>
+</catalog>
+<catalog ID="1908">
+   <entryList>
+      <entry ID="7794" name="Normal107-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1267.7794"/>
+   </entryList>
+</catalog>
+<catalog ID="1909">
+   <entryList>
+      <entry ID="7796" name="Normal107-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1268.7796"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="150">
+ <catalogList>
+<catalog ID="1910">
+   <entryList>
+      <entry ID="7798" name="Normal108-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1270.7798"/>
+   </entryList>
+</catalog>
+<catalog ID="1911">
+   <entryList>
+      <entry ID="7800" name="Normal108-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1271.7800"/>
+   </entryList>
+</catalog>
+<catalog ID="1912">
+   <entryList>
+      <entry ID="7802" name="Normal108-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1272.7802"/>
+   </entryList>
+</catalog>
+<catalog ID="1913">
+   <entryList>
+      <entry ID="7804" name="Normal108-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1273.7804"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+<catalog ID="151">
+ <catalogList>
+<catalog ID="1914">
+   <entryList>
+      <entry ID="7806" name="Normal109-DTI.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1275.7806"/>
+   </entryList>
+</catalog>
+<catalog ID="1915">
+   <entryList>
+      <entry ID="7808" name="Normal109-MRA.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1276.7808"/>
+   </entryList>
+</catalog>
+<catalog ID="1916">
+   <entryList>
+      <entry ID="7810" name="Normal109-T1-MPRage.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1277.7810"/>
+   </entryList>
+</catalog>
+<catalog ID="1917">
+   <entryList>
+      <entry ID="7812" name="Normal109-T2.mha" description="" format="image/ITK" content="" cachePath="" uri="http://hdl.handle.net/1926/1278.7812"/>
+   </entryList>
+</catalog>
+</catalogList>
+</catalog>
+</catalogList>
+</catalog>
+</XCEDE>

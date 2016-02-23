@@ -28,3 +28,6 @@ if(BUILD_TESTING)
   # Additional build-time testing
   add_subdirectory(Testing)
 endif()
+
+#-----------------------------------------------------------------------------
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/Data DESTINATION ${Slicer_INSTALL_QTSCRIPTEDMODULES_BIN_DIR} )
