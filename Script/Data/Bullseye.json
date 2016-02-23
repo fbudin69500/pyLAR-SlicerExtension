@@ -1,0 +1,23 @@
+{
+"url":"http://slicer.kitware.com/midas3/download?items=",
+"simu":
+      {
+      "fMeanSimu.nrrd":"231227",
+      "healthySimu1.nrrd":"231228",
+      "healthySimu2.nrrd":"231229",
+      "healthySimu3.nrrd":"231230",
+      "healthySimu4.nrrd":"231231",
+      "healthySimu5.nrrd":"231232",
+      "healthySimu6.nrrd":"231233",
+      "healthySimu7.nrrd":"231234",
+      "healthySimu8.nrrd":"231235",
+      "simu1.nrrd":"231236",
+      "simu2.nrrd":"231237",
+      "simu3.nrrd":"231238",
+      "simu4.nrrd":"231239",
+      "simu5.nrrd":"231240",
+      "simu6.nrrd":"231241",
+      "simu7.nrrd":"231242",
+      "simu8.nrrd":"231243"
+        }
+}
