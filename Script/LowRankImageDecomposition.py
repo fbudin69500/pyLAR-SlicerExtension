@@ -1,4 +1,6 @@
 import os
+import sys
+import shutil
 import unittest
 import vtk, qt, ctk, slicer
 from slicer.ScriptedLoadableModule import *
@@ -6,6 +8,7 @@ import logging
 import SimpleITK as sitk
 import pyLAR
 from distutils.spawn import find_executable
+import threading
 
 #
 # Low-rank Image Decomposition
@@ -42,7 +45,12 @@ class LowRankImageDecompositionWidget(ScriptedLoadableModuleWidget):
 
   def setup(self):
     ScriptedLoadableModuleWidget.setup(self)
-
+    self.logic = LowRankImageDecompositionLogic()
+    # Initialize variables
+    self.configFile = ""
+    self.Algorithm = {"Unbias Atlas Creation": "uab",
+                      "Low Rank/Sparse Decomposition": "lr",
+                      "Low Rank Atlas Creation": "nglra"}
     # Instantiate and connect widgets ...
 
     #
@@ -56,19 +64,19 @@ class LowRankImageDecompositionWidget(ScriptedLoadableModuleWidget):
     parametersFormLayout = qt.QFormLayout(parametersCollapsibleButton)
 
     #
+    # Apply Button
+    #
+    self.exampleButton = qt.QPushButton("Example Configuration File")
+    self.exampleButton.toolTip = "Save example configuration file."
+    self.exampleButton.enabled = True
+    parametersFormLayout.addRow(self.exampleButton)
+
+    #
     # parameter file selector
     #
     self.selectConfigFileButton = qt.QPushButton("Select Configuration File")
     self.selectConfigFileButton.toolTip = "Select configuration file."
     parametersFormLayout.addRow(self.selectConfigFileButton)
-
-    #
-    # Apply Button
-    #
-    self.applyButton = qt.QPushButton("Apply")
-    self.applyButton.toolTip = "Run the algorithm."
-    self.applyButton.enabled = False
-    parametersFormLayout.addRow(self.applyButton)
 
     #
     # Select algorithm
@@ -80,31 +88,95 @@ class LowRankImageDecompositionWidget(ScriptedLoadableModuleWidget):
     self.selectAlgorithm.addButton(self.selectUnbiasAtlas)
     self.selectAlgorithm.addButton(self.selectLowRankDecomposition)
     self.selectAlgorithm.addButton(self.selectLowRankAtlasCreation)
+    parametersFormLayout.addRow(self.selectUnbiasAtlas)
+    parametersFormLayout.addRow(self.selectLowRankDecomposition)
+    parametersFormLayout.addRow(self.selectLowRankAtlasCreation)
+
+    #
+    # Apply Button
+    #
+    self.applyButton = qt.QPushButton("Apply")
+    self.applyButton.toolTip = "Run the algorithm."
+    self.applyButton.enabled = False
+    parametersFormLayout.addRow(self.applyButton)
 
 
     # connections
     self.applyButton.connect('clicked(bool)', self.onApplyButton)
     self.selectConfigFileButton.connect('clicked(bool)', self.onSelectFile)
+    self.selectUnbiasAtlas.connect('clicked(bool)', self.onSelect)
+    self.selectLowRankDecomposition.connect('clicked(bool)', self.onSelect)
+    self.selectLowRankAtlasCreation.connect('clicked(bool)', self.onSelect)
+    self.exampleButton.connect('clicked(bool)', self.onSaveConfigFile)
+    # show log
+    self.log = qt.QTextEdit()
+    self.log.readOnly = True
+
+    parametersFormLayout.addRow(self.log)
+    self.logMessage('<p>Status: <i>Idle</i>\n')
 
     # Add vertical spacer
     self.layout.addStretch(1)
 
+    #Progress bar
+    self.progress_bar = slicer.qSlicerCLIProgressBar()
+    self.progress_bar.setProgressVisibility(False)
+    self.progress_bar.setStatusVisibility(False)
+    self.progress_bar.setNameVisibility(False)
+    parametersFormLayout.addRow(self.progress_bar)
+
     # Refresh Apply button state
     self.onSelect()
 
+  def logEvent(self):
+    errorLog = slicer.app.errorLogModel()
+    self.logMessage(errorLog.logEntryDescription(errorLog.logEntryCount() - 1))
+
+  def logMessage(self, message):
+    self.log.append(message)
+    self.log.insertPlainText('\n')
+    self.log.ensureCursorVisible()
+    self.log.repaint()
+
   def onSelectFile(self):
-      self.configFile = qt.QFileDialog.getOpenFileName(parent=self,caption='Select file')
+    self.configFile = qt.QFileDialog.getOpenFileName(parent=self,caption='Select file')
+    self.onSelect()
+
+  def onSaveConfigFile(self):
+    configFile = qt.QFileDialog.getOpenFileName(parent=self,caption='Select file')
 
   def cleanup(self):
-    pass
+    errorLog = slicer.app.errorLogModel()
+    errorLog.disconnect('entryAdded(ctkErrorLogLevel::LogLevel)', self.logEvent)
+    self.configFile = None
+    self.logic = None
 
   def onSelect(self):
-    self.applyButton.enabled = self.configFile and self.selectAgolrithm.checkedButton()
+    self.applyButton.enabled = self.configFile and self.selectAlgorithm.checkedButton()
+
+  def resetUI(self):
+    self.applyButton.setText("Apply")
+    self.applyButton.setEnabled(True)
+    self.applyButton.repaint()
 
   def onApplyButton(self):
-    logic = LowRankImageDecompositionLogic()
-    logic.run(self.configFile, self.selectAlgorithm.checkedButton().text)
+    self.applyButton.setText("Computing...")
+    self.applyButton.enabled = False
+    self.applyButton.repaint()
+    errorLog = slicer.app.errorLogModel()
+    errorLog.connect('entryAdded(ctkErrorLogLevel::LogLevel)', self.logEvent)
+    clinode = self.logic.run(self.configFile, self.Algorithm[self.selectAlgorithm.checkedButton().text])
+    clinode.AddObserver('ModifiedEvent', self.isFinished)
+    self.progress_bar.setCommandLineModuleNode(clinode)
 
+  def isFinished(caller, event):
+    print("Got a %s from a %s" % (event, caller.GetClassName()))
+    if caller.IsA('vtkMRMLCommandLineModuleNode'):
+      if caller.GetStatusString() == 'Completed':
+        print("Status is %s" % caller.GetStatusString())
+        self.resetUI()
+        errorLog = slicer.app.errorLogModel()
+        errorLog.disconnect('entryAdded(ctkErrorLogLevel::LogLevel)', self.logEvent)
 #
 # LowRankImageDecompositionLogic
 #
@@ -119,50 +191,56 @@ class LowRankImageDecompositionLogic(ScriptedLoadableModuleLogic):
   https://github.com/Slicer/Slicer/blob/master/Base/Python/slicer/ScriptedLoadableModule.py
   """
   def softwarePaths(self):
-    currentFilePath = os.path.realpath(__file__)
-    upDirectory = os.path.join(currentFilePath, '..')
+    savedPATH = os.environ["PATH"]
+    currentFilePath = os.path.dirname(os.path.realpath(__file__))
+    upDirectory = os.path.realpath(os.path.join(currentFilePath, '..'))
     # Prepend PATH with path of executables packaged with extension
-    os.environ["PATH"] = os.path.join(upDirectory, 'ExternalBin') + os.pathsep + os.environ["PATH"]
+    os.environ["PATH"] = os.path.join(upDirectory, 'ExternalBin') + os.pathsep + savedPATH
     # Creates software configuration file
     software = type('obj', (object,), {})
-    slicerSoftware = ['BRAINSFit', 'BRAINSDemonWarp', 'BSplineDeformableRegistration', 'BRAINSResample'
+    slicerSoftware = ['BRAINSFit', 'BRAINSDemonWarp', 'BSplineDeformableRegistration', 'BRAINSResample',
                       'ANTS', 'AverageImages', 'ComposeMultiTransform', 'WarpImageMultiTransform',
                       'CreateJacobianDeterminantImage', 'InvertDeformationField']
     for i in slicerSoftware:
-      setattr(software, 'EXE'+str(i), find_executable(i))
+      setattr(software, 'EXE_'+str(i), find_executable(i))
+    os.environ["PATH"] = savedPATH
     return software
 
-  def run(self, configFile, algo ):
+  def run(self, configFile, algo):
     """
     Run the actual algorithm
     """
-    # Loads configuration file
+    # Check that pyLAR is not already running:
+    try:
+      if self.thread.is_alive():
+        logging.warning("Processing is already running")
+        return
+    except:
+      pass
+    # Create software configuration object
     config = pyLAR.loadConfiguration(configFile, 'config')
     software = self.softwarePaths()
-
+    pyLAR.containsRequirements(config, ['data_dir', 'file_list_file_name', 'result_dir'], configFile)
     result_dir = config.result_dir
-    # For reproducibility: save all parameters into the result dir
-    savedFileName = lambda name, default: os.path.basename(name) if name else default
-    pyLAR.saveConfiguration(os.path.join(result_dir, savedFileName(configFN, 'Config.txt')), config)
-    pyLAR.saveConfiguration(os.path.join(result_dir, savedFileName(configSoftware, 'Software.txt')),
-                            software)
-    fileListFN = config.fileListFN
-    pyLAR.writeTxtIntoList(os.path.join(result_dir, savedFileName(fileListFN, 'listFiles.txt')), im_fns)
-    currentPyFile = os.path.realpath(__file__)
-    shutil.copy(currentPyFile, result_dir)
-    sys.stdout = open(os.path.join(result_dir, 'RUN.log'), "w")
-    logging.info('Processing started')
-    if algo == "Unbias Atlas Creation":
-      dsfsdf
-    elif algo == "Low Rank/Sparse Decomposition":
-      dsfsdf
-    elif algo == "Low Rank Atlas Creation":
-      esdf
-    else:
-      print "Error while selecting algorithm"
-      return False
-    logging.info('Processing completed')
-    return True
+    data_dir = config.data_dir
+    file_list_file_name = config.file_list_file_name
+    im_fns = pyLAR.readTxtIntoList(os.path.join(data_dir, file_list_file_name))
+    logger = logging.getLogger(__name__)
+    logger.setLevel(logging.INFO)
+    pyLAR.configure_logger(logger, config, configFile)
+    clinode = slicer.cli.createNode(slicer.modules.brainsfit)
+    self.thread = threading.Thread(target=self.RunThread,
+                                   args=(algo, config, software, im_fns, result_dir),
+                                   kwargs={'configFile':configFile, 'file_list_file_name':file_list_file_name})
+    self.thread.start()
+    clinode.SetStatus(2)  # 2: 'Running'
+    return clinode
+
+  def RunThread(self, algo, config, software, im_fns, result_dir,
+                configFile, file_list_file_name):
+    pyLAR.run(algo, config, software, im_fns, result_dir,
+              configFN=configFile, file_list_file_name=file_list_file_name)
+    clinode.SetStatus(32)  # 32: 'Completed'
 
 
 class LowRankImageDecompositionTest(ScriptedLoadableModuleTest):
