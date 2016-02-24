@@ -450,7 +450,7 @@ class LowRankImageDecompositionLogic(ScriptedLoadableModuleLogic):
     # Creates software configuration file
     software = type('obj', (object,), {})
     slicerSoftware = ['BRAINSFit', 'BRAINSDemonWarp', 'BSplineDeformableRegistration', 'BRAINSResample',
-                      'ANTS', 'AverageImages', 'ComposeMultiTransform', 'WarpImageMultiTransform',
+                      'antsRegistration', 'AverageImages', 'ComposeMultiTransform', 'WarpImageMultiTransform',
                       'CreateJacobianDeterminantImage', 'InvertDeformationField']
     for i in slicerSoftware:
       setattr(software, 'EXE_'+str(i), find_executable(i))
