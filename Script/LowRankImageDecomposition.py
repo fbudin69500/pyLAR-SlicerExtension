@@ -100,7 +100,7 @@ class LowRankImageDecompositionWidget(ScriptedLoadableModuleWidget):
     #
     configFilesCollapsibleButton = ctk.ctkCollapsibleButton()
     configFilesCollapsibleButton.text = "Configuration Files"
-    configFilesCollapsibleButton.collapsed = False
+    configFilesCollapsibleButton.collapsed = True
     examplesFormLayout.addRow(configFilesCollapsibleButton)
     configFormLayout = qt.QFormLayout(configFilesCollapsibleButton)
     self.exampleUABButton = qt.QPushButton("Unbiased Atlas Creation")
@@ -119,7 +119,7 @@ class LowRankImageDecompositionWidget(ScriptedLoadableModuleWidget):
     # Download data
     dataCollapsibleButton = ctk.ctkCollapsibleButton()
     dataCollapsibleButton.text = "Download data"
-    dataCollapsibleButton.collapsed = False
+    dataCollapsibleButton.collapsed = True
     examplesFormLayout.addRow(dataCollapsibleButton)
     dataFormLayout = qt.QFormLayout(dataCollapsibleButton)
     self.bulleyeButton = qt.QPushButton("Download synthetic data (Bull's eye)")
