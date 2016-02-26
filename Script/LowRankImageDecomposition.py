@@ -46,6 +46,35 @@ class LowRankImageDecompositionWidget(ScriptedLoadableModuleWidget):
   https://github.com/Slicer/Slicer/blob/master/Base/Python/slicer/ScriptedLoadableModule.py
   """
 
+  class QMovingProgressBar(qt.QProgressBar):
+    def __init__(self, size=15, interval=100):
+      qt.QProgressBar.__init__(self)
+      self.setRange(0, size)
+      self.timer = qt.QTimer()
+      self.timer.setInterval(interval)
+      self.timer.connect('timeout()', self._move)
+      self.setTextVisible(False)
+
+    def start(self):
+      self.setValue(0)
+      self.show()
+      self.timer.start()
+
+    def _move(self):
+      self.value += 1
+      if self.value == self.maximum:
+        self.value = 0
+
+    def stop(self):
+      self.timer.stop()
+      self.value = self.maximum
+
+    def clear(self):
+      self.timer.stop()
+      self.hide()
+      self.value = 0
+
+
   def setup(self):
     ScriptedLoadableModuleWidget.setup(self)
     self.logic = LowRankImageDecompositionLogic()
@@ -191,10 +220,9 @@ class LowRankImageDecompositionWidget(ScriptedLoadableModuleWidget):
     self.layout.addStretch(1)
 
     #Progress bar
-    self.progress_bar = slicer.qSlicerCLIProgressBar()
-    self.progress_bar.setProgressVisibility(False)
-    self.progress_bar.setStatusVisibility(False)
-    self.progress_bar.setNameVisibility(False)
+
+    self.progress_bar = self.QMovingProgressBar()
+    self.progress_bar.hide()
     outputFormLayout.addRow(self.progress_bar)
 
     # connections
