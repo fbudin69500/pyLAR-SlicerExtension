@@ -1,7 +1,7 @@
 
 set(proj ANTS)
 
-set(${proj}_DEPENDENCIES "")
+set(${proj}_DEPENDENCIES ITKv4)
 
 ExternalProject_Include_Dependencies(${proj} PROJECT_VAR proj DEPENDS_VAR ${proj}_DEPENDENCIES)
 
@@ -38,6 +38,12 @@ if(NOT ${CMAKE_PROJECT_NAME}_USE_SYSTEM_${proj})
       -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_CURRENT_BINARY_DIR}/${proj}-install
       -DBUILD_SHARED_LIBS:BOOL=OFF
       -DBUILD_TESTING:BOOL=OFF
+      -DUSE_SYSTEM_ITK:BOOL=ON
+      -DUSE_SYSTEM_VTK:BOOL=ON
+      -DUSE_SYSTEM_SlicerExecutionModel:PATH=ON
+      -DITK_DIR:PATH=${ITK_DIR}
+      -DVTK_DIR:PATH=${VKT_DIR}
+      -DSlicerExecutionModel:PATH=${SlicerExecutionModel_DIR}
     INSTALL_COMMAND ${CMAKE_MAKE_PROGRAM} ${INSTALL_CONFIG}
     DEPENDS
       ${${proj}_DEPENDENCIES}
