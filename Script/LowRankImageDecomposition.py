@@ -600,30 +600,29 @@ class LowRankImageDecompositionLogic(ScriptedLoadableModuleLogic):
     self.post_queue_start()
     self.thread.start()
 
-  def CreateExampleConfigurationFile(self, filename, datafile, download, algo):
-    if download:
-      data_dict = self.downloadData(datafile)
-    else:
-      data_dict = self.loadDataFile(datafile)
+  def CreateExampleConfigurationFile(self, filename, datafile, algo):
+    data_dict = self.loadDataFile(datafile)
     config_data = type('config_obj', (object,), {'modality':'Simu'})()
-    file_list_file_name = os.path.join(slicer.app.temporaryPath, "fileList.txt")
+    temp_dir = slicer.app.temporaryPath
+    file_list_file_name = os.path.join(temp_dir, "fileList.txt")
     data_list = data_dict['files'].keys()
+    data_dir = slicer.app.settings().value('Cache/Path')
     for i in range(0,len(data_list)):
-      data_list[i] = os.path.join(slicer.app.temporaryPath, data_list[i])
+      data_list[i] = os.path.join(data_dir, data_list[i])
     pyLAR.writeTxtFromList(file_list_file_name, data_list)
     config_data.file_list_file_name = "'"+file_list_file_name+"'"
-    data_dir = slicer.app.temporaryPath
     config_data.data_dir = "'"+data_dir+"'"
     config_data.reference_im_fn = "'"+data_list[0]+"'"
     config_data.modality = 'Simu'
     config_data.lamda = 2.0
-    config_data.verbose = 'True'
-    config_data.result_dir = "'"+os.path.join(data_dir,'output')+"'"
-    config_data.selection = [1,2,3]
+    config_data.verbose = True
+    config_data.result_dir = "'"+os.path.join(temp_dir,'output')+"'"
+    config_data.selection = [0,1,3]
     config_data.ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS = 2
+    config_data.clean = True
     if algo == 'lr':  # Low-rank
       config_data.registration = 'affine'
-      config_data.histogram_matching = 'False'
+      config_data.histogram_matching = False
       config_data.sigma = 0
     else:
       config_data.num_of_iterations_per_level = 4
@@ -636,7 +635,7 @@ class LowRankImageDecompositionLogic(ScriptedLoadableModuleLogic):
           'Transform' :'SyN[0.1,1,0]',\
           'Metric': 'MeanSquares[fixedIm,movingIm,1,0]'}
       if algo == 'nglra':  # Non-Greedy Low-rank altas creation
-        config_data.use_healthy_atlas = 'False'
+        config_data.use_healthy_atlas = False
         config_data.sigma = 0
         config_data.registration_type = 'ANTS'
       elif algo == 'uab':  # Unbiased Atlas Creation
@@ -687,7 +686,7 @@ class LowRankImageDecompositionTest(ScriptedLoadableModuleTest):
         )
 
     for url,name,loader in downloads:
-      filePath = slicer.app.temporaryPath + '/' + name
+      filePath = slicer.app.settings().value('Cache/Path') + '/' + name
       if not os.path.exists(filePath) or os.stat(filePath).st_size == 0:
         logging.info('Requesting download %s from %s...\n' % (name, url))
         urllib.urlretrieve(url, filePath)
