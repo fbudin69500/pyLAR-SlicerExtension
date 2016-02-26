@@ -1,6 +1,6 @@
 {
 "url":"http://slicer.kitware.com/midas3/download?items=",
-"simu":
+"files":
       {
       "fMeanSimu.nrrd":"231227",
       "healthySimu1.nrrd":"231228",
