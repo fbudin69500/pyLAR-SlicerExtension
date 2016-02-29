@@ -505,7 +505,7 @@ class LowRankImageDecompositionLogic(ScriptedLoadableModuleLogic):
     file_list_file_name = config.file_list_file_name
     im_fns = pyLAR.readTxtIntoList(os.path.join(data_dir, file_list_file_name))
     # 'clean' needs to be done before configuring the logger that creates a file in the output directory
-    if hasattr(config, "clean") and config.clean:
+    if os.path.isdir(result_dir) and hasattr(config, "clean") and config.clean:
         shutil.rmtree(result_dir)
     logger = logging.getLogger(__name__)
     logger.setLevel(logging.INFO)
