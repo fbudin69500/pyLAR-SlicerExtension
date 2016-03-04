@@ -17,7 +17,7 @@ if(NOT ${CMAKE_PROJECT_NAME}_USE_SYSTEM_${proj})
   ExternalProject_add(pyLAR
     SOURCE_DIR ${EP_SOURCE_DIR}
     GIT_REPOSITORY ${git_protocol}://github.com/fbudin69500/pyLAR.git
-    GIT_TAG e887437816e75a600a8e7a0574e49c014ad977d4
+    GIT_TAG ab4fcc1fe5b0ace365abceff5f0e30a83a2d1a6a
     CONFIGURE_COMMAND ""
     INSTALL_COMMAND ""
     BUILD_COMMAND ""
