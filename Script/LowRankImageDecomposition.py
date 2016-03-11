@@ -295,6 +295,12 @@ class LowRankImageDecompositionWidget(ScriptedLoadableModuleWidget):
         self.onSelect()
 
     def onSaveConfigFile(self, algo):
+        """ Select an output file from dialog and save example configuration file
+
+        Parameters
+        ----------
+        algo: 'lr', 'nglra', 'uab'
+        """
         file = qt.QFileDialog.getSaveFileName(parent=self, caption='Select file')
         if file:
             self.initProcessGUI()
@@ -319,6 +325,7 @@ class LowRankImageDecompositionWidget(ScriptedLoadableModuleWidget):
         self.selectedConfigFile.text = ''
 
     def onSelect(self):
+        # Only enable applyButton is a config file is selected and an algorithm has been selected
         self.applyButton.enabled = self.configFile and self.selectAlgorithm.checkedButton()
 
     def resetUI(self):
@@ -333,9 +340,11 @@ class LowRankImageDecompositionWidget(ScriptedLoadableModuleWidget):
                            self.inputSelector.currentNode())
         except Exception as e:
             logging.warning(e)
+            # if error, stop logic
             self.onLogicRunStop()
 
     def onLogicRunStop(self):
+        """ Reset UI once logic is done"""
         self.resetUI()
         self.logic.post_queue_stop_delayed()
 
@@ -350,10 +359,10 @@ class LowRankImageDecompositionLogic(ScriptedLoadableModuleLogic):
   unbiased atlas building, and low-rank atlas creation).
   The method downloading the data from a Midas server (URL and files to download are store in a JSON file) and
   running the pyLAR algorithms are multithreaded using the method implemented in [1]. This allows the Slicer GUI
-  to stay responsive while one of these operation is performed. Since Slicer creashes if new data is loaded from
+  to stay responsive while one of these operation is performed. Since Slicer crashes if new data is loaded from
   a thread that is not the main thread, the new thread only performs computation and file management operations.
   Images computed or downloaded in the secondary thread are past to the main thread through a queue that loads the images
-  using a QTimer.
+  using a QTimer call.
 
   [1] https://github.com/SimpleITK/SlicerSimpleFilters/blob/master/SimpleFilters/SimpleFilters.py#L333-L514
   """
@@ -371,6 +380,7 @@ class LowRankImageDecompositionLogic(ScriptedLoadableModuleLogic):
         self.abort = False
 
     def __del__(self):
+        # Stop the queues before deleting the object
         logging.debug("deleting logic")
         if self.main_queue_running:
             self.main_queue_stop()
@@ -380,15 +390,27 @@ class LowRankImageDecompositionLogic(ScriptedLoadableModuleLogic):
             self.thread.join()
 
     def yieldPythonGIL(self, seconds=0):
+        """ Pause to yield Python GIL.
+        """
         sleep(seconds)
 
     def thread_doit(self, f, *args, **kwargs):
+        """ Starts a thread that runs the callable 'f'.
+
+        Once callable is done running, adds 'main_queue_stop' to cleanly
+        terminate multithreaded process.
+
+        Parameters
+        ----------
+        f: callable to run in this new thread.
+        args: arguments to pass to the callable 'f'
+        kwargs: keyword arguments to pass to the callable 'f'
+        """
         try:
             if callable(f):
                 f(*args, **kwargs)
             else:
                 logging.error("Not a callable.")
-
         except Exception as e:
             msg = e.message
             self.abort = True
@@ -402,16 +424,26 @@ class LowRankImageDecompositionLogic(ScriptedLoadableModuleLogic):
             self.main_queue.put(self.main_queue_stop)
 
     def main_queue_start(self):
-        """Begins monitoring of main_queue for callables"""
+        """ Begins monitoring of main_queue for callables
+        """
         self.main_queue_running = True
         qt.QTimer.singleShot(0, self.main_queue_process)
 
     def post_queue_start(self):
-        """Begins monitoring of main_queue for callables"""
+        """ Starts post_queue_timer to run post_queue_process as a background task
+        """
         self.post_queue_running = True
         self.post_queue_timer.start()
 
     def post_queue_process(self):
+        """ Asynchronously loads images in post_queue.
+
+        Slicer can only be modified from the main thread. No direct interaction with Slicer, such as GUI update
+        or image loading can be done from a processing thread different from Slicer's main thread.
+        As a work around, this post_queue_process is run automatically, started by a QTimer, and checks if
+        new image have been added to the queue. Since this is running in Slicer's main thread, this can load
+        image into Slicer.
+        """
         loader = slicer.util.loadVolume
         if not loader:
             logging.warning("No loader available.")
@@ -433,12 +465,13 @@ class LowRankImageDecompositionLogic(ScriptedLoadableModuleLogic):
         """
     Stops the post_queue_timer with a delay long enough to run it one last time.
     This is useful when one wants the final post processing to be performed after
-    the thread is finished and tried to stop post_queue_timer
+    the thread is finished and tries to stop post_queue_timer
     """
         qt.QTimer.singleShot(self.post_queue_interval * 2.0, self.post_queue_stop)
 
     def post_queue_stop(self):
-        """End monitoring of post_queue for images"""
+        """ End monitoring of post_queue for images
+        """
         self.post_queue_running = False
         self.post_queue_timer.stop()
         with self.post_queue.mutex:
@@ -446,14 +479,16 @@ class LowRankImageDecompositionLogic(ScriptedLoadableModuleLogic):
         logging.info("Done loading images")
 
     def main_queue_stop(self):
-        """End monitoring of main_queue for callables"""
+        """ End monitoring of main_queue for callables
+        """
         self.main_queue_running = False
         if self.thread.is_alive():
             self.thread.join()
         slicer.modules.LowRankImageDecompositionWidget.onLogicRunStop()
 
     def main_queue_process(self):
-        """processes the main_queue of callables"""
+        """ Processes the main_queue of callables
+        """
         try:
             while not self.main_queue.empty():
                 f = self.main_queue.get_nowait()
@@ -473,12 +508,16 @@ class LowRankImageDecompositionLogic(ScriptedLoadableModuleLogic):
                 qt.QTimer.singleShot(0, self.main_queue_process)
 
     def requiredSoftware(self):
+        """ Creates and returns list of required software.
+        """
         slicerSoftware = ['BRAINSFit', 'BRAINSDemonWarp', 'BRAINSResample',
                           'antsRegistration', 'AverageImages', 'ComposeMultiTransform', 'WarpImageMultiTransform',
                           'CreateJacobianDeterminantImage', 'InvertDeformationField']
         return slicerSoftware
 
     def softwarePaths(self):
+        """ Creates and returns configuration object that contains software path.
+        """
         savedPATH = os.environ["PATH"]
         currentFilePath = os.path.dirname(os.path.realpath(__file__))
         upDirectory = os.path.realpath(os.path.join(currentFilePath, '..'))
@@ -493,8 +532,14 @@ class LowRankImageDecompositionLogic(ScriptedLoadableModuleLogic):
         return software
 
     def run(self, configFile, algo, node=None):
-        """
-    Run the actual algorithm
+        """ Entry point to asynchronously run pyLAR algorithm from Slicer module.
+
+        If no thread has already been started (unfinished data download or previous pyLAR computation):
+        - Creates software configuration file for project.
+        - Update configuration file if vtkMRMLScalarVolumeNode is passed.
+        - Setup pyLAR processing thread.
+        - Starts pyLAR processing in main_queue
+        - Starts post_queue to asynchronously load data in Slicer
     """
         # Check that pyLAR is not already running:
         try:
@@ -524,7 +569,7 @@ class LowRankImageDecompositionLogic(ScriptedLoadableModuleLogic):
             slicer.util.saveNode(node, extra_image_file_name)
             config.selection.append(len(im_fns))
             im_fns.append(extra_image_file_name)
-        ########################
+        # Start actual process
         self.abort = False
         self.thread = threading.Thread(target=self.thread_doit,
                                        args=(self.pyLAR_run_thread, algo, config, software, im_fns, result_dir),
@@ -536,6 +581,24 @@ class LowRankImageDecompositionLogic(ScriptedLoadableModuleLogic):
 
     def pyLAR_run_thread(self, algo, config, software, im_fns, result_dir,
                          configFN, file_list_file_name):
+        """ Run the actual pyLAR algorithm.
+
+        Parameters
+        ----------
+        algo: defines which of the 3 pyLAR algorithm is run: 'lr', 'nglra', 'uab'
+        config: configuration object containing all the configuration information
+        software: software configuration object
+        im_fns: List of the images to process
+        result_dir: Output directory. If it does not already exist, it will be created
+        configFN: Optional configuration file name, to print more explicit log messages
+        file_list_file_name: Optional file list file name, to print more explicit log messages.
+
+        Returns
+        -------
+        This functions does not return any value by populates self.post_queue with the list of
+        output files from pyLAR.run(). The list of files depends on the algorithm that is chosen.
+
+        """
         pyLAR.run(algo, config, software, im_fns, result_dir,
                   configFN=configFN, file_list_file_name=file_list_file_name)
         list_images = pyLAR.readTxtIntoList(os.path.join(result_dir, 'list_outputs.txt'))
@@ -544,11 +607,16 @@ class LowRankImageDecompositionLogic(ScriptedLoadableModuleLogic):
             self.post_queue.put((name, i))
 
     def loadDataFile(self, filename):
-        """
-    Returns
-    -------
-    downloads: List of the names of the bull's eye images available on http://slicer.kitware.com/midas3
-    with their corresponding item number.
+        """ Reads a JSON file into a dictionary.
+
+         Parameters
+         ----------
+         filename: file containing JSON structure.
+
+         Returns
+         -------
+         Dictionary with file content
+
     """
         file_path = os.path.realpath(__file__)
         dir_path = os.path.dirname(file_path)
@@ -557,10 +625,18 @@ class LowRankImageDecompositionLogic(ScriptedLoadableModuleLogic):
         return json.loads(data)
 
     def downloadData_thread(self, filename, selection = None):
+        """ Downloads data based on the information provided in filename (JSON).
+
+        JSON must contain a key called 'url' and a key called 'files'. See example files in 'Data' directory.
+        File name of the images that are downloaded are inserted in post_queue. If 'post_queue' is started,
+        images will be asynchronously loaded in Slicer.
+
+        Parameters
+        ----------
+        filename: file containing JSON structure.
+        selection: list of integers. Only files that are selected will be downloaded. If no selection is
+                   provided, all files will be downloaded.
         """
-    Downloads data based on the information provided in filename (JSON). It must contain
-    a key called 'url' and a j=key called 'files'. See example files in 'Data' directory
-    """
         logging.info('Starting to download')
         downloads = self.loadDataFile(filename)
         logging.debug("downloads:" + str(downloads))
@@ -592,6 +668,16 @@ class LowRankImageDecompositionLogic(ScriptedLoadableModuleLogic):
         logging.info('Finished with download')
 
     def downloadData(self, filename):
+        """ Asynchronously download data and load it in Slicer.
+
+        If there is not already a thread running, either to download images, or to run
+        the pyLAR processing, a new thread is started to asynchronously download data.
+        Data is downloaded in 'main_queue' and loaded in Slicer in 'post_queue'.
+
+        Parameters
+        ----------
+        filename: JSON file containing information to download images.
+        """
         # Check that pyLAR is not already running:
         try:
             if self.thread.is_alive():
@@ -607,6 +693,14 @@ class LowRankImageDecompositionLogic(ScriptedLoadableModuleLogic):
         self.thread.start()
 
     def CreateExampleConfigurationFileFromJSON(self, filename, datafile, algo):
+        """ Writes example configuration file based on JSON.
+
+        Parameters
+        ----------
+        filename: output file name.
+        datafile: JSON file containing image information.
+        algo: algorithm to create the configuration file for ('lr', 'uab', 'nglra')
+        """
         data_dict = self.loadDataFile(datafile)
         data_list = data_dict['files'].keys()
         cache_dir = slicer.app.settings().value('Cache/Path')
@@ -620,6 +714,42 @@ class LowRankImageDecompositionLogic(ScriptedLoadableModuleLogic):
                                 num_of_levels=1, number_of_cpu=None,
                                 ants_params=None,
                                 use_healthy_atlas=False, registration_type='ANTS'):
+        """ Writes configuration file for pyLAR
+
+        Parameters
+        ----------
+        filename: output file name
+        data_list: file containing data list
+        algo: select configuration file for specified algorithm: 'lr', 'uab', 'nglra'
+        selection: List of images that would be process. Default: all images will be selected.
+        data_dir: folder containing images. This function requires all images to be in the same directory.
+                  Default: slicer.app.temporaryPath
+        file_list_dir: folder containing file_list_file_name. Default: slicer.app.temporaryPath
+        file_list_file_name: output file name of the file containing the list of data to process.
+                             It should only contain the basename. Default: u'fileList.txt'
+        reference_im_fn: Reference image. Default value: first element of the data list.
+        modality: prefix used when naming output image. Default: 'Simu'
+        lamda: float value
+        verbose: boolean
+        result_dir: output folder containing processing result. Default: slicer.app.temporaryPath+'/output'
+        ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS: Number of threads used by tools based on ITK
+        clean: boolean specifying if result_dir is removed before new computation is run.
+        registration: Type of registration ('none', 'rigid', 'affine'). Only for 'lr'.
+        histogram_matching: boolean. Only for 'lr'.
+        sigma: Smoothing kernel size. For 'lr' and 'nglra'.
+        num_of_iterations_per_level: integer. For 'uab' and 'nglra'.
+        num_of_levels: integer. For 'uab' and 'nglra'.
+        number_of_cpu: Number of tools run in parallel. For 'uab' and 'nglra'.
+        ants_params: Parameters used for ANTS. For 'uab' and 'nglra'.
+                    Default: ants_params = {'Convergence': '[100x50x25,1e-6,10]', \
+                               'Dimension': 3, \
+                               'ShrinkFactors': '4x2x1', \
+                               'SmoothingSigmas': '2x1x0vox', \
+                               'Transform': 'SyN[0.1,1,0]', \
+                               'Metric': 'MeanSquares[fixedIm,movingIm,1,0]'}
+        use_healthy_atlas: boolean. For 'nglra'
+        registration_type: Registration used: 'BSpline', 'Demons', 'ANTS'. For 'nglra'.
+        """
         # Checks that parameters are reasonable
         if not selection:
             selection = range(0, len(data_list))
@@ -698,8 +828,8 @@ class LowRankImageDecompositionTest(ScriptedLoadableModuleTest):
         slicer.mrmlScene.Clear(0)
 
     def runTest(self):
-        """Run as few or as many tests as needed here.
-    """
+        """Run all tests
+        """
         self.setUp()
         self.test_softwarePaths()
         self.test_softwarePaths_PATH_unchanged()
@@ -711,6 +841,11 @@ class LowRankImageDecompositionTest(ScriptedLoadableModuleTest):
         self.test_LowRankImageDecompositionExtraNode()
 
     def test_softwarePaths(self):
+        """ Verifies that all the expected tools are found and are in the correct location.
+
+        BRAINSResample, BRAINSDemonWarp, and BRAINSFit should be found in Slicer.
+        The other tools should be found in this extension's directory.
+        """
         self.delayDisplay("Starting test_softwarePaths")
         logic = LowRankImageDecompositionLogic()
         software = logic.softwarePaths()
@@ -734,6 +869,13 @@ class LowRankImageDecompositionTest(ScriptedLoadableModuleTest):
 
 
     def test_softwarePaths_PATH_unchanged(self):
+        """ Making sure that PATH is unchanged after looking for software on the system.
+
+        The function 'softwarePaths()' modifies the environment variable PATH to find executables
+        on the system. This test makes sure that PATH is reset to its original value after
+        exiting 'softwarePaths()'. Not resetting PATH could lead to issues, and would also incrementally
+        make PATH longer each time this function is called.
+        """
         self.delayDisplay("Starting test_softwarePaths_PATH_unchanged")
         logic = LowRankImageDecompositionLogic()
         savedPATH = os.environ["PATH"]
@@ -743,6 +885,11 @@ class LowRankImageDecompositionTest(ScriptedLoadableModuleTest):
         self.delayDisplay('test_softwarePaths_PATH_unchanged passed!')
 
     def test_loadDataFile(self):
+        """ Test that a given JSON file containing downloading information can be loaded.
+
+        One of the JSON file used to download example data is loaded. This test verifies that
+        this file is loaded and that its content matches expected values.
+        """
         self.delayDisplay("Starting test_loadDataFile")
         logic = LowRankImageDecompositionLogic()
         downloads=logic.loadDataFile("Bullseye.json")
@@ -753,6 +900,14 @@ class LowRankImageDecompositionTest(ScriptedLoadableModuleTest):
         self.delayDisplay('test_loadDataFile passed!')
 
     def test_CreateConfigurationFile(self):
+        """ Test the creation of a configuration file.
+
+        A configuration file is created. This test verifies that the file gets created in the correct
+        location and that its content is what is expected.
+        It also verifies that if 'CreateConfigurationFile()' is called with wrong arguments
+        (file_list_file_name should only contain a basename, selection should contain files in given data_list),
+        an exception is thrown.
+        """
         self.delayDisplay("Starting test_CreateConfigurationFile")
         logic = LowRankImageDecompositionLogic()
         temp_dir = slicer.app.temporaryPath
@@ -784,6 +939,13 @@ class LowRankImageDecompositionTest(ScriptedLoadableModuleTest):
         self.delayDisplay('test_CreateConfigurationFile passed!')
 
     def test_CreateExampleConfigurationFileFromJSON(self):
+        """ Creates a configuration file based on the content of a loaded JSON file.
+
+        When creating an example configuration file in this module, some of its
+        content is given by a JSON file that is used to download example data.
+        This test assess that creating a configuration file from a JSON file creates
+        a configuration file with the expected values.
+        """
         self.delayDisplay("Starting test_CreateExampleConfigurationFileFromJSON")
         temp_dir = slicer.app.temporaryPath
         filename = os.path.join(temp_dir, "test_CreateExampleConfigurationFileFromJSON_file.txt")
@@ -812,25 +974,27 @@ class LowRankImageDecompositionTest(ScriptedLoadableModuleTest):
         self.delayDisplay('test_CreateExampleConfigurationFileFromJSON passed!')
 
     def test_Download(self):
+        """ Verifies that data can be downloaded from a server.
+
+        Example data can be downloaded from a server. This test assess that the download
+        process works for one image which information is loaded from a JSON file that
+        contains its download information (url, image name, image key on the server).
+
+        """
         self.delayDisplay("Starting test_Download")
         json_file_name = "TestDownloadOneImage.json"
         logic = LowRankImageDecompositionLogic()
         with self.assertRaisesRegexp(Exception,"'selection' contains .*"):
             logic.downloadData_thread(json_file_name, [1])
         logic.downloadData_thread(json_file_name, [0])
-        """ Ideally you should have several levels of tests.  At the lowest level
-    tests should exercise the functionality of the logic with different inputs
-    (both valid and invalid).  At higher levels your tests should emulate the
-    way the user would interact with your code and confirm that it still works
-    the way you intended.
-    One of the most important features of the tests is that it should alert other
-    developers when their changes will have an impact on the behavior of your
-    module.  For example, if a developer removes a feature that you depend on,
-    your test should break so they know that the feature is needed.
-    """
         self.delayDisplay('test_Download passed!')
 
     def test_LowRankImageDecomposition(self):
+        """ Test low rank/sparse decomposition of an image
+
+         This test verifies that calling the low rank/sparse decomposition algorithm from pyLAR
+         outputs the expected file.
+        """
         self.delayDisplay("Starting test_LowRankImageDecomposition")
         #
         # first, get some data
@@ -860,6 +1024,12 @@ class LowRankImageDecompositionTest(ScriptedLoadableModuleTest):
         self.delayDisplay('test_LowRankImageDecomposition passed!')
 
     def test_LowRankImageDecompositionExtraNode(self):
+        """ Test low rank/sparse decomposition of an image given by a vtkMRMLScalarVolumeNode
+
+        If a vtkMRMLScalarVolumeNode is passed to the logic additionally to the configuration file,
+        the scalar volume of the node is saved on the disk and a new configuration file containing the added file is
+        created and used to run the processing.
+        """
         self.delayDisplay("Starting test_LowRankImageDecompositionExtraNode")
         #
         # first, get some data
