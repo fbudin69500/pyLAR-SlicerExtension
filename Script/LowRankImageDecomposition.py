@@ -718,7 +718,7 @@ class LowRankImageDecompositionLogic(ScriptedLoadableModuleLogic):
         temp_dir = slicer.app.temporaryPath
         file_list_file_name = u'fileList.txt'
         pyLAR.writeTxtFromList(os.path.join(temp_dir, file_list_file_name), data_list_path)
-        if selection == None:
+        if selection is None:
             selection = range(0, len(data_list))
         config = self.createConfiguration(algo, reference_im_fn=data_list_path[0], file_list_dir=temp_dir,
                                           file_list_file_name=file_list_file_name, selection=selection,
