@@ -636,16 +636,16 @@ class LowRankImageDecompositionLogic(ScriptedLoadableModuleLogic):
                    provided, all files will be downloaded.
         """
         logging.info('Starting to download')
-        downloads = self.loadDataFile(filename)
         logging.debug("downloads:" + str(downloads))
         import socket
         socket.setdefaulttimeout(50)
         if not selection:
             selection = range(0, len(downloads['files'].keys()))
         else:
+            print "downloads: %r" % downloads
             if max(selection) > len(downloads['files'].keys())-1:
-                raise Exception("'selection' contains items (%d) greater than the number of files available in %s"
-                                % (max(selection),filename))
+                raise Exception("'selection' contains items (%d) greater than the number of files available in %r"
+                                % (max(selection), downloads))
         import urllib
         if 'url' not in downloads.keys():
             raise Exception("Key 'url' is missing in dictionary")
@@ -664,6 +664,7 @@ class LowRankImageDecompositionLogic(ScriptedLoadableModuleLogic):
                 urllib.urlretrieve(item_url, filePath)
             self.post_queue.put((name, filePath))
         logging.info('Finished with download')
+        return downloads
 
     def run_downloadData(self, filename):
         """ Asynchronously download data and load it in Slicer.
@@ -683,6 +684,7 @@ class LowRankImageDecompositionLogic(ScriptedLoadableModuleLogic):
                 return
         except AttributeError:
             pass
+        data_dict = self.loadJSONFile(filename)
         self.abort = False
         self.thread = threading.Thread(target=self.thread_doit,
                                        args=(self.thread_downloadData, data_dict))
@@ -928,7 +930,7 @@ class LowRankImageDecompositionTest(ScriptedLoadableModuleTest):
                                            "fake_file_list_name.txt", selection)
         # Loads the configuration file that was saved and compare only the selection indices.
         # If the indices are correct, we hope that everything is correct
-        self.assertTrue(config.selection == [0, 3])
+        self.assertTrue(config.selection == selection, 'Expected %r. Got %r'%(selection,config.selection))
         self.delayDisplay('test_createConfiguration passed!')
 
     def test_createExampleConfigurationAndListFiles(self):
@@ -998,12 +1000,7 @@ class LowRankImageDecompositionTest(ScriptedLoadableModuleTest):
         json_file_name = "TestDownloadOneImage.json"
         algo = 'lr'
         logic = LowRankImageDecompositionLogic()
-        logic.downloadData_thread(json_file_name)
-        lr_test_file_name = 'lr_test_file.txt'
-        data_dict = logic.loadDataFile(json_file_name)
-        logic.downloadData_thread(json_file_name)
-        data_list = data_dict['files'].keys()
-        cache_dir = slicer.app.settings().value('Cache/Path')
+        lr_test_file_name = os.path.join(slicer.app.temporaryPath,'lr_test_file.txt')
         result_dir = os.path.join(slicer.app.temporaryPath, 'output')
         # Remove result directory to start from a clean computation
         shutil.rmtree(result_dir, ignore_errors=True)
@@ -1031,29 +1028,9 @@ class LowRankImageDecompositionTest(ScriptedLoadableModuleTest):
         # first, get some data
         #
         self.setUp()  # Clear MRML
-        json_file_name = "TestDownloadOneImage.json"
+        json_file_name = "Bullseye.json"
         logic = LowRankImageDecompositionLogic()
-        logic.downloadData_thread(json_file_name, [0])
-        data_dict = logic.loadDataFile(json_file_name)
 
-        # Load data in Slicer
-        loader = slicer.util.loadVolume
-        self.assertTrue(loader)
-        cache_dir = slicer.app.settings().value('Cache/Path')
-        data_list = data_dict['files'].keys()
-        self.assertTrue(os.path.basename(data_list[0]) == data_list[0],
-                        "Got %s, expected %s" % (data_list[0],os.path.basename(data_list[0])))
-        for i in range(0, len(data_list)):
-            data_list[i] = os.path.join(cache_dir,data_list[i])
-        data_list = data_list + data_list + data_list
-        loaded_image = os.path.join(cache_dir,data_list[0])
-        self.assertTrue(loader(loaded_image))
-        # Get node from Slicer
-        nodeName = os.path.splitext(os.path.basename(data_list[0]))[0]
-        mrml = slicer.app.mrmlScene()
-        collection = mrml.GetNodesByName(nodeName)
-        scalarNode = collection.GetItemAsObject(0)
-        self.assertTrue(scalarNode)
         algo = 'lr'
         logic = LowRankImageDecompositionLogic()
         lr_test_file_basename = 'lr_test_file.txt'
@@ -1061,20 +1038,41 @@ class LowRankImageDecompositionTest(ScriptedLoadableModuleTest):
         result_dir = os.path.join(slicer.app.temporaryPath, 'output')
         # Remove result directory to start from a clean computation
         shutil.rmtree(result_dir, ignore_errors=True)
-        selection=[0]
-        logic.CreateConfigurationFile(lr_test_file_filename, data_list, algo, selection,
-                                      result_dir=result_dir, registration='none',
-                                      file_list_dir=slicer.app.temporaryPath)
-        logic.run(lr_test_file_filename, algo, node=scalarNode)
+        selection = [0,4,10]
+        logic.createExampleConfigurationAndListFiles(lr_test_file_filename, json_file_name, algo,
+                                       selection=selection, output_dir=result_dir,
+                                       registration='none', download=True)
+        self.assertTrue(os.path.isfile(lr_test_file_filename), '%s not found' % lr_test_file_filename)
+        file_name_to_check = os.path.join(slicer.app.temporaryPath, u'fileList.txt')
+        self.assertTrue(os.path.isfile(file_name_to_check), '%s not found' % file_name_to_check)
+        # Load data in Slicer
+        loader = slicer.util.loadVolume
+        self.assertTrue(loader, 'Volume loaded not found')
+        cache_dir = slicer.app.settings().value('Cache/Path')
+        data_dict = logic.loadJSONFile(json_file_name)
+        data_list = data_dict['files'].keys()
+        self.assertTrue(os.path.basename(data_list[0]) == data_list[0],
+                        "Got %s, expected %s" % (data_list[0], os.path.basename(data_list[0])))
+        for i in range(0, len(data_list)):
+            data_list[i] = os.path.join(cache_dir, data_list[i])
+        loaded_image = os.path.join(cache_dir, data_list[0])
+        self.assertTrue(loader(loaded_image), 'Unable to load %s' % loaded_image)
+        # Get node from Slicer
+        nodeName = os.path.splitext(os.path.basename(data_list[0]))[0]
+        mrml = slicer.app.mrmlScene()
+        collection = mrml.GetNodesByName(nodeName)
+        scalarNode = collection.GetItemAsObject(0)
+        self.assertTrue(scalarNode, '%s not found as a scalar node' % nodeName)
+
+        logic.run_pyLAR(lr_test_file_filename, algo, node=scalarNode)
         if logic.thread.is_alive():
             logic.thread.join()
         # Check that output files are there and loaded in Slicer
         list_images = pyLAR.readTxtIntoList(os.path.join(result_dir, 'list_outputs.txt'))
         for image in list_images:
-            self.assertTrue(os.path.isfile(image))
+            self.assertTrue(os.path.isfile(image), '%s not found' % image)
         # Check new configuration file and new file_list_file_name file created with additional node
         config_file_name = os.path.join(result_dir, lr_test_file_basename)
-        shutil.copyfile(config_file_name,'/home/fbudin/myfile.txt')
         config = pyLAR.loadConfiguration(config_file_name, 'config')
         expected_selection = selection + [len(data_list)]
         self.assertTrue(config.selection == expected_selection,
@@ -1091,8 +1089,8 @@ class LowRankImageDecompositionTest(ScriptedLoadableModuleTest):
                         %(config.selection[len(config.selection)-1], len(data_list)))
         self.assertTrue(len(im_fns)-2 > 0)
         for i in range(0,len(im_fns)-2):
-            self.assertTrue(im_fns[i] == loaded_image)
+            self.assertTrue(im_fns[i] == data_list[i], 'Expected %s. Got %s' % (im_fns[i],data_list[i]))
         expected_extra_image_name = os.path.join(result_dir, "ExtraImage.nrrd")
         self.assertTrue(im_fns[len(im_fns)-1] == expected_extra_image_name, "Got %s, expected %s. Pos %d - whole list %s"
                         %(im_fns[len(im_fns)-1], expected_extra_image_name,len(im_fns), str(im_fns)))
-        self.delayDisplay('test_LowRankImageDecompositionExtraNode passed!')
+        self.delayDisplay('test_lowRankImageDecompositionExtraNode passed!')
