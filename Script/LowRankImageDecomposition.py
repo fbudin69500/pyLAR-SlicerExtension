@@ -272,7 +272,7 @@ class LowRankImageDecompositionWidget(ScriptedLoadableModuleWidget):
             return
         try:
             self.initProcessGUI()
-            self.logic.downloadData(name)
+            self.logic.run_downloadData(name)
         except Exception as e:
             logging.warning(e)
             self.onLogicRunStop()
@@ -304,8 +304,8 @@ class LowRankImageDecompositionWidget(ScriptedLoadableModuleWidget):
         file = qt.QFileDialog.getSaveFileName(parent=self, caption='Select file')
         if file:
             self.initProcessGUI()
-            self.logic.CreateExampleConfigurationFile(file, self.BullseyeFileName, algo)
         self.onLogicRunStop()
+            self.logic.createExampleConfigurationAndListFiles(file, self.BullseyeFileName, algo)
         qt.QMessageBox.warning(slicer.util.mainWindow(),
                                'Download data',
                                'To use this configuration file, you will need to download the synthetic data')
@@ -335,7 +335,7 @@ class LowRankImageDecompositionWidget(ScriptedLoadableModuleWidget):
     def onApplyButton(self):
         try:
             self.initProcessGUI()
-            self.logic.run(self.configFile,
+            self.logic.run_pyLAR(self.configFile,
                            self.Algorithm[self.selectAlgorithm.checkedButton().text],
                            self.inputSelector.currentNode())
         except Exception as e:
@@ -531,7 +531,7 @@ class LowRankImageDecompositionLogic(ScriptedLoadableModuleLogic):
         os.environ["PATH"] = savedPATH
         return software
 
-    def run(self, configFile, algo, node=None):
+    def run_pyLAR(self, configFile, algo, node=None):
         """ Entry point to asynchronously run pyLAR algorithm from Slicer module.
 
         If no thread has already been started (unfinished data download or previous pyLAR computation):
@@ -572,14 +572,14 @@ class LowRankImageDecompositionLogic(ScriptedLoadableModuleLogic):
         # Start actual process
         self.abort = False
         self.thread = threading.Thread(target=self.thread_doit,
-                                       args=(self.pyLAR_run_thread, algo, config, software, im_fns, result_dir),
+                                       args=(self.thread_pyLAR, algo, config, software, im_fns, result_dir),
                                        kwargs={'configFN': configFile, 'file_list_file_name': file_list_file_name})
 
         self.main_queue_start()
         self.post_queue_start()
         self.thread.start()
 
-    def pyLAR_run_thread(self, algo, config, software, im_fns, result_dir,
+    def thread_pyLAR(self, algo, config, software, im_fns, result_dir,
                          configFN, file_list_file_name):
         """ Run the actual pyLAR algorithm.
 
@@ -606,7 +606,7 @@ class LowRankImageDecompositionLogic(ScriptedLoadableModuleLogic):
             name = os.path.splitext(os.path.basename(i))[0]
             self.post_queue.put((name, i))
 
-    def loadDataFile(self, filename):
+    def loadJSONFile(self, filename):
         """ Reads a JSON file into a dictionary.
 
          Parameters
@@ -624,7 +624,7 @@ class LowRankImageDecompositionLogic(ScriptedLoadableModuleLogic):
         data = open(os.path.join(dir_path, filename), 'r').read()
         return json.loads(data)
 
-    def downloadData_thread(self, filename, selection = None):
+    def thread_downloadData(self, downloads, selection=None):
         """ Downloads data based on the information provided in filename (JSON).
 
         JSON must contain a key called 'url' and a key called 'files'. See example files in 'Data' directory.
@@ -667,7 +667,7 @@ class LowRankImageDecompositionLogic(ScriptedLoadableModuleLogic):
             self.post_queue.put((name, filePath))
         logging.info('Finished with download')
 
-    def downloadData(self, filename):
+    def run_downloadData(self, filename):
         """ Asynchronously download data and load it in Slicer.
 
         If there is not already a thread running, either to download images, or to run
@@ -687,47 +687,62 @@ class LowRankImageDecompositionLogic(ScriptedLoadableModuleLogic):
             pass
         self.abort = False
         self.thread = threading.Thread(target=self.thread_doit,
-                                       args=(self.downloadData_thread, filename))
+                                       args=(self.thread_downloadData, data_dict))
         self.main_queue_start()
         self.post_queue_start()
         self.thread.start()
 
-    def CreateExampleConfigurationFileFromJSON(self, filename, datafile, algo):
-        """ Writes example configuration file based on JSON.
+    def createExampleConfigurationAndListFiles(self, filename, datafile, algo,
+                                               selection=None, output_dir=None,
+                                               registration='affine', download=False):
+        """ Writes example configuration file and an image list file based on JSON content.
 
         Parameters
         ----------
         filename: output file name.
         datafile: JSON file containing image information.
         algo: algorithm to create the configuration file for ('lr', 'uab', 'nglra')
+        download: boolean to download data or not.
+        selection: selection passed to 'createConfiguration()'
+        output_dir: output_dir passed to 'createConfiguration()'
+        registration: registration passed to 'createConfiguration()'
         """
-        data_dict = self.loadDataFile(datafile)
+        data_dict = self.loadJSONFile(datafile)
+        if download:
+            data_dict = self.thread_downloadData(data_dict)
         data_list = data_dict['files'].keys()
         cache_dir = slicer.app.settings().value('Cache/Path')
-        self.CreateConfigurationFile(filename, data_list, algo, [0,1,3], data_dir=cache_dir)
+        data_list_path = []
+        for data in data_list:
+            data_list_path.append(os.path.join(cache_dir, data))
+        temp_dir = slicer.app.temporaryPath
+        file_list_file_name = u'fileList.txt'
+        pyLAR.writeTxtFromList(os.path.join(temp_dir, file_list_file_name), data_list_path)
+        if selection == None:
+            selection = range(0, len(data_list))
+        config = self.createConfiguration(algo, reference_im_fn=data_list_path[0], file_list_dir=temp_dir,
+                                          file_list_file_name=file_list_file_name, selection=selection,
+                                          result_dir=output_dir, registration=registration)
+        pyLAR.saveConfiguration(filename, config)
 
-    def CreateConfigurationFile(self, filename, data_list, algo, selection=None,
-                                data_dir=None, file_list_dir=None, file_list_file_name=None,
-                                reference_im_fn=None, modality='Simu', lamda=2.0, verbose=True,
+
+    def createConfiguration(self, algo, reference_im_fn,
+                                file_list_dir, file_list_file_name, selection,
+                                modality='Simu', lamda=2.0, verbose=True,
                                 result_dir=None, ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=None, clean=True,
                                 registration='affine', histogram_matching=False, sigma=0, num_of_iterations_per_level=4,
                                 num_of_levels=1, number_of_cpu=None,
-                                ants_params=None,
-                                use_healthy_atlas=False, registration_type='ANTS'):
+                                ants_params=None, use_healthy_atlas=False, registration_type='ANTS'):
         """ Writes configuration file for pyLAR
 
         Parameters
         ----------
-        filename: output file name
-        data_list: file containing data list
         algo: select configuration file for specified algorithm: 'lr', 'uab', 'nglra'
-        selection: List of images that would be process. Default: all images will be selected.
-        data_dir: folder containing images. This function requires all images to be in the same directory.
-                  Default: slicer.app.temporaryPath
-        file_list_dir: folder containing file_list_file_name. Default: slicer.app.temporaryPath
+        reference_im_fn: Reference image.
+        file_list_dir: folder containing file_list_file_name.
         file_list_file_name: output file name of the file containing the list of data to process.
-                             It should only contain the basename. Default: u'fileList.txt'
-        reference_im_fn: Reference image. Default value: first element of the data list.
+                             It should only contain the basename.
+        selection: List of images that would be process.
         modality: prefix used when naming output image. Default: 'Simu'
         lamda: float value
         verbose: boolean
@@ -751,35 +766,19 @@ class LowRankImageDecompositionLogic(ScriptedLoadableModuleLogic):
         registration_type: Registration used: 'BSpline', 'Demons', 'ANTS'. For 'nglra'.
         """
         # Checks that parameters are reasonable
-        if not selection:
-            selection = range(0, len(data_list))
-        if max(selection) >= len(data_list):
-            raise Exception("'selection' contains elements outside of 'data_list'")
         if file_list_file_name and os.path.basename(file_list_file_name) != file_list_file_name:
             raise Exception("'file_list_file_name' should only be a file name.\
              It should not contain path information. Got %s, expected %s"
                             %(file_list_file_name, os.path.basename(file_list_file_name)))
         ####
         config_data = type('config_obj', (object,), {'modality': 'Simu'})()
-        temp_dir = slicer.app.temporaryPath
-        if not data_dir:
-            data_dir = temp_dir
-        if not file_list_dir:
-            file_list_dir = temp_dir
-        data_list_path = []
-        for data in data_list:
-            data_list_path.append(os.path.join(data_dir, data))
-        if not file_list_file_name:
-            file_list_file_name = u'fileList.txt'
-        pyLAR.writeTxtFromList(os.path.join(file_list_dir,file_list_file_name), data_list_path)
         config_data.file_list_file_name = "'" + file_list_file_name + "'"
         config_data.data_dir = "'" + file_list_dir + "'"
-        if not reference_im_fn:
-            reference_im_fn = data_list_path[0]
         config_data.reference_im_fn = "'" + reference_im_fn + "'"
         config_data.modality = modality
         config_data.lamda = lamda
         config_data.verbose = verbose
+        temp_dir = slicer.app.temporaryPath
         if not result_dir:
             result_dir = os.path.join(temp_dir, 'output')
         config_data.result_dir = "'" + result_dir + "'"
@@ -812,7 +811,7 @@ class LowRankImageDecompositionLogic(ScriptedLoadableModuleLogic):
                 pass
             else:
                 raise Exception('Unknown algorithm to create configuration file')
-        pyLAR.saveConfiguration(filename, config_data)
+        return config_data
 
 
 class LowRankImageDecompositionTest(ScriptedLoadableModuleTest):
@@ -833,12 +832,12 @@ class LowRankImageDecompositionTest(ScriptedLoadableModuleTest):
         self.setUp()
         self.test_softwarePaths()
         self.test_softwarePaths_PATH_unchanged()
-        self.test_loadDataFile()
-        self.test_CreateConfigurationFile()
-        self.test_CreateExampleConfigurationFileFromJSON()
-        self.test_Download()
-        self.test_LowRankImageDecomposition()
-        self.test_LowRankImageDecompositionExtraNode()
+        self.test_loadJSONFile()
+        self.test_createConfiguration()
+        self.test_createExampleConfigurationAndListFiles()
+        self.test_downloadData()
+        self.test_lowRankImageDecomposition()
+        self.test_lowRankImageDecompositionExtraNode()
 
     def test_softwarePaths(self):
         """ Verifies that all the expected tools are found and are in the correct location.
@@ -884,61 +883,57 @@ class LowRankImageDecompositionTest(ScriptedLoadableModuleTest):
         self.assertTrue(not cmp(savedPATH,PATH))
         self.delayDisplay('test_softwarePaths_PATH_unchanged passed!')
 
-    def test_loadDataFile(self):
+    def test_loadJSONFile(self):
         """ Test that a given JSON file containing downloading information can be loaded.
 
         One of the JSON file used to download example data is loaded. This test verifies that
         this file is loaded and that its content matches expected values.
         """
-        self.delayDisplay("Starting test_loadDataFile")
+        self.delayDisplay("Starting test_loadJSONFile")
         logic = LowRankImageDecompositionLogic()
-        downloads=logic.loadDataFile("Bullseye.json")
+        downloads = logic.loadJSONFile("Bullseye.json")
         self.assertTrue('url' in downloads.keys())
         self.assertTrue(downloads['url'] == "http://slicer.kitware.com/midas3/download?items=")
         self.assertTrue('files' in downloads.keys())
         self.assertTrue(downloads['files']['fMeanSimu.nrrd'] == "231227")
-        self.delayDisplay('test_loadDataFile passed!')
+        self.delayDisplay('test_loadJSONFile passed!')
 
-    def test_CreateConfigurationFile(self):
+    def test_createConfiguration(self):
         """ Test the creation of a configuration file.
 
         A configuration file is created. This test verifies that the file gets created in the correct
         location and that its content is what is expected.
-        It also verifies that if 'CreateConfigurationFile()' is called with wrong arguments
+        It also verifies that if 'createConfiguration()' is called with wrong arguments
         (file_list_file_name should only contain a basename, selection should contain files in given data_list),
         an exception is thrown.
         """
-        self.delayDisplay("Starting test_CreateConfigurationFile")
+        self.delayDisplay("Starting test_createConfiguration")
         logic = LowRankImageDecompositionLogic()
         temp_dir = slicer.app.temporaryPath
-        filename = os.path.join(temp_dir, "test_CreateConfigurationFile_file.txt")
+        filename = os.path.join(temp_dir, "test_createConfiguration_file.txt")
         # Remove the file that could have been created in a previous test
         try:
             os.remove(filename)
         except OSError as e:
             if errno.errorcode[e.errno] != 'ENOENT':  # No such file or directory
                 raise e
-        # Make sure that an exception is thrown if the given 'CreateConfigurationFile' is
+        # Make sure that an exception is thrown if the given 'createConfiguration' is
         # not only a basename (has path information)
         failed_list_file = os.path.join(slicer.app.temporaryPath, 'failed_list_file.txt')
         with self.assertRaisesRegexp(Exception,"'file_list_file_name' should only be a file name.\
              It should not contain path information..*"):
-            logic.CreateConfigurationFile(filename, ['fake1.nrrd', 'fake2.nrrd'], "lr",
-                                          file_list_file_name=failed_list_file)
-        # Makes sure that an exception is thrown if not enough images are given compared to the selection indices.
-        # No configuration file created in this case.
-        with self.assertRaisesRegexp(Exception,"'selection' contains elements outside of 'data_list'"):
-            logic.CreateConfigurationFile(filename, ['fake1.nrrd', 'fake2.nrrd'], "lr", [0,3])
+            logic.createConfiguration("lr", "fake_reference_image.nrrd", "fake_file_list_dir",
+                                      failed_list_file, [0])
         # This time a configuration file should be created.
-        logic.CreateConfigurationFile(filename, ['fake1.nrrd', 'fake2.nrrd', 'fake3.nrrd', 'fake4.nrrd'], "lr", [0,3])
-        self.assertTrue(os.path.isfile(filename))
+        selection = [0,3]
+        config = logic.createConfiguration("lr", "fake_reference_image.nrrd", "fake_file_list_dir",
+                                           "fake_file_list_name.txt", selection)
         # Loads the configuration file that was saved and compare only the selection indices.
         # If the indices are correct, we hope that everything is correct
-        config = pyLAR.loadConfiguration(filename,'config')
         self.assertTrue(config.selection == [0, 3])
-        self.delayDisplay('test_CreateConfigurationFile passed!')
+        self.delayDisplay('test_createConfiguration passed!')
 
-    def test_CreateExampleConfigurationFileFromJSON(self):
+    def test_createExampleConfigurationAndListFiles(self):
         """ Creates a configuration file based on the content of a loaded JSON file.
 
         When creating an example configuration file in this module, some of its
@@ -946,10 +941,10 @@ class LowRankImageDecompositionTest(ScriptedLoadableModuleTest):
         This test assess that creating a configuration file from a JSON file creates
         a configuration file with the expected values.
         """
-        self.delayDisplay("Starting test_CreateExampleConfigurationFileFromJSON")
+        self.delayDisplay("Starting test_createExampleConfigurationAndListFiles")
         temp_dir = slicer.app.temporaryPath
-        filename = os.path.join(temp_dir, "test_CreateExampleConfigurationFileFromJSON_file.txt")
-        json = "Bullseye.json"
+        filename = os.path.join(temp_dir, "test_createExampleConfigurationAndListFiles_file.txt")
+        json_file_name = "Bullseye.json"
         # Remove the file that could have been created in a previous test
         try:
             os.remove(filename)
@@ -957,23 +952,24 @@ class LowRankImageDecompositionTest(ScriptedLoadableModuleTest):
             if errno.errorcode[e.errno] != 'ENOENT':  # No such file or directory
                 raise e
         logic = LowRankImageDecompositionLogic()
-        logic.CreateExampleConfigurationFileFromJSON(filename, json , 'nglra')
+        selection = [0,1,3]
+        logic.createExampleConfigurationAndListFiles(filename, json_file_name , 'nglra', selection=selection)
         # Make sure the example configuration file was created
-        self.assertTrue(os.path.isfile(filename))
+        self.assertTrue(os.path.isfile(filename), '%s is not a file.'%filename)
         # Check a few of its variables
-        config = pyLAR.loadConfiguration(filename,'config')
-        self.assertTrue(config.selection == [0,1,3])
-        self.assertTrue(config.use_healthy_atlas is False)
-        self.assertTrue(config.registration_type == 'ANTS')
+        config = pyLAR.loadConfiguration(filename, 'config')
+        self.assertTrue(config.selection == selection, 'Got %r. Expected %r'%(config.selection,selection))
+        self.assertTrue(config.use_healthy_atlas is False, 'Got %r. Expected %r'%(config.use_healthy_atlas, False))
+        self.assertTrue(config.registration_type == 'ANTS', 'Got %r. Expected %r'%(config.registration_type, 'ANTS'))
         # Tries to load file_list_file_name file and compare its
-        listFiles = pyLAR.readTxtIntoList(os.path.join(config.data_dir,config.file_list_file_name))
+        listFiles = pyLAR.readTxtIntoList(os.path.join(config.data_dir, config.file_list_file_name))
         cache_dir = slicer.app.settings().value('Cache/Path')
-        data_dict = logic.loadDataFile(json)
+        data_dict = logic.loadJSONFile(json_file_name)
         file0 = os.path.join(cache_dir, data_dict['files'].keys()[0])
-        self.assertTrue(listFiles[0] == file0)
-        self.delayDisplay('test_CreateExampleConfigurationFileFromJSON passed!')
+        self.assertTrue(listFiles[0] == file0, 'Got %s. Expected %s.'%(listFiles[0], file0))
+        self.delayDisplay('test_createExampleConfigurationAndListFiles passed!')
 
-    def test_Download(self):
+    def test_downloadData(self):
         """ Verifies that data can be downloaded from a server.
 
         Example data can be downloaded from a server. This test assess that the download
@@ -981,21 +977,23 @@ class LowRankImageDecompositionTest(ScriptedLoadableModuleTest):
         contains its download information (url, image name, image key on the server).
 
         """
-        self.delayDisplay("Starting test_Download")
+        self.delayDisplay("Starting test_downloadData")
         json_file_name = "TestDownloadOneImage.json"
         logic = LowRankImageDecompositionLogic()
+        data_dict = logic.loadJSONFile(json_file_name)
         with self.assertRaisesRegexp(Exception,"'selection' contains .*"):
-            logic.downloadData_thread(json_file_name, [1])
-        logic.downloadData_thread(json_file_name, [0])
-        self.delayDisplay('test_Download passed!')
+            logic.thread_downloadData(data_dict, [1])
+        logic.thread_downloadData(data_dict, [0])
+        self.delayDisplay('test_downloadData passed!')
 
-    def test_LowRankImageDecomposition(self):
+
+    def test_lowRankImageDecomposition(self):
         """ Test low rank/sparse decomposition of an image
 
          This test verifies that calling the low rank/sparse decomposition algorithm from pyLAR
          outputs the expected file.
         """
-        self.delayDisplay("Starting test_LowRankImageDecomposition")
+        self.delayDisplay("Starting test_lowRankImageDecomposition")
         #
         # first, get some data
         #
@@ -1011,26 +1009,26 @@ class LowRankImageDecompositionTest(ScriptedLoadableModuleTest):
         result_dir = os.path.join(slicer.app.temporaryPath, 'output')
         # Remove result directory to start from a clean computation
         shutil.rmtree(result_dir, ignore_errors=True)
-        logic.CreateConfigurationFile(lr_test_file_name, data_list, algo, [0],
-                                      data_dir=cache_dir, result_dir=result_dir, registration='none',
-                                      file_list_dir=slicer.app.temporaryPath)
-        logic.run(os.path.join(slicer.app.temporaryPath, lr_test_file_name), algo)
+        logic.createExampleConfigurationAndListFiles(lr_test_file_name, json_file_name, algo,
+                                               selection=[0], output_dir=result_dir,
+                                               registration='none', download=True)
+        logic.run_pyLAR(os.path.join(slicer.app.temporaryPath, lr_test_file_name), algo)
         if logic.thread.is_alive():
             logic.thread.join()
         # Check that output files are there and loaded in Slicer
         list_images = pyLAR.readTxtIntoList(os.path.join(result_dir, 'list_outputs.txt'))
         for image in list_images:
             self.assertTrue(os.path.isfile(image))
-        self.delayDisplay('test_LowRankImageDecomposition passed!')
+        self.delayDisplay('test_lowRankImageDecomposition passed!')
 
-    def test_LowRankImageDecompositionExtraNode(self):
+    def test_lowRankImageDecompositionExtraNode(self):
         """ Test low rank/sparse decomposition of an image given by a vtkMRMLScalarVolumeNode
 
         If a vtkMRMLScalarVolumeNode is passed to the logic additionally to the configuration file,
         the scalar volume of the node is saved on the disk and a new configuration file containing the added file is
         created and used to run the processing.
         """
-        self.delayDisplay("Starting test_LowRankImageDecompositionExtraNode")
+        self.delayDisplay("Starting test_lowRankImageDecompositionExtraNode")
         #
         # first, get some data
         #
