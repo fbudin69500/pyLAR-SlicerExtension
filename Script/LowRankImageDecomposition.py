@@ -303,8 +303,6 @@ class LowRankImageDecompositionWidget(ScriptedLoadableModuleWidget):
         """
         file = qt.QFileDialog.getSaveFileName(parent=self, caption='Select file')
         if file:
-            self.initProcessGUI()
-        self.onLogicRunStop()
             self.logic.createExampleConfigurationAndListFiles(file, self.BullseyeFileName, algo)
         qt.QMessageBox.warning(slicer.util.mainWindow(),
                                'Download data',
