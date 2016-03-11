@@ -796,11 +796,11 @@ class LowRankImageDecompositionLogic(ScriptedLoadableModuleLogic):
             if number_of_cpu:
               config_data.number_of_cpu = number_of_cpu
             if ants_params is None:
-                ants_params = {'Convergence': '[100x50x25,1e-6,10]', \
-                               'Dimension': 3, \
-                               'ShrinkFactors': '4x2x1', \
-                               'SmoothingSigmas': '2x1x0vox', \
-                               'Transform': 'SyN[0.1,1,0]', \
+                ants_params = {'Convergence': '[100x50x25,1e-6,10]',\
+                               'Dimension': 3,\
+                               'ShrinkFactors': '4x2x1',\
+                               'SmoothingSigmas': '2x1x0vox',\
+                               'Transform': 'SyN[0.1,1,0]',\
                                'Metric': 'MeanSquares[fixedIm,movingIm,1,0]'}
             config_data.ants_params = ants_params
             if algo == 'nglra':  # Non-Greedy Low-rank altas creation
@@ -853,17 +853,20 @@ class LowRankImageDecompositionTest(ScriptedLoadableModuleTest):
         for i in requiredSoftware:
             listPATH.append(getattr(software, 'EXE_' + str(i)))
         logging.debug("List software paths: %s"%(listPATH))
-        self.assertTrue(all(listPATH))
+        self.assertTrue(all(listPATH), 'Not all software paths were found: %r' % listPATH)
         listToolsInSlicerTrunk = ['BRAINSResample', 'BRAINSDemonWarp', 'BRAINSFit']
         for i in listToolsInSlicerTrunk:
             path = getattr(software, 'EXE_' + str(i))
-            logging.debug("Path found: %s ; extensions path: %s"%(path,slicer.app.slicerHome))
-            self.assertTrue(slicer.app.slicerHome in path)
+            logging.debug("Path found: %s ; extensions path: %s"%(path, slicer.app.slicerHome))
+            self.assertTrue(slicer.app.slicerHome in path, 'Path found for %s: %s. The found should be in %s'
+                            % (str(i), path, slicer.app.slicerHome))
         listToolsInExtension = set(requiredSoftware) - set(listToolsInSlicerTrunk)
         for i in listToolsInExtension:
             path = getattr(software, 'EXE_' + str(i))
             logging.debug("Path found: %s ; extensions path: %s"%(path,slicer.app.extensionsInstallPath))
-            self.assertTrue(slicer.app.extensionsInstallPath in path)
+            self.assertTrue(slicer.app.extensionsInstallPath in path,
+                            'Path found for %s: %s. The found should be in %s'
+                            % (str(i), path, slicer.app.extensionsInstallPath))
         self.delayDisplay('test_softwarePaths passed!')
 
 
@@ -880,7 +883,7 @@ class LowRankImageDecompositionTest(ScriptedLoadableModuleTest):
         savedPATH = os.environ["PATH"]
         logic.softwarePaths()
         PATH = os.environ["PATH"]
-        self.assertTrue(not cmp(savedPATH,PATH))
+        self.assertTrue(not cmp(savedPATH,PATH), 'PATH has been modified.')
         self.delayDisplay('test_softwarePaths_PATH_unchanged passed!')
 
     def test_loadJSONFile(self):
@@ -892,10 +895,14 @@ class LowRankImageDecompositionTest(ScriptedLoadableModuleTest):
         self.delayDisplay("Starting test_loadJSONFile")
         logic = LowRankImageDecompositionLogic()
         downloads = logic.loadJSONFile("Bullseye.json")
-        self.assertTrue('url' in downloads.keys())
-        self.assertTrue(downloads['url'] == "http://slicer.kitware.com/midas3/download?items=")
-        self.assertTrue('files' in downloads.keys())
-        self.assertTrue(downloads['files']['fMeanSimu.nrrd'] == "231227")
+        self.assertTrue('url' in downloads.keys(), "key 'url' not found in JSON: %r" % downloads)
+        expected_url = "http://slicer.kitware.com/midas3/download?items="
+        self.assertTrue(downloads['url'] == expected_url ,
+                        "'url' value is not expected value. Got %s. Expected %s" % (downloads['url'], expected_url))
+        self.assertTrue('files' in downloads.keys(), "key 'files' not found in JSON: %r" % downloads)
+        expected_value = "231227"
+        self.assertTrue(downloads['files']['fMeanSimu.nrrd'] == "231227", 'Unexpexted value found. Expected %s. Got %s'
+                        % (expected_value, downloads['files']['fMeanSimu.nrrd']))
         self.delayDisplay('test_loadJSONFile passed!')
 
     def test_createConfiguration(self):
@@ -920,7 +927,7 @@ class LowRankImageDecompositionTest(ScriptedLoadableModuleTest):
         # Make sure that an exception is thrown if the given 'createConfiguration' is
         # not only a basename (has path information)
         failed_list_file = os.path.join(slicer.app.temporaryPath, 'failed_list_file.txt')
-        with self.assertRaisesRegexp(Exception,"'file_list_file_name' should only be a file name.\
+        with self.assertRaisesRegexp(Exception, "'file_list_file_name' should only be a file name.\
              It should not contain path information..*"):
             logic.createConfiguration("lr", "fake_reference_image.nrrd", "fake_file_list_dir",
                                       failed_list_file, [0])
@@ -981,7 +988,7 @@ class LowRankImageDecompositionTest(ScriptedLoadableModuleTest):
         json_file_name = "TestDownloadOneImage.json"
         logic = LowRankImageDecompositionLogic()
         data_dict = logic.loadJSONFile(json_file_name)
-        with self.assertRaisesRegexp(Exception,"'selection' contains .*"):
+        with self.assertRaisesRegexp(Exception, "'selection' contains .*"):
             logic.thread_downloadData(data_dict, [1])
         logic.thread_downloadData(data_dict, [0])
         self.delayDisplay('test_downloadData passed!')
@@ -1013,7 +1020,7 @@ class LowRankImageDecompositionTest(ScriptedLoadableModuleTest):
         # Check that output files are there and loaded in Slicer
         list_images = pyLAR.readTxtIntoList(os.path.join(result_dir, 'list_outputs.txt'))
         for image in list_images:
-            self.assertTrue(os.path.isfile(image))
+            self.assertTrue(os.path.isfile(image), 'File not found: %s' % image)
         self.delayDisplay('test_lowRankImageDecomposition passed!')
 
     def test_lowRankImageDecompositionExtraNode(self):
@@ -1091,6 +1098,7 @@ class LowRankImageDecompositionTest(ScriptedLoadableModuleTest):
         for i in range(0,len(im_fns)-2):
             self.assertTrue(im_fns[i] == data_list[i], 'Expected %s. Got %s' % (im_fns[i],data_list[i]))
         expected_extra_image_name = os.path.join(result_dir, "ExtraImage.nrrd")
-        self.assertTrue(im_fns[len(im_fns)-1] == expected_extra_image_name, "Got %s, expected %s. Pos %d - whole list %s"
+        self.assertTrue(im_fns[len(im_fns)-1] == expected_extra_image_name,
+                        "Got %s, expected %s. Pos %d - whole list %s"
                         %(im_fns[len(im_fns)-1], expected_extra_image_name,len(im_fns), str(im_fns)))
         self.delayDisplay('test_lowRankImageDecompositionExtraNode passed!')
