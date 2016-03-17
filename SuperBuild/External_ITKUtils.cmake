@@ -22,7 +22,7 @@ set(proj ITKUtils)
 ExternalProject_Add(${proj}
   ${${proj}_EP_ARGS}
   GIT_REPOSITORY ${git_protocol}://github.com/fbudin69500/ITKUtils.git
-  GIT_TAG c6366afc4d420a06fc78f6340f0952f3cfb0a777
+  GIT_TAG a9ed54f882e749a0de42a969a040fb04a7eb573f
   SOURCE_DIR ${proj}
   BINARY_DIR ${proj}-build
   CMAKE_GENERATOR ${gen}
@@ -32,11 +32,12 @@ ExternalProject_Add(${proj}
     -DCMAKE_C_COMPILER:FILEPATH=${CMAKE_C_COMPILER}
     -DCMAKE_C_FLAGS:STRING=${ep_common_c_flags}
     -DCMAKE_BUILD_TYPE:STRING=${CMAKE_BUILD_TYPE}
-    -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_BINARY_DIR}/${proj}-install
+    -DINSTALL_RUNTIME_DESTINATION:STRING=${Slicer_INSTALL_ExternalBinMODULES_BIN_DIR}
+  INSTALL_COMMAND ""
   DEPENDS
     ${${proj}_DEPENDENCIES}
 )
-  set(ITKUtils_DIR ${CMAKE_BINARY_DIR}/${proj}-install/bin)
+  set(ITKUtils_DIR ${CMAKE_BINARY_DIR}/${proj}-build)
 else()
   ExternalProject_Add_Empty(${proj} DEPENDS ${${proj}_DEPENDENCIES})
 endif()

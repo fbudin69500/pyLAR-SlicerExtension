@@ -15,15 +15,15 @@ if(NOT ${CMAKE_PROJECT_NAME}_USE_SYSTEM_${proj})
   # Add external dependencies: pyLAR library
   set(proj ANTS)
   set(projbuild ${proj}-build)
-  if( MSVC )
-    set( INSTALL_CONFIG ${projbuild}/ANTS.sln /Build Release /Project INSTALL.vcproj )
-  else()
-    set( INSTALL_CONFIG -C ${projbuild} install)
-  endif()
+#  if( MSVC )
+#    set( INSTALL_CONFIG ${projbuild}/ANTS.sln /Build Release /Project INSTALL.vcproj )
+#  else()
+#    set( INSTALL_CONFIG -C ${projbuild} install)
+#  endif()
   ExternalProject_Add(${proj}
     ${${proj}_EP_ARGS}
-    GIT_REPOSITORY ${git_protocol}://github.com/stnava/ANTs.git
-    GIT_TAG 3758b7c5617ec1e21d4e60a2930d9729fe03a5cd
+    GIT_REPOSITORY ${git_protocol}://github.com/fbudin69500/ANTs.git
+    GIT_TAG 5bbf379aa583d603df92b3f6b2f54e12ba5484cb
     SOURCE_DIR ${proj}
     BINARY_DIR ${projbuild}
     CMAKE_ARGS
@@ -35,20 +35,23 @@ if(NOT ${CMAKE_PROJECT_NAME}_USE_SYSTEM_${proj})
       -DCMAKE_RUNTIME_OUTPUT_DIRECTORY:PATH=${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
       -DCMAKE_LIBRARY_OUTPUT_DIRECTORY:PATH=${CMAKE_LIBRARY_OUTPUT_DIRECTORY}
       -DCMAKE_ARCHIVE_OUTPUT_DIRECTORY:PATH=${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}
-      -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_CURRENT_BINARY_DIR}/${proj}-install
+      -DANTS_BUILD_WarpImageMultiTransform:BOOL=TRUE
+      -DANTS_BUILD_ComposeMultiTransform:BOOL=TRUE
+      -DANTS_BUILD_AverageImages:BOOL=TRUE
+      -DBUILD_ALL_ANTS_APPS:BOOL=FALSE
       -DBUILD_SHARED_LIBS:BOOL=OFF
+      -DBIN_INSTALL_DIR:STRING=${Slicer_INSTALL_ExternalBinMODULES_BIN_DIR}
       -DBUILD_TESTING:BOOL=OFF
-      -DUSE_SYSTEM_ITK:BOOL=ON
-      -DUSE_SYSTEM_VTK:BOOL=ON
-      -DUSE_SYSTEM_SlicerExecutionModel:PATH=ON
       -DITK_DIR:PATH=${ITK_DIR}
-      -DVTK_DIR:PATH=${VKT_DIR}
       -DSlicerExecutionModel:PATH=${SlicerExecutionModel_DIR}
-    INSTALL_COMMAND ${CMAKE_MAKE_PROGRAM} ${INSTALL_CONFIG}
+      -DANTS_SUPERBUILD:BOOL=FALSE
+#    INSTALL_COMMAND ${CMAKE_MAKE_PROGRAM} ${INSTALL_CONFIG}
+    INSTALL_COMMAND ""
     DEPENDS
       ${${proj}_DEPENDENCIES}
   )
-  set(ANTS_DIR ${CMAKE_BINARY_DIR}/${proj}-install/bin)
+#  set(ANTS_DIR ${CMAKE_BINARY_DIR}/${proj}-install/bin)
+  set(ANTS_DIR ${CMAKE_BINARY_DIR}/${projbuild})
 else()
   ExternalProject_Add_Empty(${proj} DEPENDS ${${proj}_DEPENDENCIES})
 endif()

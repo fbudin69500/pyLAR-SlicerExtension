@@ -15,7 +15,7 @@ set(EXTENSION_SCREENSHOTURLS "http://www.example.com/Slicer/Extensions/pyLAR/Scr
 # Extension dependencies
 find_package(Slicer REQUIRED)
 include(${Slicer_USE_FILE})
-
+set(Slicer_INSTALL_ExternalBinMODULES_BIN_DIR ${Slicer_INSTALL_CLIMODULES_BIN_DIR}/../ExternalBin )
 #-----------------------------------------------------------------------------
 # Git
 #-----------------------------------------------------------------------------
@@ -57,14 +57,18 @@ add_subdirectory(Script)
 ## NEXT_MODULE
 #-----------------------------------------------------------------------------
 # Packaging
-install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/pyLAR/pyLAR DESTINATION ${Slicer_INSTALL_QTSCRIPTEDMODULES_BIN_DIR} )
-if( WIN32 )
-  set( EXE_EXTENSION ".exe" )
-endif()
-set(Slicer_INSTALL_ExternalBinMODULES_BIN_DIR ${Slicer_INSTALL_CLIMODULES_BIN_DIR}/../ExternalBin )
-set(ANTS_EXE antsRegistration AverageImages ComposeMultiTransform WarpImageMultiTransform CreateJacobianDeterminantImage )
+set(ANTS_EXE
+ antsRegistration
+ AverageImages
+ ComposeMultiTransform
+ WarpImageMultiTransform
+ CreateJacobianDeterminantImage
+)
 foreach(VAR ${ANTS_EXE})
-  install(PROGRAMS ${ANTS_DIR}/${VAR}${EXE_EXTENSION} DESTINATION ${Slicer_INSTALL_ExternalBinMODULES_BIN_DIR} )
+  set(CPACK_INSTALL_CMAKE_PROJECTS "${CPACK_INSTALL_CMAKE_PROJECTS};${ANTS_DIR};ANTS;RUNTIME_${VAR};/")
 endforeach()
-install(PROGRAMS ${ITKUtils_DIR}/InvertDeformationField${EXE_EXTENSION} DESTINATION  ${Slicer_INSTALL_ExternalBinMODULES_BIN_DIR} )
+set(CPACK_INSTALL_CMAKE_PROJECTS "${CPACK_INSTALL_CMAKE_PROJECTS};${ITKUtils_DIR};ITKUtils;ALL;/")
+install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/pyLAR/pyLAR DESTINATION ${Slicer_INSTALL_QTSCRIPTEDMODULES_BIN_DIR} )
+set(CPACK_INSTALL_CMAKE_PROJECTS "${CPACK_INSTALL_CMAKE_PROJECTS};.;pyLAR-SlicerExtension;ALL;/")
 include(${Slicer_EXTENSION_CPACK})
+
