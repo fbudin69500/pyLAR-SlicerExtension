@@ -728,7 +728,7 @@ class LowRankImageDecompositionLogic(ScriptedLoadableModuleLogic):
 
     def createConfiguration(self, algo, reference_im_fn,
                                 file_list_dir, file_list_file_name, selection,
-                                modality='Simu', lamda=2.0, verbose=True,
+                                lamda=2.0, verbose=True,
                                 result_dir=None, ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=None, clean=True,
                                 registration='affine', histogram_matching=False, sigma=0, num_of_iterations_per_level=4,
                                 num_of_levels=1, number_of_cpu=None,
@@ -743,7 +743,6 @@ class LowRankImageDecompositionLogic(ScriptedLoadableModuleLogic):
         file_list_file_name: output file name of the file containing the list of data to process.
                              It should only contain the basename.
         selection: List of images that would be process.
-        modality: prefix used when naming output image. Default: 'Simu'
         lamda: float value
         verbose: boolean
         result_dir: output folder containing processing result. Default: slicer.app.temporaryPath+'/output'
@@ -771,11 +770,10 @@ class LowRankImageDecompositionLogic(ScriptedLoadableModuleLogic):
              It should not contain path information. Got %s, expected %s"
                             %(file_list_file_name, os.path.basename(file_list_file_name)))
         ####
-        config_data = type('config_obj', (object,), {'modality': 'Simu'})()
+        config_data = type('config_obj', (object,), {})()
         config_data.file_list_file_name = "'" + file_list_file_name + "'"
         config_data.data_dir = "'" + file_list_dir + "'"
         config_data.reference_im_fn = "'" + reference_im_fn + "'"
-        config_data.modality = modality
         config_data.lamda = lamda
         config_data.verbose = verbose
         temp_dir = slicer.app.temporaryPath
