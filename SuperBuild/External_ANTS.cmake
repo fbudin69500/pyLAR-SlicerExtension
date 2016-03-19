@@ -23,7 +23,7 @@ if(NOT ${CMAKE_PROJECT_NAME}_USE_SYSTEM_${proj})
   ExternalProject_Add(${proj}
     ${${proj}_EP_ARGS}
     GIT_REPOSITORY ${git_protocol}://github.com/fbudin69500/ANTs.git
-    GIT_TAG 5bbf379aa583d603df92b3f6b2f54e12ba5484cb
+    GIT_TAG 09e0ec9f4a6c41ad77a1d4dbbc74afad1258d011
     SOURCE_DIR ${proj}
     BINARY_DIR ${projbuild}
     CMAKE_ARGS
