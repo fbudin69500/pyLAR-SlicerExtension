@@ -22,7 +22,7 @@ set(proj ITKUtils)
 ExternalProject_Add(${proj}
   ${${proj}_EP_ARGS}
   GIT_REPOSITORY ${git_protocol}://github.com/fbudin69500/ITKUtils.git
-  GIT_TAG a9ed54f882e749a0de42a969a040fb04a7eb573f
+  GIT_TAG 839d39ebd9c43131f42bdfa3dd9ecd6cf345b748
   SOURCE_DIR ${proj}
   BINARY_DIR ${proj}-build
   CMAKE_GENERATOR ${gen}
