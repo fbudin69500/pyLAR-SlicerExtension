@@ -13,6 +13,7 @@ import threading
 import Queue
 from time import sleep
 import errno
+import re
 
 #
 # Low-rank Image Decomposition
@@ -603,6 +604,8 @@ class LowRankImageDecompositionLogic(ScriptedLoadableModuleLogic):
         for i in list_images:
             name = os.path.splitext(os.path.basename(i))[0]
             self.post_queue.put((name, i))
+        logger = logging.getLogger(__name__)
+        pyLAR.close_handlers(logger)
 
     def loadJSONFile(self, filename):
         """ Reads a JSON file into a dictionary.
@@ -711,12 +714,12 @@ class LowRankImageDecompositionLogic(ScriptedLoadableModuleLogic):
         if download:
             data_dict = self.thread_downloadData(data_dict)
         data_list = data_dict['files'].keys()
-        cache_dir = slicer.app.settings().value('Cache/Path')
+        cache_dir = self._normalize_path(slicer.app.settings().value('Cache/Path'))
         data_list_path = []
+        temp_dir = self._normalize_path(slicer.app.temporaryPath)
         for data in data_list:
             data_list_path.append(os.path.join(cache_dir, data))
-        temp_dir = slicer.app.temporaryPath
-        file_list_file_name = u'fileList.txt'
+        file_list_file_name = r'fileList.txt'
         pyLAR.writeTxtFromList(os.path.join(temp_dir, file_list_file_name), data_list_path)
         if selection is None:
             selection = range(0, len(data_list))
@@ -771,15 +774,15 @@ class LowRankImageDecompositionLogic(ScriptedLoadableModuleLogic):
                             %(file_list_file_name, os.path.basename(file_list_file_name)))
         ####
         config_data = type('config_obj', (object,), {})()
-        config_data.file_list_file_name = "'" + file_list_file_name + "'"
-        config_data.data_dir = "'" + file_list_dir + "'"
-        config_data.reference_im_fn = "'" + reference_im_fn + "'"
+        config_data.file_list_file_name = file_list_file_name
+        config_data.data_dir = file_list_dir
+        config_data.reference_im_fn = reference_im_fn
         config_data.lamda = lamda
         config_data.verbose = verbose
         temp_dir = slicer.app.temporaryPath
         if not result_dir:
             result_dir = os.path.join(temp_dir, 'output')
-        config_data.result_dir = "'" + result_dir + "'"
+        config_data.result_dir = result_dir
         config_data.selection = selection
         if ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS:
             config_data.ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS = ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS
@@ -810,7 +813,21 @@ class LowRankImageDecompositionLogic(ScriptedLoadableModuleLogic):
             else:
                 raise Exception('Unknown algorithm to create configuration file')
         return config_data
-
+        
+        
+    def _normalize_path(self, path):
+        """Normalizes path:
+        - replaces '\' with '/' to avoid special characters problems
+        - normalizes case on Windows
+        - removes extra '.' and '..'
+        - resolves links
+        """
+        #return os.path.realpath(os.path.normcase(os.path.normpath(
+        #                            os.sep.join(re.split(r'\\|/',path)))))
+        if os.name is not 'posix':
+            return '/'.join(re.split(r'\\|/',os.path.realpath(os.path.normcase(os.path.normpath(path))) ))
+        else:
+            return path
 
 class LowRankImageDecompositionTest(ScriptedLoadableModuleTest):
     """
@@ -836,6 +853,7 @@ class LowRankImageDecompositionTest(ScriptedLoadableModuleTest):
         self.test_downloadData()
         self.test_lowRankImageDecomposition()
         self.test_lowRankImageDecompositionExtraNode()
+        
 
     def test_softwarePaths(self):
         """ Verifies that all the expected tools are found and are in the correct location.
@@ -853,18 +871,22 @@ class LowRankImageDecompositionTest(ScriptedLoadableModuleTest):
         logging.debug("List software paths: %s"%(listPATH))
         self.assertTrue(all(listPATH), 'Not all software paths were found: %r' % listPATH)
         listToolsInSlicerTrunk = ['BRAINSResample', 'BRAINSDemonWarp', 'BRAINSFit']
+        path_home = logic._normalize_path(slicer.app.slicerHome)
         for i in listToolsInSlicerTrunk:
             path = getattr(software, 'EXE_' + str(i))
-            logging.debug("Path found: %s ; extensions path: %s"%(path, slicer.app.slicerHome))
-            self.assertTrue(slicer.app.slicerHome in path, 'Path found for %s: %s. The found should be in %s'
-                            % (str(i), path, slicer.app.slicerHome))
+            path = logic._normalize_path(path)
+            logging.debug("Path found: %s ; extensions path: %s"%(path, path_home))
+            self.assertTrue(path_home in path, 'Path found for %s: %s. The path should be in %s'
+                            % (str(i), path, path_home))
         listToolsInExtension = set(requiredSoftware) - set(listToolsInSlicerTrunk)
+        path_extensions = logic._normalize_path(slicer.app.extensionsInstallPath)
         for i in listToolsInExtension:
             path = getattr(software, 'EXE_' + str(i))
-            logging.debug("Path found: %s ; extensions path: %s"%(path,slicer.app.extensionsInstallPath))
-            self.assertTrue(slicer.app.extensionsInstallPath in path,
+            path = logic._normalize_path(path)
+            logging.debug("Path found: %s ; extensions path: %s"%(path,path_extensions))
+            self.assertTrue(path_extensions in path,
                             'Path found for %s: %s. The found should be in %s'
-                            % (str(i), path, slicer.app.extensionsInstallPath))
+                            % (str(i), path, path_extensions))
         self.delayDisplay('test_softwarePaths passed!')
 
 
@@ -967,11 +989,13 @@ class LowRankImageDecompositionTest(ScriptedLoadableModuleTest):
         self.assertTrue(config.use_healthy_atlas is False, 'Got %r. Expected %r'%(config.use_healthy_atlas, False))
         self.assertTrue(config.registration_type == 'ANTS', 'Got %r. Expected %r'%(config.registration_type, 'ANTS'))
         # Tries to load file_list_file_name file and compare its
-        listFiles = pyLAR.readTxtIntoList(os.path.join(config.data_dir, config.file_list_file_name))
+        data_dir = logic._normalize_path(config.data_dir)
+        listFiles = pyLAR.readTxtIntoList(os.path.join(data_dir, config.file_list_file_name))
         cache_dir = slicer.app.settings().value('Cache/Path')
         data_dict = logic.loadJSONFile(json_file_name)
-        file0 = os.path.join(cache_dir, data_dict['files'].keys()[0])
-        self.assertTrue(listFiles[0] == file0, 'Got %s. Expected %s.'%(listFiles[0], file0))
+        file0 = logic._normalize_path(os.path.join(cache_dir, data_dict['files'].keys()[0]))
+        normalized_listFiles0 = logic._normalize_path(listFiles[0])
+        self.assertTrue(normalized_listFiles0 == file0, 'Got %s. Expected %s.'%(normalized_listFiles0, file0))
         self.delayDisplay('test_createExampleConfigurationAndListFiles passed!')
 
     def test_downloadData(self):
@@ -1048,7 +1072,7 @@ class LowRankImageDecompositionTest(ScriptedLoadableModuleTest):
                                        selection=selection, output_dir=result_dir,
                                        registration='none', download=True)
         self.assertTrue(os.path.isfile(lr_test_file_filename), '%s not found' % lr_test_file_filename)
-        file_name_to_check = os.path.join(slicer.app.temporaryPath, u'fileList.txt')
+        file_name_to_check = os.path.join(slicer.app.temporaryPath, r'fileList.txt')
         self.assertTrue(os.path.isfile(file_name_to_check), '%s not found' % file_name_to_check)
         # Load data in Slicer
         loader = slicer.util.loadVolume
@@ -1094,9 +1118,12 @@ class LowRankImageDecompositionTest(ScriptedLoadableModuleTest):
                         %(config.selection[len(config.selection)-1], len(data_list)))
         self.assertTrue(len(im_fns)-2 > 0)
         for i in range(0,len(im_fns)-2):
-            self.assertTrue(im_fns[i] == data_list[i], 'Expected %s. Got %s' % (im_fns[i],data_list[i]))
-        expected_extra_image_name = os.path.join(result_dir, "ExtraImage.nrrd")
-        self.assertTrue(im_fns[len(im_fns)-1] == expected_extra_image_name,
+            im_fns_i = logic._normalize_path(im_fns[i])
+            data_list_i = logic._normalize_path(data_list[i])
+            self.assertTrue(im_fns_i == data_list_i, 'Expected %s. Got %s' % (im_fns_i,data_list_i))
+        expected_extra_image_name = logic._normalize_path(os.path.join(result_dir, "ExtraImage.nrrd"))
+        im_fns_1 = logic._normalize_path(im_fns[len(im_fns)-1])
+        self.assertTrue(im_fns_1 == expected_extra_image_name,
                         "Got %s, expected %s. Pos %d - whole list %s"
-                        %(im_fns[len(im_fns)-1], expected_extra_image_name,len(im_fns), str(im_fns)))
+                        %(im_fns_1, expected_extra_image_name,len(im_fns), str(im_fns)))
         self.delayDisplay('test_lowRankImageDecompositionExtraNode passed!')
