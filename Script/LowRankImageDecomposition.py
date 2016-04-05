@@ -14,6 +14,7 @@ import Queue
 from time import sleep
 import errno
 import re
+import hashlib
 
 #
 # Low-rank Image Decomposition
@@ -658,13 +659,21 @@ class LowRankImageDecompositionLogic(ScriptedLoadableModuleLogic):
         for name, value in [downloads['files'].items()[i] for i in selection]:
             if self.abort:
                 raise Exception("Download aborted")
-            item_url = url + value
+            item_url = url + value[0]
             filePath = os.path.join(slicer.app.settings().value('Cache/Path'), name)
             if not os.path.exists(filePath) \
                     or slicer.app.settings().value('Cache/ForceRedownload') != 'false' \
                     or os.stat(filePath).st_size == 0:
                 logging.info('Requesting download %s\nfrom %s...\n' % (filePath, item_url))
                 urllib.urlretrieve(item_url, filePath)
+            m = hashlib.md5()
+            with open(filePath, "rb") as f:
+                for chunk in iter(lambda: f.read(4096), b""):
+                    m.update(chunk)
+            if m.hexdigest() != value[1]:
+                raise Exception("%s md5 sum does not match expected value. Got %s. Expected %s. Try to remove \
+                                downloaded file and donwload again."
+                                %(filePath,str(m.hexdigest()),str(value[1])))
             self.post_queue.put((name, filePath))
         logging.info('Finished with download')
         return downloads
@@ -920,9 +929,9 @@ class LowRankImageDecompositionTest(ScriptedLoadableModuleTest):
         self.assertTrue(downloads['url'] == expected_url ,
                         "'url' value is not expected value. Got %s. Expected %s" % (downloads['url'], expected_url))
         self.assertTrue('files' in downloads.keys(), "key 'files' not found in JSON: %r" % downloads)
-        expected_value = "231227"
-        self.assertTrue(downloads['files']['fMeanSimu.nrrd'] == "231227", 'Unexpexted value found. Expected %s. Got %s'
-                        % (expected_value, downloads['files']['fMeanSimu.nrrd']))
+        expected_value = ["231227","2595e2ca644ea4878e2ef3d04a21bec6"]
+        self.assertTrue(downloads['files']['fMeanSimu.nrrd'] == expected_value, 'Unexpexted value found. Expected %s. Got %s'
+                        % (str(expected_value), str(downloads['files']['fMeanSimu.nrrd'])))
         self.delayDisplay('test_loadJSONFile passed!')
 
     def test_createConfiguration(self):
