@@ -15,15 +15,10 @@ if(NOT ${CMAKE_PROJECT_NAME}_USE_SYSTEM_${proj})
   # Add external dependencies: pyLAR library
   set(proj ANTS)
   set(projbuild ${proj}-build)
-#  if( MSVC )
-#    set( INSTALL_CONFIG ${projbuild}/ANTS.sln /Build Release /Project INSTALL.vcproj )
-#  else()
-#    set( INSTALL_CONFIG -C ${projbuild} install)
-#  endif()
   ExternalProject_Add(${proj}
     ${${proj}_EP_ARGS}
     GIT_REPOSITORY ${git_protocol}://github.com/fbudin69500/ANTs.git
-    GIT_TAG 09e0ec9f4a6c41ad77a1d4dbbc74afad1258d011
+    GIT_TAG 9ef3be39a5bf1efe5a696c78e2da35991c8ca663
     SOURCE_DIR ${proj}
     BINARY_DIR ${projbuild}
     CMAKE_ARGS
