@@ -551,11 +551,10 @@ class LowRankImageDecompositionLogic(ScriptedLoadableModuleLogic):
         # Create software configuration object
         config = pyLAR.loadConfiguration(configFile, 'config')
         software = self.softwarePaths()
-        pyLAR.containsRequirements(config, ['data_dir', 'file_list_file_name', 'result_dir'], configFile)
+        pyLAR.containsRequirements(config, ['file_list_file_name', 'result_dir'], configFile)
         result_dir = config.result_dir
-        data_dir = config.data_dir
-        file_list_file_name = config.file_list_file_name
-        im_fns = pyLAR.readTxtIntoList(os.path.join(data_dir, file_list_file_name))
+        file_list_file_name = self._normalize_path(config.file_list_file_name)
+        im_fns = pyLAR.readTxtIntoList(file_list_file_name)
         # 'clean' needs to be done before configuring the logger that creates a file in the output directory
         if os.path.isdir(result_dir) and hasattr(config, "clean") and config.clean:
             shutil.rmtree(result_dir)
@@ -728,18 +727,18 @@ class LowRankImageDecompositionLogic(ScriptedLoadableModuleLogic):
         temp_dir = self._normalize_path(slicer.app.temporaryPath)
         for data in data_list:
             data_list_path.append(os.path.join(cache_dir, data))
-        file_list_file_name = r'fileList.txt'
-        pyLAR.writeTxtFromList(os.path.join(temp_dir, file_list_file_name), data_list_path)
+        file_list_file_name = os.path.join(temp_dir,r'fileList.txt')
+        pyLAR.writeTxtFromList(file_list_file_name, data_list_path)
         if selection is None:
             selection = range(0, len(data_list))
-        config = self.createConfiguration(algo, reference_im_fn=data_list_path[0], file_list_dir=temp_dir,
+        config = self.createConfiguration(algo, reference_im_fn=data_list_path[0],
                                           file_list_file_name=file_list_file_name, selection=selection,
                                           result_dir=output_dir, registration=registration)
         pyLAR.saveConfiguration(filename, config)
 
 
     def createConfiguration(self, algo, reference_im_fn,
-                                file_list_dir, file_list_file_name, selection,
+                                file_list_file_name, selection,
                                 lamda=2.0, verbose=True,
                                 result_dir=None, ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=None, clean=True,
                                 registration='affine', histogram_matching=False, sigma=0, num_of_iterations_per_level=4,
@@ -751,9 +750,7 @@ class LowRankImageDecompositionLogic(ScriptedLoadableModuleLogic):
         ----------
         algo: select configuration file for specified algorithm: 'lr', 'uab', 'nglra'
         reference_im_fn: Reference image.
-        file_list_dir: folder containing file_list_file_name.
         file_list_file_name: output file name of the file containing the list of data to process.
-                             It should only contain the basename.
         selection: List of images that would be process.
         lamda: float value
         verbose: boolean
@@ -776,15 +773,9 @@ class LowRankImageDecompositionLogic(ScriptedLoadableModuleLogic):
         use_healthy_atlas: boolean. For 'nglra'
         registration_type: Registration used: 'BSpline', 'Demons', 'ANTS'. For 'nglra'.
         """
-        # Checks that parameters are reasonable
-        if file_list_file_name and os.path.basename(file_list_file_name) != file_list_file_name:
-            raise Exception("'file_list_file_name' should only be a file name.\
-             It should not contain path information. Got %s, expected %s"
-                            %(file_list_file_name, os.path.basename(file_list_file_name)))
         ####
         config_data = type('config_obj', (object,), {})()
         config_data.file_list_file_name = file_list_file_name
-        config_data.data_dir = file_list_dir
         config_data.reference_im_fn = reference_im_fn
         config_data.lamda = lamda
         config_data.verbose = verbose
@@ -940,7 +931,7 @@ class LowRankImageDecompositionTest(ScriptedLoadableModuleTest):
         A configuration file is created. This test verifies that the file gets created in the correct
         location and that its content is what is expected.
         It also verifies that if 'createConfiguration()' is called with wrong arguments
-        (file_list_file_name should only contain a basename, selection should contain files in given data_list),
+        (selection should contain files in given data_list),
         an exception is thrown.
         """
         self.delayDisplay("Starting test_createConfiguration")
@@ -953,16 +944,9 @@ class LowRankImageDecompositionTest(ScriptedLoadableModuleTest):
         except OSError as e:
             if errno.errorcode[e.errno] != 'ENOENT':  # No such file or directory
                 raise e
-        # Make sure that an exception is thrown if the given 'createConfiguration' is
-        # not only a basename (has path information)
-        failed_list_file = os.path.join(slicer.app.temporaryPath, 'failed_list_file.txt')
-        with self.assertRaisesRegexp(Exception, "'file_list_file_name' should only be a file name.\
-             It should not contain path information..*"):
-            logic.createConfiguration("lr", "fake_reference_image.nrrd", "fake_file_list_dir",
-                                      failed_list_file, [0])
         # This time a configuration file should be created.
         selection = [0,3]
-        config = logic.createConfiguration("lr", "fake_reference_image.nrrd", "fake_file_list_dir",
+        config = logic.createConfiguration("lr", "fake_reference_image.nrrd",
                                            "fake_file_list_name.txt", selection)
         # Loads the configuration file that was saved and compare only the selection indices.
         # If the indices are correct, we hope that everything is correct
@@ -998,8 +982,8 @@ class LowRankImageDecompositionTest(ScriptedLoadableModuleTest):
         self.assertTrue(config.use_healthy_atlas is False, 'Got %r. Expected %r'%(config.use_healthy_atlas, False))
         self.assertTrue(config.registration_type == 'ANTS', 'Got %r. Expected %r'%(config.registration_type, 'ANTS'))
         # Tries to load file_list_file_name file and compare its
-        data_dir = logic._normalize_path(config.data_dir)
-        listFiles = pyLAR.readTxtIntoList(os.path.join(data_dir, config.file_list_file_name))
+        file_list_file_name = logic._normalize_path(config.file_list_file_name)
+        listFiles = pyLAR.readTxtIntoList(file_list_file_name)
         cache_dir = slicer.app.settings().value('Cache/Path')
         data_dict = logic.loadJSONFile(json_file_name)
         file0 = logic._normalize_path(os.path.join(cache_dir, data_dict['files'].keys()[0]))
@@ -1116,9 +1100,8 @@ class LowRankImageDecompositionTest(ScriptedLoadableModuleTest):
         self.assertTrue(config.selection == expected_selection,
                         "Unexpected selection. Got %s in %s, expected %s"
                         %(str(config.selection), config_file_name,str(expected_selection)))
-        data_dir = config.data_dir
-        file_list_file_name = config.file_list_file_name
-        im_fns = pyLAR.readTxtIntoList(os.path.join(data_dir, file_list_file_name))
+        file_list_file_name = logic._normalize_path(config.file_list_file_name)
+        im_fns = pyLAR.readTxtIntoList(file_list_file_name)
         self.assertTrue(len(expected_selection) == len(config.selection),
                         "Unexpected selection length: got %d,expected %d"
                         %(len(config.selection),len(selection)+1))
