@@ -1,5 +1,5 @@
 
-set(proj ITKUtils)
+set(proj ITKFixedPointInverseDeformationField)
 
 # Set dependency list
 set(${proj}_DEPENDENCIES ITKv4)
@@ -8,7 +8,7 @@ set(${proj}_DEPENDENCIES ITKv4)
 ExternalProject_Include_Dependencies(${proj} PROJECT_VAR proj DEPENDS_VAR ${proj}_DEPENDENCIES)
 
 # Sanity checks
-if(DEFINED ITKUtils_DIR AND NOT EXISTS ${ITKUtils_DIR})
+if(DEFINED ITKFixedPointInverseDeformationField_DIR AND NOT EXISTS ${ITKFixedPointInverseDeformationField_DIR})
   message(FATAL_ERROR "ANTS_DIR variable is defined but corresponds to nonexistent directory")
 endif()
 
@@ -18,11 +18,11 @@ if(NOT ${CMAKE_PROJECT_NAME}_USE_SYSTEM_${proj})
 
 #-----------------------------------------------------------------------------
 # Add external dependencies: pyLAR library
-set(proj ITKUtils)
+set(proj ITKFixedPointInverseDeformationField)
 ExternalProject_Add(${proj}
   ${${proj}_EP_ARGS}
-  GIT_REPOSITORY ${git_protocol}://github.com/fbudin69500/ITKUtils.git
-  GIT_TAG 839d39ebd9c43131f42bdfa3dd9ecd6cf345b748
+  GIT_REPOSITORY ${git_protocol}://github.com/KitwareMedical/ITKFixedPointInverseDeformationField.git
+  GIT_TAG 1a975a10615c9c6fbf03ba565268ca3e3a6ee8da
   SOURCE_DIR ${proj}
   BINARY_DIR ${proj}-build
   CMAKE_GENERATOR ${gen}
@@ -38,12 +38,12 @@ ExternalProject_Add(${proj}
   DEPENDS
     ${${proj}_DEPENDENCIES}
 )
-  set(ITKUtils_DIR ${CMAKE_BINARY_DIR}/${proj}-build)
+  set(ITKFixedPointInverseDeformationField_DIR ${CMAKE_BINARY_DIR}/${proj}-build)
 else()
   ExternalProject_Add_Empty(${proj} DEPENDS ${${proj}_DEPENDENCIES})
 endif()
 
 mark_as_superbuild(
-  VARS ITKUtils_DIR:PATH
+  VARS ITKFixedPointInverseDeformationField_DIR:PATH
   LABELS "FIND_PACKAGE"
   )

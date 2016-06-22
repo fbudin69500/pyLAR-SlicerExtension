@@ -22,8 +22,8 @@ if(NOT ${CMAKE_PROJECT_NAME}_USE_SYSTEM_${proj})
 #  endif()
   ExternalProject_Add(${proj}
     ${${proj}_EP_ARGS}
-    GIT_REPOSITORY ${git_protocol}://github.com/fbudin69500/ANTs.git
-    GIT_TAG 09e0ec9f4a6c41ad77a1d4dbbc74afad1258d011
+    GIT_REPOSITORY ${git_protocol}://github.com/stnava/ANTs.git
+    GIT_TAG 8234565e12d1b0be855f2b624025b812680bd817
     SOURCE_DIR ${proj}
     BINARY_DIR ${projbuild}
     CMAKE_ARGS
@@ -45,12 +45,10 @@ if(NOT ${CMAKE_PROJECT_NAME}_USE_SYSTEM_${proj})
       -DITK_DIR:PATH=${ITK_DIR}
       -DSlicerExecutionModel:PATH=${SlicerExecutionModel_DIR}
       -DANTS_SUPERBUILD:BOOL=FALSE
-#    INSTALL_COMMAND ${CMAKE_MAKE_PROGRAM} ${INSTALL_CONFIG}
     INSTALL_COMMAND ""
     DEPENDS
       ${${proj}_DEPENDENCIES}
   )
-#  set(ANTS_DIR ${CMAKE_BINARY_DIR}/${proj}-install/bin)
   set(ANTS_DIR ${CMAKE_BINARY_DIR}/${projbuild})
 else()
   ExternalProject_Add_Empty(${proj} DEPENDS ${${proj}_DEPENDENCIES})
