@@ -22,7 +22,7 @@ set(proj ITKFixedPointInverseDeformationField)
 ExternalProject_Add(${proj}
   ${${proj}_EP_ARGS}
   GIT_REPOSITORY ${git_protocol}://github.com/KitwareMedical/ITKFixedPointInverseDeformationField.git
-  GIT_TAG 1a975a10615c9c6fbf03ba565268ca3e3a6ee8da
+  GIT_TAG 743d13ae718da9879d3840a6670acd56c5d66c18
   SOURCE_DIR ${proj}
   BINARY_DIR ${proj}-build
   CMAKE_GENERATOR ${gen}
@@ -32,8 +32,10 @@ ExternalProject_Add(${proj}
     -DCMAKE_C_COMPILER:FILEPATH=${CMAKE_C_COMPILER}
     -DCMAKE_C_FLAGS:STRING=${ep_common_c_flags}
     -DCMAKE_BUILD_TYPE:STRING=${CMAKE_BUILD_TYPE}
+    -DITK_USE_KWSTYLE:BOOL=FALSE
+    -DBUILD_TESTING:BOOL=FALSE
     -DINSTALL_RUNTIME_DESTINATION:STRING=${Slicer_INSTALL_ExternalBinMODULES_BIN_DIR}
-	-DITK_DIR:PATH=${ITK_DIR}
+    -DITK_DIR:PATH=${ITK_DIR}
   INSTALL_COMMAND ""
   DEPENDS
     ${${proj}_DEPENDENCIES}
