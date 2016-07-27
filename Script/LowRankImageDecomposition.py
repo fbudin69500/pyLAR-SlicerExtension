@@ -742,7 +742,7 @@ class LowRankImageDecompositionLogic(ScriptedLoadableModuleLogic):
                                 lamda=2.0, verbose=True,
                                 result_dir=None, ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=None, clean=True,
                                 registration='affine', histogram_matching=False, sigma=0, num_of_iterations_per_level=4,
-                                num_of_levels=1, number_of_cpu=None,
+                                num_of_levels=1,
                                 ants_params=None, use_healthy_atlas=False, registration_type='ANTS'):
         """ Writes configuration file for pyLAR
 
@@ -762,7 +762,6 @@ class LowRankImageDecompositionLogic(ScriptedLoadableModuleLogic):
         sigma: Smoothing kernel size. For 'lr' and 'nglra'.
         num_of_iterations_per_level: integer. For 'uab' and 'nglra'.
         num_of_levels: integer. For 'uab' and 'nglra'.
-        number_of_cpu: Number of tools run in parallel. For 'uab' and 'nglra'.
         ants_params: Parameters used for ANTS. For 'uab' and 'nglra'.
                     Default: ants_params = {'Convergence': '[100x50x25,1e-6,10]', \
                                'Dimension': 3, \
@@ -794,8 +793,6 @@ class LowRankImageDecompositionLogic(ScriptedLoadableModuleLogic):
         else:
             config_data.num_of_iterations_per_level = num_of_iterations_per_level
             config_data.num_of_levels = num_of_levels
-            if number_of_cpu:
-              config_data.number_of_cpu = number_of_cpu
             if ants_params is None:
                 ants_params = {'Convergence': '[100x50x25,1e-6,10]',\
                                'Dimension': 3,\
